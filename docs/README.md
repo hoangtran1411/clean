@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & API Architecture - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, and **Senior .NET Career Roadmap** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -66,3 +66,8 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - The Junior ➔ Mid ➔ Senior mindset shift
     - Real-world milestone projects to master
     - Recommended books, authors & resources
+
+12. [**12 - Top 30 .NET & ASP.NET Core Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs/12-top-30-dotnet-interview-questions.md)
+    - 10 Easy / Foundational Questions (Value vs Reference types, DI lifetimes, `IEnumerable` vs `IQueryable`, Middleware)
+    - 10 Medium / Intermediate Questions (Async State Machine, `Task` vs `ValueTask`, N+1 queries, Refresh Token Rotation, Outbox Pattern)
+    - 10 Advanced / Senior Questions (`Span<T>` memory slicing, ThreadPool starvation, Distributed Idempotency, `IAuthorizationPolicyProvider`, LOH fragmentation)

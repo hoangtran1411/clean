@@ -138,3 +138,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 9. [**09 - Global Exception Handling & RFC ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)
 10. [**10 - .NET Aspire: Orchestration, Observability & Service Defaults**](file:///C:/Users/Hoang/Desktop/clean/docs/10-dotnet-aspire-orchestration-and-observability.md)
 11. [**11 - Career & Technical Roadmap for a 2-Year .NET Developer**](file:///C:/Users/Hoang/Desktop/clean/docs/11-career-roadmap-for-2-year-dotnet-developer.md)
+12. [**12 - Top 30 .NET Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs/12-top-30-dotnet-interview-questions.md)
