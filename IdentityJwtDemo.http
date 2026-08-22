@@ -1,0 +1,153 @@
+@HostAddress = http://localhost:5000
+
+### -------------------------------------------------------------
+### 1. AUTHENTICATION & LOGIN FOR DIFFERENT USERS
+### -------------------------------------------------------------
+
+### 1a. Login as Super Admin (Has all roles & full permissions)
+# @name adminLogin
+POST {{HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@123456"
+}
+
+### 1b. Login as Operations Manager (Has Users.View, Reports.View, Reports.Export)
+# @name managerLogin
+POST {{HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "manager@example.com",
+  "password": "Manager@123456"
+}
+
+### 1c. Login as Standard Employee (Has Users.View only)
+# @name userLogin
+POST {{HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User@123456"
+}
+
+### Set active token for requests below (switch between admin, manager, user)
+@adminToken = {{adminLogin.response.body.accessToken}}
+@managerToken = {{managerLogin.response.body.accessToken}}
+@userToken = {{userLogin.response.body.accessToken}}
+
+
+### -------------------------------------------------------------
+### 2. TESTING DYNAMIC POLICIES (IAuthorizationPolicyProvider)
+### -------------------------------------------------------------
+
+### 2a. Dynamic Permission: 'Users.View'
+### SUCCESS for Admin, Manager, and Standard User
+GET {{HostAddress}}/api/resources/users-list
+Authorization: Bearer {{userToken}}
+Accept: application/json
+
+### 2b. Dynamic Permission: 'Reports.Export'
+### SUCCESS for Admin and Manager, 403 FORBIDDEN for Standard User
+GET {{HostAddress}}/api/resources/export-financial-report
+Authorization: Bearer {{managerToken}}
+Accept: application/json
+
+### 2c. Dynamic Permission: 'Users.Create'
+### SUCCESS for Admin, 403 FORBIDDEN for Manager and Standard User
+POST {{HostAddress}}/api/resources/create-user-record
+Authorization: Bearer {{userToken}}
+Accept: application/json
+
+### 2d. Dynamic Permission: 'Users.Delete'
+### SUCCESS for Admin, 403 FORBIDDEN for Standard User
+DELETE {{HostAddress}}/api/resources/delete-user-record/123
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+
+### -------------------------------------------------------------
+### 3. DYNAMICALLY GRANTING PERMISSIONS AT RUNTIME
+### -------------------------------------------------------------
+
+### 3a. Admin grants 'Users.Create' permission to user@example.com
+POST {{HostAddress}}/api/auth/grant-permission
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "permission": "Users.Create"
+}
+
+### 3b. After user logs in again, they can now call 'create-user-record'!
+POST {{HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "User@123456"
+}
+
+
+### -------------------------------------------------------------
+### 4. IDEMPOTENCY TESTING (Double-Charge & Network Retry Protection)
+### -------------------------------------------------------------
+
+### 4a. Initial Payment Charge (First Request -> Processed Normally)
+### Expect: 200 OK with X-Cache: IDEMPOTENT-MISS and a new transactionId
+POST {{HostAddress}}/api/payments/charge
+Authorization: Bearer {{userToken}}
+Idempotency-Key: pay-key-unique-001
+Content-Type: application/json
+
+{
+  "amount": 99.99,
+  "currency": "USD",
+  "orderReference": "ORD-2026-9876",
+  "description": "Premium Subscription"
+}
+
+### 4b. Immediate Retry of Payment Charge (Exact Same Idempotency-Key & Payload)
+### Expect: 200 OK with X-Cache: IDEMPOTENT-HIT and the EXACT SAME transactionId (No double-charge!)
+POST {{HostAddress}}/api/payments/charge
+Authorization: Bearer {{userToken}}
+Idempotency-Key: pay-key-unique-001
+Content-Type: application/json
+
+{
+  "amount": 99.99,
+  "currency": "USD",
+  "orderReference": "ORD-2026-9876",
+  "description": "Premium Subscription"
+}
+
+### 4c. Conflict Test: Same Idempotency-Key with MODIFIED Payload ($150 instead of $99.99)
+### Expect: 422 Unprocessable Entity (Key reuse detected with altered parameters)
+POST {{HostAddress}}/api/payments/charge
+Authorization: Bearer {{userToken}}
+Idempotency-Key: pay-key-unique-001
+Content-Type: application/json
+
+{
+  "amount": 150.00,
+  "currency": "USD",
+  "orderReference": "ORD-2026-9876",
+  "description": "Premium Subscription"
+}
+
+### 4d. Missing Idempotency-Key Test
+### Expect: 400 Bad Request ("Idempotency-Key header is required")
+POST {{HostAddress}}/api/payments/charge
+Authorization: Bearer {{userToken}}
+Content-Type: application/json
+
+{
+  "amount": 50.00,
+  "currency": "USD",
+  "orderReference": "ORD-2026-1111",
+  "description": "E-Book purchase"
+}
