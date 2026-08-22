@@ -139,15 +139,38 @@ Content-Type: application/json
   "description": "Premium Subscription"
 }
 
-### 4d. Missing Idempotency-Key Test
-### Expect: 400 Bad Request ("Idempotency-Key header is required")
-POST {{HostAddress}}/api/payments/charge
-Authorization: Bearer {{userToken}}
+
+### -------------------------------------------------------------
+### 5. GLOBAL EXCEPTION HANDLING & RFC 7807/9457 PROBLEM DETAILS
+### -------------------------------------------------------------
+
+### 5a. Test 404 Not Found Exception
+GET {{HostAddress}}/api/errors/not-found
+Accept: application/json
+
+### 5b. Test 409 Conflict Exception
+GET {{HostAddress}}/api/errors/conflict
+Accept: application/json
+
+### 5c. Test 400 Domain Rule Violation Exception
+GET {{HostAddress}}/api/errors/domain-error
+Accept: application/json
+
+### 5d. Test 403 Forbidden Exception
+GET {{HostAddress}}/api/errors/forbidden
+Accept: application/json
+
+### 5e. Test 500 Server Error (Unhandled Exception masked for security)
+GET {{HostAddress}}/api/errors/server-error
+Accept: application/json
+
+### 5f. Test FluentValidation Error (Empty Register Command)
+POST {{HostAddress}}/api/auth/register
 Content-Type: application/json
 
 {
-  "amount": 50.00,
-  "currency": "USD",
-  "orderReference": "ORD-2026-1111",
-  "description": "E-Book purchase"
+  "fullName": "",
+  "email": "invalid-email",
+  "password": "123",
+  "confirmPassword": "456"
 }

@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture & API Architecture - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, and **Clean Architecture with CQRS** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, and **Modern Global Exception Handling** in **.NET 10**.
 
 ---
 
@@ -48,3 +48,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
    - Layer breakdown: Domain, Application, Infrastructure, WebApi
    - CQRS with MediatR (Commands, Queries, Handlers)
    - Automatic request validation with FluentValidation & Pipeline Behaviors
+
+9. [**09 - Global Exception Handling & RFC 7807/9457 ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)
+   - Modern `IExceptionHandler` & `IProblemDetailsService` in .NET 10
+   - Standard RFC Problem Details format
+   - Clean Architecture exception hierarchy (`ValidationException`, `NotFoundException`, `ConflictException`, `DomainException`)
+   - Distributed trace correlation

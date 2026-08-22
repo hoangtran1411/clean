@@ -1,16 +1,17 @@
 # Clean Architecture Identity, JWT & API Architecture (.NET 10)
 
-A production-grade reference architecture for modern Web APIs built with **.NET 10 (C# 13)** and **Clean Architecture**, demonstrating **CQRS (MediatR)**, **ASP.NET Core Identity**, **JWT Bearer Authentication**, **Refresh Token Rotation**, **Dynamic Policy Authorization (`IAuthorizationPolicyProvider`)**, and the **API Idempotency Pattern (Stripe Standard)**.
+A production-grade reference architecture for modern Web APIs built with **.NET 10 (C# 13)** and **Clean Architecture**, demonstrating **CQRS (MediatR)**, **ASP.NET Core Identity**, **JWT Bearer Authentication**, **Refresh Token Rotation**, **Dynamic Policy Authorization (`IAuthorizationPolicyProvider`)**, **API Idempotency Pattern (Stripe Standard)**, and **Global Exception Handling (`IExceptionHandler` & RFC 7807/9457 ProblemDetails)**.
 
 ---
 
 ## 🌟 Key Architecture & Features
 
 - 🏛️ **Clean Architecture (Onion / Hexagonal)**: Strict separation of concerns with 4 distinct layers:
-  - `CleanArch.Domain`: Pure business entities, constants, and exceptions (**0 external dependencies**).
+  - `CleanArch.Domain`: Pure business entities, constants, and custom domain exceptions (**0 external dependencies**).
   - `CleanArch.Application`: CQRS Commands/Queries (MediatR), FluentValidation pipeline behaviors, DTOs, and interface abstractions.
   - `CleanArch.Infrastructure`: EF Core 10 SQLite database context, Identity `UserManager`, JWT token cryptographic services.
   - `CleanArch.WebApi`: Presentation layer, controllers, dynamic policy providers, idempotency action filters, and Scalar OpenAPI UI.
+- 🚨 **Modern Global Exception Handling (`IExceptionHandler`)**: Built-in .NET 10 asynchronous exception handling translating unhandled exceptions (`ValidationException`, `NotFoundException`, `ConflictException`, `DomainException`, `500 Server Errors`) into standard RFC 7807 / RFC 9457 Problem Details with distributed trace IDs.
 - 📬 **CQRS Pattern with MediatR**: Commands (State Mutations) and Queries (Data Read) are separated and piped through automatic `ValidationBehavior` before execution.
 - 🔐 **ASP.NET Core Identity & EF Core 10**: PBKDF2 HMAC-SHA512 password hashing, user stores, role management, and auto-seeded databases.
 - 🎟️ **Custom JWT & Refresh Token Rotation**: Signed JWT Access Tokens (HMAC-SHA256) with strict validation, custom claims, and single-use rotating refresh tokens to prevent replay attacks.
@@ -29,7 +30,7 @@ IdentityCleanArch/
 │   │   ├── Common/ (BaseEntity.cs)
 │   │   ├── Constants/ (UserRoles.cs, AppPermissions.cs)
 │   │   ├── Entities/ (PaymentRecord.cs, IdempotentRecord.cs)
-│   │   └── Exceptions/ (DomainException.cs)
+│   │   └── Exceptions/ (DomainException.cs, NotFoundException.cs, ConflictException.cs, ForbiddenException.cs)
 │   │
 │   ├── CleanArch.Application/            # 2. Application Layer (Depends only on Domain)
 │   │   ├── Common/
@@ -49,14 +50,14 @@ IdentityCleanArch/
 │   │   └── DependencyInjection.cs
 │   │
 │   └── CleanArch.WebApi/                 # 4. Presentation Web API Layer
-│       ├── Controllers/ (ApiControllerBase.cs, AuthController.cs, PaymentsController.cs, ResourcesController.cs, UsersController.cs)
+│       ├── Controllers/ (ApiControllerBase.cs, AuthController.cs, ErrorsTestController.cs, PaymentsController.cs, ResourcesController.cs, UsersController.cs)
 │       ├── Authorization/ (DynamicPermissionPolicyProvider.cs, HasPermissionAttribute.cs, PermissionAuthorizationHandler.cs)
 │       ├── Idempotency/ (IdempotentAttribute.cs, IdempotentActionFilter.cs)
-│       ├── Middleware/ (CustomExceptionHandlerMiddleware.cs)
+│       ├── Middleware/ (GlobalExceptionHandler.cs - IExceptionHandler)
 │       ├── appsettings.json
 │       └── Program.cs
 │
-├── docs/                                 # 📚 Step-by-step learning modules (01 - 08)
+├── docs/                                 # 📚 Step-by-step learning modules (01 - 09)
 ├── IdentityJwtDemo.http                  # Executable REST Client requests for VS Code / Visual Studio
 ├── README.md
 └── IdentityCleanArch.slnx
@@ -103,6 +104,7 @@ Open [**`IdentityJwtDemo.http`**](file:///C:/Users/Hoang/Desktop/clean/IdentityJ
 - ✅ **Dynamic Permissions**: Test `Users.View`, `Reports.Export`, and `Users.Delete`.
 - ✅ **Runtime Permission Granting**: Admin grants permissions dynamically to users.
 - ✅ **Idempotency**: Test initial payments, identical retries (`X-Cache: IDEMPOTENT-HIT`), and payload modification conflicts (`422 Unprocessable Entity`).
+- ✅ **Global Exceptions**: Test `404 Not Found`, `409 Conflict`, `400 Domain Error`, `403 Forbidden`, and `500 Server Error` formatted as RFC 7807/9457 Problem Details.
 
 ---
 
@@ -118,3 +120,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 6. [**06 - Testing & Debugging Guide**](file:///C:/Users/Hoang/Desktop/clean/docs/06-testing-and-debugging-guide.md)
 7. [**07 - API Idempotency Pattern**](file:///C:/Users/Hoang/Desktop/clean/docs/07-api-idempotency-pattern.md)
 8. [**08 - Clean Architecture & CQRS Deep-Dive**](file:///C:/Users/Hoang/Desktop/clean/docs/08-clean-architecture-deep-dive.md)
+9. [**09 - Global Exception Handling & RFC ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)

@@ -21,7 +21,11 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RequireAdminOrManager", policy =>
         policy.RequireRole(UserRoles.Admin, UserRoles.Manager));
 
-// 3. Controllers & Modern OpenAPI (Scalar)
+// 3. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+// 4. Controllers & Modern OpenAPI (Scalar)
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -30,8 +34,8 @@ var app = builder.Build();
 // Seed Database automatically on startup
 await DbInitializer.SeedRolesAndUsersAsync(app.Services);
 
-// Custom Exception Handling Middleware (translates ValidationException -> 400 Bad Request)
-app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+// Built-in .NET 10 Global Exception Handler Middleware
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
