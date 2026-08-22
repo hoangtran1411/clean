@@ -1,6 +1,6 @@
-# .NET 10 Identity, JWT & API Architecture - Learning Path
+# .NET 10 Identity, JWT, Clean Architecture & API Architecture - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, and API idempotency in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, and **Clean Architecture with CQRS** in **.NET 10**.
 
 ---
 
@@ -42,3 +42,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
    - The `Idempotency-Key` HTTP header protocol (Stripe standard)
    - SHA-256 Request Payload hashing & replay detection
    - Implementing `[Idempotent]` Action Filter in .NET 10
+
+8. [**08 - Clean Architecture & CQRS Deep-Dive**](file:///C:/Users/Hoang/Desktop/clean/docs/08-clean-architecture-deep-dive.md)
+   - The Dependency Rule (Inward dependencies)
+   - Layer breakdown: Domain, Application, Infrastructure, WebApi
+   - CQRS with MediatR (Commands, Queries, Handlers)
+   - Automatic request validation with FluentValidation & Pipeline Behaviors

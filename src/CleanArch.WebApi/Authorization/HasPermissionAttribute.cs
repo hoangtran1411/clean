@@ -1,0 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
+
+namespace CleanArch.WebApi.Authorization;
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
+public class HasPermissionAttribute : AuthorizeAttribute
+{
+    public HasPermissionAttribute(string permission)
+        : base(policy: $"{DynamicPermissionPolicyProvider.PolicyPrefix}{permission}")
+    {
+    }
+}
