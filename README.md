@@ -1,12 +1,18 @@
-# Clean Architecture Identity, JWT & API Architecture (.NET 10)
+# Clean Architecture & .NET Aspire Reference Stack (.NET 10)
 
-A production-grade reference architecture for modern Web APIs built with **.NET 10 (C# 13)** and **Clean Architecture**, demonstrating **CQRS (MediatR)**, **ASP.NET Core Identity**, **JWT Bearer Authentication**, **Refresh Token Rotation**, **Dynamic Policy Authorization (`IAuthorizationPolicyProvider`)**, **API Idempotency Pattern (Stripe Standard)**, and **Global Exception Handling (`IExceptionHandler` & RFC 7807/9457 ProblemDetails)**.
+A production-grade reference architecture for modern Web APIs and distributed cloud-native applications built with **.NET 10 (C# 13)**, **.NET Aspire**, and **Clean Architecture**.
+
+It brings together **CQRS (MediatR)**, **ASP.NET Core Identity**, **JWT Bearer Authentication**, **Refresh Token Rotation**, **Dynamic Policy Authorization (`IAuthorizationPolicyProvider`)**, **API Idempotency Pattern (Stripe Standard)**, **Global Exception Handling (`IExceptionHandler`)**, and **.NET Aspire Distributed Orchestration & OpenTelemetry**.
 
 ---
 
 ## 🌟 Key Architecture & Features
 
-- 🏛️ **Clean Architecture (Onion / Hexagonal)**: Strict separation of concerns with 4 distinct layers:
+- 🚀 **.NET Aspire Cloud-Native Orchestration**:
+  - `CleanArch.AppHost`: Orchestrates microservices, databases, and caches in pure C#.
+  - `CleanArch.ServiceDefaults`: Standardized OpenTelemetry (traces, metrics, logs), standard health checks (`/health`, `/alive`), Polly HTTP resilience, and service discovery.
+  - **Aspire Dashboard**: Live real-time dashboard displaying traces, logs, resource health, and metrics.
+- 🏛️ **Clean Architecture (Onion / Hexagonal)**: Strict separation of concerns across 4 layers:
   - `CleanArch.Domain`: Pure business entities, constants, and custom domain exceptions (**0 external dependencies**).
   - `CleanArch.Application`: CQRS Commands/Queries (MediatR), FluentValidation pipeline behaviors, DTOs, and interface abstractions.
   - `CleanArch.Infrastructure`: EF Core 10 SQLite database context, Identity `UserManager`, JWT token cryptographic services.
@@ -26,6 +32,14 @@ A production-grade reference architecture for modern Web APIs built with **.NET 
 ```
 IdentityCleanArch/
 ├── src/
+│   ├── CleanArch.AppHost/                # 🌟 Aspire Orchestrator (AppHost)
+│   │   ├── Program.cs                    # DistributedApplication.CreateBuilder(args)
+│   │   └── CleanArch.AppHost.csproj
+│   │
+│   ├── CleanArch.ServiceDefaults/        # 🌟 Aspire Service Defaults & Observability
+│   │   ├── Extensions.cs                 # AddServiceDefaults(), MapDefaultEndpoints()
+│   │   └── CleanArch.ServiceDefaults.csproj
+│   │
 │   ├── CleanArch.Domain/                 # 1. Domain Layer (Pure C#, 0 dependencies)
 │   │   ├── Common/ (BaseEntity.cs)
 │   │   ├── Constants/ (UserRoles.cs, AppPermissions.cs)
@@ -57,7 +71,7 @@ IdentityCleanArch/
 │       ├── appsettings.json
 │       └── Program.cs
 │
-├── docs/                                 # 📚 Step-by-step learning modules (01 - 09)
+├── docs/                                 # 📚 Step-by-step learning modules (01 - 10)
 ├── IdentityJwtDemo.http                  # Executable REST Client requests for VS Code / Visual Studio
 ├── README.md
 └── IdentityCleanArch.slnx
@@ -67,15 +81,16 @@ IdentityCleanArch/
 
 ## 🚀 Getting Started
 
-### Run the Web API
+### Option 1: Run with .NET Aspire (Orchestrator & Live Dashboard)
+```powershell
+dotnet run --project src/CleanArch.AppHost
+```
+This launches the Web API along with the **Aspire Dashboard** at the URL printed in the console (e.g. `https://localhost:17180`).
+
+### Option 2: Run Web API Directly
 ```powershell
 dotnet run --project src/CleanArch.WebApi
 ```
-
-The application will automatically:
-1. Initialize the SQLite database (`clean_identity.db`).
-2. Create all ASP.NET Core Identity tables, Payment tables & Idempotency tables.
-3. Seed default roles (`Admin`, `Manager`, `User`) and test accounts with permissions.
 
 ---
 
@@ -121,3 +136,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 7. [**07 - API Idempotency Pattern**](file:///C:/Users/Hoang/Desktop/clean/docs/07-api-idempotency-pattern.md)
 8. [**08 - Clean Architecture & CQRS Deep-Dive**](file:///C:/Users/Hoang/Desktop/clean/docs/08-clean-architecture-deep-dive.md)
 9. [**09 - Global Exception Handling & RFC ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)
+10. [**10 - .NET Aspire: Orchestration, Observability & Service Defaults**](file:///C:/Users/Hoang/Desktop/clean/docs/10-dotnet-aspire-orchestration-and-observability.md)

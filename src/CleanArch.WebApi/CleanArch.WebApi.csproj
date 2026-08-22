@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CleanArch.Application\CleanArch.Application.csproj" />
     <ProjectReference Include="..\CleanArch.Infrastructure\CleanArch.Infrastructure.csproj" />
+    <ProjectReference Include="..\CleanArch.ServiceDefaults\CleanArch.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

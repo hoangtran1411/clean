@@ -2,6 +2,7 @@ using CleanArch.Application;
 using CleanArch.Domain.Constants;
 using CleanArch.Infrastructure;
 using CleanArch.Infrastructure.Persistence;
+using CleanArch.ServiceDefaults;
 using CleanArch.WebApi.Authorization;
 using CleanArch.WebApi.Middleware;
 using Microsoft.AspNetCore.Authorization;
@@ -9,11 +10,14 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Clean Architecture Layer Registrations
+// 1. .NET Aspire Service Defaults (OpenTelemetry, HealthChecks, Resilience, Service Discovery)
+builder.AddServiceDefaults();
+
+// 2. Clean Architecture Layer Registrations
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// 2. Dynamic Authorization Policy Provider & Handler
+// 3. Dynamic Authorization Policy Provider & Handler
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicPermissionPolicyProvider>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
@@ -21,15 +25,18 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RequireAdminOrManager", policy =>
         policy.RequireRole(UserRoles.Admin, UserRoles.Manager));
 
-// 3. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
+// 4. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-// 4. Controllers & Modern OpenAPI (Scalar)
+// 5. Controllers & Modern OpenAPI (Scalar)
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Aspire Default Endpoints (/health, /alive)
+app.MapDefaultEndpoints();
 
 // Seed Database automatically on startup
 await DbInitializer.SeedRolesAndUsersAsync(app.Services);

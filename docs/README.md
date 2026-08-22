@@ -1,6 +1,6 @@
-# .NET 10 Identity, JWT, Clean Architecture & API Architecture - Learning Path
+# .NET 10 Identity, JWT, Clean Architecture, Aspire & API Architecture - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, and **Modern Global Exception Handling** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, and **.NET Aspire Orchestration** in **.NET 10**.
 
 ---
 
@@ -49,8 +49,14 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
    - CQRS with MediatR (Commands, Queries, Handlers)
    - Automatic request validation with FluentValidation & Pipeline Behaviors
 
-9. [**09 - Global Exception Handling & RFC 7807/9457 ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)
+9. [**09 - Global Exception Handling & RFC ProblemDetails**](file:///C:/Users/Hoang/Desktop/clean/docs/09-global-exception-handling.md)
    - Modern `IExceptionHandler` & `IProblemDetailsService` in .NET 10
    - Standard RFC Problem Details format
    - Clean Architecture exception hierarchy (`ValidationException`, `NotFoundException`, `ConflictException`, `DomainException`)
    - Distributed trace correlation
+
+10. [**10 - .NET Aspire: Orchestration, Observability & Service Defaults**](file:///C:/Users/Hoang/Desktop/clean/docs/10-dotnet-aspire-orchestration-and-observability.md)
+    - The 3 Pillars of Aspire: Orchestration, Components, Observability
+    - `CleanArch.AppHost`: C# cloud-native application orchestrator
+    - `CleanArch.ServiceDefaults`: OpenTelemetry, Health Checks (`/health`, `/alive`), Polly resilience & service discovery
+    - The real-time Aspire Developer Dashboard
