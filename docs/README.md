@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & API Architecture - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, and **.NET Aspire Orchestration** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, and **Senior .NET Career Roadmap** in **.NET 10**.
 
 ---
 
@@ -60,3 +60,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - `CleanArch.AppHost`: C# cloud-native application orchestrator
     - `CleanArch.ServiceDefaults`: OpenTelemetry, Health Checks (`/health`, `/alive`), Polly resilience & service discovery
     - The real-time Aspire Developer Dashboard
+
+11. [**11 - Career & Technical Roadmap for a 2-Year .NET Developer**](file:///C:/Users/Hoang/Desktop/clean/docs/11-career-roadmap-for-2-year-dotnet-developer.md)
+    - The 6 Core Knowledge Pillars (CLR Internals, DDD/Clean Architecture, Data Optimization, Distributed Systems, Security, Observability)
+    - The Junior ➔ Mid ➔ Senior mindset shift
+    - Real-world milestone projects to master
+    - Recommended books, authors & resources
