@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, **.editorconfig Governance**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -99,3 +99,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - How `dotnet.exe` and MSBuild operate under the hood
     - Cheat sheet: Project management, NuGet auditing (`--outdated`, `--vulnerable`), Hot Reload (`dotnet watch`), formatting, single-file publish, and EF Core tools
     - Diagnostic tools (`dotnet-counters`, `dotnet-trace`, `dotnet-dump`)
+
+18. [**18 - Understanding and Configuring `.editorconfig`**](file:///C:/Users/Hoang/Desktop/clean/docs/18-understanding-and-configuring-editorconfig.md)
+    - What is `.editorconfig` and why teams use it
+    - Global formatting rules, modern C# 13 style conventions, and .NET naming rules (e.g. `I` prefix for interfaces, `_` prefix for fields)
+    - Roslyn Analyzer rules and severity levels (`none`, `suggestion`, `warning`, `error`)
+    - Enforcing `.editorconfig` in CI/CD via `dotnet format --verify-no-changes`

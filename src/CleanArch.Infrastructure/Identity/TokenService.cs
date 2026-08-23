@@ -26,7 +26,7 @@ public class TokenService : ITokenService
         IList<Claim>? customClaims = null)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
-        var secretKey = jwtSettings["SecretKey"] 
+        var secretKey = jwtSettings["SecretKey"]
             ?? throw new InvalidOperationException("JWT SecretKey is not configured in appsettings.json.");
         var issuer = jwtSettings["Issuer"];
         var audience = jwtSettings["Audience"];
@@ -84,7 +84,7 @@ public class TokenService : ITokenService
     public ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
-        var secretKey = jwtSettings["SecretKey"] 
+        var secretKey = jwtSettings["SecretKey"]
             ?? throw new InvalidOperationException("JWT SecretKey is not configured.");
 
         var tokenValidationParameters = new TokenValidationParameters

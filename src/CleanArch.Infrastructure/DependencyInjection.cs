@@ -19,13 +19,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         // 1. Configure EF Core DbContext
-        var connectionString = configuration.GetConnectionString("DefaultConnection") 
+        var connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? "Data Source=clean_identity.db";
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(connectionString));
 
-        services.AddScoped<IAppDbContext>(provider => 
+        services.AddScoped<IAppDbContext>(provider =>
             provider.GetRequiredService<AppDbContext>());
 
         // 2. Configure ASP.NET Core Identity
@@ -48,7 +48,7 @@ public static class DependencyInjection
 
         // 3. Configure JWT Authentication
         var jwtSettings = configuration.GetSection("Jwt");
-        var secretKey = jwtSettings["SecretKey"] 
+        var secretKey = jwtSettings["SecretKey"]
             ?? "A_Super_Secret_Key_For_Identity_Clean_Arch_2026_DotNet10_Must_Be_Long_Enough!";
 
         services.AddAuthentication(options =>

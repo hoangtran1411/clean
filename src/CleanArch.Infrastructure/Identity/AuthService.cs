@@ -142,8 +142,8 @@ public class AuthService : IAuthService
         }
 
         var user = await _userManager.FindByIdAsync(userId);
-        if (user == null || 
-            user.RefreshToken != refreshToken || 
+        if (user == null ||
+            user.RefreshToken != refreshToken ||
             user.RefreshTokenExpiryTime <= DateTime.UtcNow)
         {
             return new AuthResponse { IsSuccess = false, Message = "Invalid or expired refresh token." };
@@ -153,10 +153,10 @@ public class AuthService : IAuthService
         var customClaims = await _userManager.GetClaimsAsync(user);
         var (newToken, expiresAtUtc) = await _tokenService.GenerateAccessTokenAsync(
             user.Id, user.UserName ?? string.Empty, user.Email ?? string.Empty, user.FullName, roles, customClaims);
-        
+
         var newRefreshToken = _tokenService.GenerateRefreshToken();
         var refreshExpiryDays = double.Parse(_configuration["Jwt:RefreshTokenExpiryDays"] ?? "7");
-        
+
         user.RefreshToken = newRefreshToken;
         user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(refreshExpiryDays);
         await _userManager.UpdateAsync(user);

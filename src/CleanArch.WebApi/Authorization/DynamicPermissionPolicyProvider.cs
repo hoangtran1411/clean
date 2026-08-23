@@ -7,7 +7,7 @@ public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvide
 {
     public const string PolicyPrefix = "Permission:";
 
-    public DynamicPermissionPolicyProvider(IOptions<AuthorizationOptions> options) 
+    public DynamicPermissionPolicyProvider(IOptions<AuthorizationOptions> options)
         : base(options)
     {
     }
@@ -17,7 +17,7 @@ public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvide
         if (policyName.StartsWith(PolicyPrefix, StringComparison.OrdinalIgnoreCase))
         {
             var permission = policyName[PolicyPrefix.Length..];
-            
+
             var policy = new AuthorizationPolicyBuilder();
             policy.AddRequirements(new PermissionRequirement(permission));
             return policy.Build();
