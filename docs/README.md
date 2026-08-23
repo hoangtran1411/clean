@@ -1,6 +1,6 @@
-# .NET 10 Identity, JWT, Clean Architecture, Aspire & Caching - Learning Path
+# .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **In-Memory Cache & Output Cache**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging with Serilog**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -77,3 +77,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Middleware-layer caching with `[OutputCache]` (complete HTTP response caching)
     - Tag-based invalidation with `IOutputCacheStore.EvictByTagAsync`
     - VaryBy route/query parameters and built-in cache stampede protection
+
+14. [**14 - Structured Logging with Serilog, Correlation IDs & MediatR Pipeline**](file:///C:/Users/Hoang/Desktop/clean/docs/14-structured-logging-serilog-and-telemetry.md)
+    - Unstructured vs Structured Logging & Message Templates
+    - Serilog Sinks (Console, Daily Rolling File) & LogContext Enrichment
+    - MediatR `LoggingBehavior` and `PerformanceBehavior` (automatic long-running request alerts)
+    - Distributed tracing with `CorrelationIdMiddleware` (`X-Correlation-ID` header)

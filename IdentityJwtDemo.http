@@ -170,7 +170,6 @@ Accept: application/json
 ### -------------------------------------------------------------
 
 ### 6a. Test In-Memory Cache (IMemoryCache in Application Layer)
-### Repeated requests within 5 mins return cached C# objects instantly
 GET {{HostAddress}}/api/products/in-memory-cached
 Accept: application/json
 
@@ -183,12 +182,7 @@ Accept: application/json
 GET {{HostAddress}}/api/products/category/Laptops
 Accept: application/json
 
-### 6d. Test Output Cache with VaryByRoute (category: Audio)
-GET {{HostAddress}}/api/products/category/Audio
-Accept: application/json
-
-### 6e. Create Product & Invalidate Cache (EvictByTagAsync)
-### Creates product and evicts "products-tag" from OutputCache + In-Memory cache!
+### 6d. Create Product & Invalidate Cache (EvictByTagAsync)
 POST {{HostAddress}}/api/products
 Content-Type: application/json
 
@@ -199,7 +193,22 @@ Content-Type: application/json
   "stockQuantity": 30
 }
 
-### 6f. Re-request Output Cache after Eviction
-### Notice 'generatedAtUtc' timestamp updates immediately and contains the new iPad Pro!
-GET {{HostAddress}}/api/products/output-cached
-Accept: application/json
+
+### -------------------------------------------------------------
+### 7. STRUCTURED LOGGING & CORRELATION ID TRACING
+### -------------------------------------------------------------
+
+### 7a. Request with Custom Correlation ID
+### Check your console or 'logs/cleanarch-.log' to see [CORR-TRACE-12345] attached to every log line!
+POST {{HostAddress}}/api/payments/charge
+Authorization: Bearer {{userToken}}
+Idempotency-Key: pay-key-log-test-001
+X-Correlation-ID: CORR-TRACE-12345
+Content-Type: application/json
+
+{
+  "amount": 250.00,
+  "currency": "USD",
+  "orderReference": "ORD-LOG-999",
+  "description": "Enterprise Plan"
+}

@@ -140,3 +140,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 11. [**11 - Career & Technical Roadmap for a 2-Year .NET Developer**](file:///C:/Users/Hoang/Desktop/clean/docs/11-career-roadmap-for-2-year-dotnet-developer.md)
 12. [**12 - Top 30 .NET Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs/12-top-30-dotnet-interview-questions.md)
 13. [**13 - In-Memory Cache & Output Cache Deep-Dive**](file:///C:/Users/Hoang/Desktop/clean/docs/13-inmemory-cache-and-output-cache.md)
+14. [**14 - Structured Logging with Serilog, Correlation IDs & MediatR Pipeline**](file:///C:/Users/Hoang/Desktop/clean/docs/14-structured-logging-serilog-and-telemetry.md)

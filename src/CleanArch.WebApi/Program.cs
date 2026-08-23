@@ -7,25 +7,31 @@ using CleanArch.WebApi.Authorization;
 using CleanArch.WebApi.Middleware;
 using Microsoft.AspNetCore.Authorization;
 using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. .NET Aspire Service Defaults (OpenTelemetry, HealthChecks, Resilience, Service Discovery)
+// 1. Structured Logging with Serilog (Console + Rolling File Sinks)
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext());
+
+// 2. .NET Aspire Service Defaults (OpenTelemetry, HealthChecks, Resilience, Service Discovery)
 builder.AddServiceDefaults();
 
-// 2. Clean Architecture Layer Registrations
+// 3. Clean Architecture Layer Registrations
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// 3. In-Memory Caching (Application Layer) & Output Caching (Middleware Layer)
+// 4. In-Memory Caching (Application Layer) & Output Caching (Middleware Layer)
 builder.Services.AddMemoryCache();
 builder.Services.AddOutputCache(options =>
 {
-    // Global base policy: Cache GET requests
-    options.AddBasePolicy(builder => builder.Cache());
+    options.AddBasePolicy(b => b.Cache());
 });
 
-// 4. Dynamic Authorization Policy Provider & Handler
+// 5. Dynamic Authorization Policy Provider & Handler
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicPermissionPolicyProvider>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
@@ -33,15 +39,21 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RequireAdminOrManager", policy =>
         policy.RequireRole(UserRoles.Admin, UserRoles.Manager));
 
-// 5. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
+// 6. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-// 6. Controllers & Modern OpenAPI (Scalar)
+// 7. Controllers & Modern OpenAPI (Scalar)
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Correlation ID Middleware (must be first to tag all incoming logs with X-Correlation-ID)
+app.UseMiddleware<CorrelationIdMiddleware>();
+
+// Serilog HTTP Request Logging (logs every HTTP request with status, duration, and endpoint)
+app.UseSerilogRequestLogging();
 
 // Aspire Default Endpoints (/health, /alive)
 app.MapDefaultEndpoints();
@@ -64,7 +76,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Output Caching Middleware (serves cached HTTP responses before reaching controllers)
+// Output Caching Middleware
 app.UseOutputCache();
 
 // IMPORTANT: Authentication must precede Authorization
