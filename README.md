@@ -111,3 +111,16 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/17-dotnet-cli-mastery-and-cheat-sheet.md)
 18. [**18 - Understanding and Configuring `.editorconfig`**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/18-understanding-and-configuring-editorconfig.md)
 19. [**19 - Centralized Solution Management with `Directory.Build.props`**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/19-centralized-solution-management-with-directory-build-props.md)
+
+---
+
+## 🤝 Contributing & Community
+
+We welcome contributions from the developer community! Please review [**`CONTRIBUTING.md`**](file:///C:/Users/Hoang/Desktop/clean/CONTRIBUTING.md) for full development setup, coding guidelines, and pull request workflows.
+
+---
+
+## 📄 License
+
+This project is open-source software licensed under the [**MIT License**](file:///C:/Users/Hoang/Desktop/clean/LICENSE).
+
