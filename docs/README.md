@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, **.editorconfig Governance**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, **.editorconfig Governance**, **Directory.Build.props Centralization**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -105,3 +105,8 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Global formatting rules, modern C# 13 style conventions, and .NET naming rules (e.g. `I` prefix for interfaces, `_` prefix for fields)
     - Roslyn Analyzer rules and severity levels (`none`, `suggestion`, `warning`, `error`)
     - Enforcing `.editorconfig` in CI/CD via `dotnet format --verify-no-changes`
+
+19. [**19 - Centralized Solution Management with `Directory.Build.props`**](file:///C:/Users/Hoang/Desktop/clean/docs/19-centralized-solution-management-with-directory-build-props.md)
+    - How MSBuild automatically imports `Directory.Build.props` across all `.csproj` files
+    - Centralizing `TargetFramework`, `LangVersion`, `Nullable`, `ImplicitUsings`, and assembly metadata
+    - Comparison: `Directory.Build.props` vs `Directory.Build.targets` vs `Directory.Packages.props`

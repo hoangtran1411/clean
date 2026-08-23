@@ -145,3 +145,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 16. [**16 - Understanding and Mastering `.http` Files**](file:///C:/Users/Hoang/Desktop/clean/docs/16-understanding-and-mastering-http-files.md)
 17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](file:///C:/Users/Hoang/Desktop/clean/docs/17-dotnet-cli-mastery-and-cheat-sheet.md)
 18. [**18 - Understanding and Configuring `.editorconfig`**](file:///C:/Users/Hoang/Desktop/clean/docs/18-understanding-and-configuring-editorconfig.md)
+19. [**19 - Centralized Solution Management with `Directory.Build.props`**](file:///C:/Users/Hoang/Desktop/clean/docs/19-centralized-solution-management-with-directory-build-props.md)

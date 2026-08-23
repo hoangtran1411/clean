@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <!-- Centralized Target Framework & C# Language Version -->
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Code Quality & Static Analysis -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <NoWarn>$(NoWarn);CA2007;CA1062;CA1848;CA1305;CA1304;CA1309;CA1873;CA1849;CA1000;CA2016;CA1311;CA1862</NoWarn>
+
+    <!-- Shared Metadata & Versioning -->
+    <Authors>Hoang Tran</Authors>
+    <Company>Clean Architecture Solutions</Company>
+    <Product>Clean Architecture .NET 10 Enterprise Stack</Product>
+    <Version>1.0.0</Version>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>
