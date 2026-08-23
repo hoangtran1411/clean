@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -88,3 +88,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - 🟢 **Beginner**: Workbooks, Worksheets, Cell indexers, License context
     - 🟡 **Mid-Level**: Number formatting (`$#,##0.00`), Table Styles (`Medium9`), AutoFit columns, Freeze panes
     - 🔴 **Expert**: Excel Formulas (`AVERAGE`, `SUM`), Conditional Formatting, Data Validation dropdowns, Streaming upload with row-by-row error reporting
+
+16. [**16 - Understanding and Mastering `.http` Files**](file:///C:/Users/Hoang/Desktop/clean/docs/16-understanding-and-mastering-http-files.md)
+    - What is an `.http` file and why it replaces Postman in modern teams
+    - Core syntax: Request delimiters (`###`), variables (`@var`), and response chaining (`# @name`)
+    - Complete walkthrough of `IdentityJwtDemo.http`
+    - Executing `.http` files in Visual Studio, VS Code, and CI/CD
