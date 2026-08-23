@@ -164,13 +164,42 @@ Accept: application/json
 GET {{HostAddress}}/api/errors/server-error
 Accept: application/json
 
-### 5f. Test FluentValidation Error (Empty Register Command)
-POST {{HostAddress}}/api/auth/register
+
+### -------------------------------------------------------------
+### 6. IN-MEMORY CACHE & OUTPUT CACHE TESTING
+### -------------------------------------------------------------
+
+### 6a. Test In-Memory Cache (IMemoryCache in Application Layer)
+### Repeated requests within 5 mins return cached C# objects instantly
+GET {{HostAddress}}/api/products/in-memory-cached
+Accept: application/json
+
+### 6b. Test Output Cache ([OutputCache] Middleware Layer)
+### Notice 'generatedAtUtc' timestamp stays identical for 60 seconds (Controller skipped!)
+GET {{HostAddress}}/api/products/output-cached
+Accept: application/json
+
+### 6c. Test Output Cache with VaryByRoute (category: Laptops vs Audio)
+GET {{HostAddress}}/api/products/category/Laptops
+Accept: application/json
+
+### 6d. Test Output Cache with VaryByRoute (category: Audio)
+GET {{HostAddress}}/api/products/category/Audio
+Accept: application/json
+
+### 6e. Create Product & Invalidate Cache (EvictByTagAsync)
+### Creates product and evicts "products-tag" from OutputCache + In-Memory cache!
+POST {{HostAddress}}/api/products
 Content-Type: application/json
 
 {
-  "fullName": "",
-  "email": "invalid-email",
-  "password": "123",
-  "confirmPassword": "456"
+  "name": "iPad Pro M4 13-inch",
+  "category": "Tablets",
+  "price": 1299.00,
+  "stockQuantity": 30
 }
+
+### 6f. Re-request Output Cache after Eviction
+### Notice 'generatedAtUtc' timestamp updates immediately and contains the new iPad Pro!
+GET {{HostAddress}}/api/products/output-cached
+Accept: application/json

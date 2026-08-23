@@ -1,7 +1,9 @@
 using System.Security.Claims;
 using CleanArch.Domain.Constants;
+using CleanArch.Domain.Entities;
 using CleanArch.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArch.Infrastructure.Persistence;
@@ -96,6 +98,18 @@ public static class DbInitializer
                 await userManager.AddToRoleAsync(newStandard, UserRoles.User);
                 await userManager.AddClaimAsync(newStandard, new Claim(AppPermissions.ClaimType, AppPermissions.UsersView));
             }
+        }
+
+        // 5. Seed Initial Products for Caching demos
+        if (!await context.Products.AnyAsync())
+        {
+            await context.Products.AddRangeAsync(
+                new ProductItem { Name = "MacBook Pro M4 Max", Category = "Laptops", Price = 3499.99m, StockQuantity = 15 },
+                new ProductItem { Name = "Dell XPS 16", Category = "Laptops", Price = 2299.00m, StockQuantity = 20 },
+                new ProductItem { Name = "Sony WH-1000XM5", Category = "Audio", Price = 399.99m, StockQuantity = 50 },
+                new ProductItem { Name = "Keychron Q1 Pro", Category = "Accessories", Price = 199.00m, StockQuantity = 40 }
+            );
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace CleanArch.Infrastructure.Persistence;
 
 public class AppDbContext : IdentityDbContext<ApplicationUser>, IAppDbContext
 {
+    public DbSet<ProductItem> Products => Set<ProductItem>();
     public DbSet<PaymentRecord> Payments => Set<PaymentRecord>();
     public DbSet<IdempotentRecord> IdempotentRequests => Set<IdempotentRecord>();
 
@@ -18,6 +19,14 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>, IAppDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<ProductItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Category).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Price).HasPrecision(18, 2);
+        });
 
         builder.Entity<PaymentRecord>(entity =>
         {

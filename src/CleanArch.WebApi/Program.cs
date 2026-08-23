@@ -17,7 +17,15 @@ builder.AddServiceDefaults();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// 3. Dynamic Authorization Policy Provider & Handler
+// 3. In-Memory Caching (Application Layer) & Output Caching (Middleware Layer)
+builder.Services.AddMemoryCache();
+builder.Services.AddOutputCache(options =>
+{
+    // Global base policy: Cache GET requests
+    options.AddBasePolicy(builder => builder.Cache());
+});
+
+// 4. Dynamic Authorization Policy Provider & Handler
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicPermissionPolicyProvider>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
@@ -25,11 +33,11 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RequireAdminOrManager", policy =>
         policy.RequireRole(UserRoles.Admin, UserRoles.Manager));
 
-// 4. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
+// 5. Global Exception Handling & RFC 7807/9457 ProblemDetails (.NET 10)
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-// 5. Controllers & Modern OpenAPI (Scalar)
+// 6. Controllers & Modern OpenAPI (Scalar)
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -55,6 +63,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Output Caching Middleware (serves cached HTTP responses before reaching controllers)
+app.UseOutputCache();
 
 // IMPORTANT: Authentication must precede Authorization
 app.UseAuthentication();

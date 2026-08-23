@@ -1,6 +1,6 @@
-# .NET 10 Identity, JWT, Clean Architecture, Aspire & API Architecture - Learning Path
+# .NET 10 Identity, JWT, Clean Architecture, Aspire & Caching - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **In-Memory Cache & Output Cache**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -71,3 +71,9 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - 10 Easy / Foundational Questions (Value vs Reference types, DI lifetimes, `IEnumerable` vs `IQueryable`, Middleware)
     - 10 Medium / Intermediate Questions (Async State Machine, `Task` vs `ValueTask`, N+1 queries, Refresh Token Rotation, Outbox Pattern)
     - 10 Advanced / Senior Questions (`Span<T>` memory slicing, ThreadPool starvation, Distributed Idempotency, `IAuthorizationPolicyProvider`, LOH fragmentation)
+
+13. [**13 - In-Memory Cache (`IMemoryCache`) & Output Cache (`[OutputCache]`)**](file:///C:/Users/Hoang/Desktop/clean/docs/13-inmemory-cache-and-output-cache.md)
+    - Application-layer caching with `IMemoryCache` (sliding vs absolute expiration)
+    - Middleware-layer caching with `[OutputCache]` (complete HTTP response caching)
+    - Tag-based invalidation with `IOutputCacheStore.EvictByTagAsync`
+    - VaryBy route/query parameters and built-in cache stampede protection

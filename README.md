@@ -139,3 +139,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 10. [**10 - .NET Aspire: Orchestration, Observability & Service Defaults**](file:///C:/Users/Hoang/Desktop/clean/docs/10-dotnet-aspire-orchestration-and-observability.md)
 11. [**11 - Career & Technical Roadmap for a 2-Year .NET Developer**](file:///C:/Users/Hoang/Desktop/clean/docs/11-career-roadmap-for-2-year-dotnet-developer.md)
 12. [**12 - Top 30 .NET Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs/12-top-30-dotnet-interview-questions.md)
+13. [**13 - In-Memory Cache & Output Cache Deep-Dive**](file:///C:/Users/Hoang/Desktop/clean/docs/13-inmemory-cache-and-output-cache.md)
