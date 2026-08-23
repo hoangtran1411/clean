@@ -88,6 +88,8 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 4. [**04 - TanStack Query v5 Mastery (Server State, Caching & Invalidation)**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/04-tanstack-query-mastery.md)
 5. [**05 - shadcn/ui Component Architecture & Design System**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/05-shadcn-ui-components-and-theming.md)
 6. [**06 - Full-Stack Integration: Identity, Idempotency & EPPlus Excel in React**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/06-complete-crud-and-excel-integration.md)
+7. [**07 - Career & Technical Roadmap for a Modern Frontend Developer**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/07-career-roadmap-for-frontend-developer.md)
+8. [**08 - Top 30 Modern Frontend & React Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/08-top-30-frontend-interview-questions.md)
 
 ### 🏛️ Backend Modules (`docs-backend/`)
 1. [**01 - Introduction & Tech Stack**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/01-introduction-and-techstack.md)

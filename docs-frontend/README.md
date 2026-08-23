@@ -1,6 +1,6 @@
 # React 19, Tailwind CSS, shadcn/ui, Axios & TanStack Query - Frontend Path
 
-Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwind CSS v4**, **shadcn/ui**, **Axios with JWT Refresh Token Rotation**, **TanStack Query v5**, and full-stack integration with our **.NET 10 Clean Architecture API**.
+Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwind CSS v4**, **shadcn/ui**, **Axios with JWT Refresh Token Rotation**, **TanStack Query v5**, **Career Roadmap**, **Interview Preparation**, and full-stack integration with our **.NET 10 Clean Architecture API**.
 
 ---
 
@@ -35,3 +35,13 @@ Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwi
    - Downloading binary `.xlsx` spreadsheets with Axios blobs
    - Multipart/form-data Excel file uploads
    - Frontend handling of `Idempotency-Key` headers and cache hits
+
+7. [**07 - Career & Technical Roadmap for a Modern Frontend Developer**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/07-career-roadmap-for-frontend-developer.md)
+   - Junior ➔ Mid ➔ Senior mindset shift
+   - The 6 Core Knowledge Pillars (JS Internals, React 19, TanStack Server State, Core Web Vitals, Design Systems, Security)
+   - Portfolio projects and recommended engineering books
+
+8. [**08 - Top 30 Modern Frontend & React Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-frontend/08-top-30-frontend-interview-questions.md)
+   - 10 Foundational / Junior questions (Closures, Keys, Flexbox vs Grid, Event Bubbling, Promises)
+   - 10 Intermediate / Mid-level questions (React 19 Actions, TanStack staleTime vs gcTime, Fiber reconciliation, Token refresh race conditions, TypeScript discriminated unions)
+   - 10 Advanced / Senior questions (INP optimization, RSC wire format vs SSR, useTransition non-blocking scheduler, memory leak profiling, list virtualization)
