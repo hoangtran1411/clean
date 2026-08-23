@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -94,3 +94,8 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Core syntax: Request delimiters (`###`), variables (`@var`), and response chaining (`# @name`)
     - Complete walkthrough of `IdentityJwtDemo.http`
     - Executing `.http` files in Visual Studio, VS Code, and CI/CD
+
+17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](file:///C:/Users/Hoang/Desktop/clean/docs/17-dotnet-cli-mastery-and-cheat-sheet.md)
+    - How `dotnet.exe` and MSBuild operate under the hood
+    - Cheat sheet: Project management, NuGet auditing (`--outdated`, `--vulnerable`), Hot Reload (`dotnet watch`), formatting, single-file publish, and EF Core tools
+    - Diagnostic tools (`dotnet-counters`, `dotnet-trace`, `dotnet-dump`)

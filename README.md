@@ -143,3 +143,4 @@ The `docs/` folder contains in-depth, step-by-step guides explaining every techn
 14. [**14 - Structured Logging with Serilog, Correlation IDs & MediatR Pipeline**](file:///C:/Users/Hoang/Desktop/clean/docs/14-structured-logging-serilog-and-telemetry.md)
 15. [**15 - Excel Import & Export with EPPlus (Beginner ➔ Mid ➔ Expert)**](file:///C:/Users/Hoang/Desktop/clean/docs/15-excel-import-and-export-with-epplus.md)
 16. [**16 - Understanding and Mastering `.http` Files**](file:///C:/Users/Hoang/Desktop/clean/docs/16-understanding-and-mastering-http-files.md)
+17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](file:///C:/Users/Hoang/Desktop/clean/docs/17-dotnet-cli-mastery-and-cheat-sheet.md)
