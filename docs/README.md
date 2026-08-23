@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Learning Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging with Serilog**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -83,3 +83,8 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Serilog Sinks (Console, Daily Rolling File) & LogContext Enrichment
     - MediatR `LoggingBehavior` and `PerformanceBehavior` (automatic long-running request alerts)
     - Distributed tracing with `CorrelationIdMiddleware` (`X-Correlation-ID` header)
+
+15. [**15 - Excel Import & Export with EPPlus (Beginner ➔ Mid ➔ Expert)**](file:///C:/Users/Hoang/Desktop/clean/docs/15-excel-import-and-export-with-epplus.md)
+    - 🟢 **Beginner**: Workbooks, Worksheets, Cell indexers, License context
+    - 🟡 **Mid-Level**: Number formatting (`$#,##0.00`), Table Styles (`Medium9`), AutoFit columns, Freeze panes
+    - 🔴 **Expert**: Excel Formulas (`AVERAGE`, `SUM`), Conditional Formatting, Data Validation dropdowns, Streaming upload with row-by-row error reporting

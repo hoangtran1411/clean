@@ -2,6 +2,7 @@ using System.Text;
 using CleanArch.Application.Common.Interfaces;
 using CleanArch.Infrastructure.Identity;
 using CleanArch.Infrastructure.Persistence;
+using CleanArch.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +80,7 @@ public static class DependencyInjection
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IIdempotencyService, IdempotencyService>();
+        services.AddScoped<IExcelService, ExcelService>();
 
         return services;
     }

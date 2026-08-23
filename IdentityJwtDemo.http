@@ -199,7 +199,6 @@ Content-Type: application/json
 ### -------------------------------------------------------------
 
 ### 7a. Request with Custom Correlation ID
-### Check your console or 'logs/cleanarch-.log' to see [CORR-TRACE-12345] attached to every log line!
 POST {{HostAddress}}/api/payments/charge
 Authorization: Bearer {{userToken}}
 Idempotency-Key: pay-key-log-test-001
@@ -212,3 +211,15 @@ Content-Type: application/json
   "orderReference": "ORD-LOG-999",
   "description": "Enterprise Plan"
 }
+
+
+### -------------------------------------------------------------
+### 8. EXCEL IMPORT & EXPORT (EPPlus Level: Beginner -> Mid -> Expert)
+### -------------------------------------------------------------
+
+### 8a. Expert Export: Download Styled Excel File
+### Downloads .xlsx with Table Styles, Freeze Panes, Currency formatting, Formulas, and Conditional Formatting
+GET {{HostAddress}}/api/excel/export-products
+
+### 8b. Expert Template: Download Import Template with Category Dropdown Validation
+GET {{HostAddress}}/api/excel/template
