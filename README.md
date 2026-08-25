@@ -127,6 +127,7 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 11. [**11 - Understanding Database Execution Plans (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/11-understanding-execution-plans-deep-dive.md)
 12. [**12 - Database Deadlocks: Identification, Analysis & Resolution (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/12-deadlocks-identification-and-resolution-deep-dive.md)
 13. [**13 - Database Lock Exhaustion, Memory Pressure & Lock Escalation (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/13-database-lock-exhaustion-and-escalation-deep-dive.md)
+14. [**14 - Database Query Store & Performance Diagnostics (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/14-database-query-store-and-performance-diagnostics.md)
 
 ---
 

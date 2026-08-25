@@ -1,6 +1,6 @@
 # Database Engineering, SQL, EF Core 10 & Distributed Data Architecture - Learning Path
 
-Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, **Deadlock Analysis & Resolution**, **Lock Exhaustion & Escalation**, and **Database Interview Preparation**.
+Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, **Deadlock Analysis & Resolution**, **Lock Exhaustion & Escalation**, **Query Store & Performance Diagnostics**, and **Database Interview Preparation**.
 
 ---
 
@@ -92,3 +92,10 @@ Welcome to the comprehensive database curriculum covering **Relational Modeling*
     - The 5,000-row Lock Escalation threshold and concurrency collapse
     - Detecting lock memory pressure in `sys.dm_os_memory_clerks` and `sys.dm_tran_locks`
     - The 6 Production Strategies: Chunked Batching (batches of 4,000), RCSI snapshot elimination, Partition escalation (`LOCK_ESCALATION = AUTO`), and Lock Timeouts
+
+14. [**14 - Database Query Store & Performance Diagnostics (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/14-database-query-store-and-performance-diagnostics.md)
+    - What is Query Store & The persistent "Flight Data Recorder" architecture
+    - The 3 Internal Stores: Plan Store, Runtime Stats Store, and Wait Stats Store
+    - Finding Regressed Queries & Pinning execution plans with `sp_query_store_force_plan`
+    - Automatic Plan Correction (Self-Healing Databases with `FORCE_LAST_GOOD_PLAN = ON`)
+    - Essential T-SQL diagnostic scripts for Top CPU queries, Plan regressions, and Wait categories
