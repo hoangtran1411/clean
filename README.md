@@ -48,7 +48,8 @@ clean/
 │   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler
 │
 ├── docs-backend/                         # 📚 19 In-Depth Backend Learning Modules
-├── docs-frontend/                        # 📚 6 Step-by-Step Frontend Learning Modules
+├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
+├── docs-database/                        # 📚 10 In-Depth Database & SQL Learning Modules
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -111,6 +112,19 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/17-dotnet-cli-mastery-and-cheat-sheet.md)
 18. [**18 - Understanding and Configuring `.editorconfig`**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/18-understanding-and-configuring-editorconfig.md)
 19. [**19 - Centralized Solution Management with `Directory.Build.props`**](file:///C:/Users/Hoang/Desktop/clean/docs-backend/19-centralized-solution-management-with-directory-build-props.md)
+
+### 🗄️ Database Modules (`docs-database/`)
+1. [**01 - Database Fundamentals & Relational Data Modeling**](file:///C:/Users/Hoang/Desktop/clean/docs-database/01-database-fundamentals-and-relational-modeling.md)
+2. [**02 - SQL Mastery & Advanced Querying**](file:///C:/Users/Hoang/Desktop/clean/docs-database/02-sql-mastery-and-advanced-querying.md)
+3. [**03 - Indexing Strategies & Query Optimization**](file:///C:/Users/Hoang/Desktop/clean/docs-database/03-indexing-strategies-and-query-optimization.md)
+4. [**04 - Transactions, ACID Properties & Isolation Levels**](file:///C:/Users/Hoang/Desktop/clean/docs-database/04-transactions-acid-and-isolation-levels.md)
+5. [**05 - Entity Framework Core 10 Deep-Dive & Best Practices**](file:///C:/Users/Hoang/Desktop/clean/docs-database/05-ef-core-10-deep-dive-and-best-practices.md)
+6. [**06 - Advanced EF Core Patterns & High-Performance Data Access**](file:///C:/Users/Hoang/Desktop/clean/docs-database/06-advanced-ef-core-patterns-and-performance.md)
+7. [**07 - Database Migrations, Versioning & Zero-Downtime CI/CD**](file:///C:/Users/Hoang/Desktop/clean/docs-database/07-database-migrations-versioning-and-cicd.md)
+8. [**08 - NoSQL Databases & Distributed Caching with Redis**](file:///C:/Users/Hoang/Desktop/clean/docs-database/08-nosql-and-caching-redis-and-document-dbs.md)
+9. [**09 - Database Scaling, High Availability & Sharding**](file:///C:/Users/Hoang/Desktop/clean/docs-database/09-database-scaling-high-availability-and-sharding.md)
+10. [**10 - Top 30 Database, SQL & EF Core Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/10-top-30-database-and-sql-interview-questions.md)
+11. [**11 - Understanding Database Execution Plans (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/11-understanding-execution-plans-deep-dive.md)
 
 ---
 
