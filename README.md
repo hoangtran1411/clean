@@ -125,6 +125,7 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 9. [**09 - Database Scaling, High Availability & Sharding**](file:///C:/Users/Hoang/Desktop/clean/docs-database/09-database-scaling-high-availability-and-sharding.md)
 10. [**10 - Top 30 Database, SQL & EF Core Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/10-top-30-database-and-sql-interview-questions.md)
 11. [**11 - Understanding Database Execution Plans (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/11-understanding-execution-plans-deep-dive.md)
+12. [**12 - Database Deadlocks: Identification, Analysis & Resolution (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/12-deadlocks-identification-and-resolution-deep-dive.md)
 
 ---
 

@@ -1,6 +1,6 @@
 # Database Engineering, SQL, EF Core 10 & Distributed Data Architecture - Learning Path
 
-Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, and **Database Interview Preparation**.
+Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, **Deadlock Analysis & Resolution**, and **Database Interview Preparation**.
 
 ---
 
@@ -74,3 +74,10 @@ Welcome to the comprehensive database curriculum covering **Relational Modeling*
     - Physical operators: Index Seek vs. Scan, Key Lookups, Nested Loops vs. Hash Match vs. Merge Join
     - Identifying Cardinality Estimation errors, Stale Statistics, and Parameter Sniffing traps
     - Case study: 850x performance boost by eliminating Key Lookups & Sorts with a Covering Index
+
+12. [**12 - Database Deadlocks: Identification, Analysis & Resolution (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/12-deadlocks-identification-and-resolution-deep-dive.md)
+    - What is a Deadlock & The 4 Coffman conditions
+    - How the Deadlock Monitor thread detects circular wait chains and selects victims
+    - The 4 Classic Deadlock Scenarios (Reverse-Order, Lock Conversion, Bookmark Lookup, Lock Escalation)
+    - Capturing & reading XML Deadlock Graphs with Extended Events & Trace Flag 1222
+    - The 6 Proven Strategies: Chronological Ordering, `UPDLOCK`, RCSI/MVCC, Short Transactions, Covering Indexes, and EF Core Polly Retries (`1205`)
