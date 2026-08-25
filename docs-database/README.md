@@ -22,6 +22,10 @@ Welcome to the comprehensive database curriculum covering **Relational Modeling*
    - Clustered vs. Non-Clustered Indexes
    - Composite indexes & The Leftmost Prefix Rule
    - Covering Indexes with `INCLUDE` (eliminating Key Lookups)
+   - Index `FILLFACTOR` & `PAD_INDEX` (preventing B-Tree page splits & fragmentation)
+   - Index Maintenance: `REORGANIZE` (10-30%) vs. `REBUILD` (>30%) & `UPDATE STATISTICS`
+   - Identifying & dropping **Unused / Ineffective Indexes** (high write overhead, 0 reads)
+   - Finding Missing Indexes with Dynamic Management Views (DMVs)
    - Filtered/Partial Indexes & Query Sargability
 
 4. [**04 - Transactions, ACID Properties & Isolation Levels**](file:///C:/Users/Hoang/Desktop/clean/docs-database/04-transactions-acid-and-isolation-levels.md)
