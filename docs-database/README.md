@@ -1,6 +1,6 @@
 # Database Engineering, SQL, EF Core 10 & Distributed Data Architecture - Learning Path
 
-Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, **Deadlock Analysis & Resolution**, and **Database Interview Preparation**.
+Welcome to the comprehensive database curriculum covering **Relational Modeling**, **Advanced SQL**, **Indexing & Query Optimization**, **ACID & Transactions**, **Entity Framework Core 10 Deep-Dive**, **Zero-Downtime Migrations**, **Redis Distributed Caching**, **High Availability & Sharding**, **Execution Plan Deep Dive**, **Deadlock Analysis & Resolution**, **Lock Exhaustion & Escalation**, and **Database Interview Preparation**.
 
 ---
 
@@ -85,3 +85,10 @@ Welcome to the comprehensive database curriculum covering **Relational Modeling*
     - The 4 Classic Deadlock Scenarios (Reverse-Order, Lock Conversion, Bookmark Lookup, Lock Escalation)
     - Capturing & reading XML Deadlock Graphs with Extended Events & Trace Flag 1222
     - The 6 Proven Strategies: Chronological Ordering, `UPDLOCK`, RCSI/MVCC, Short Transactions, Covering Indexes, and EF Core Polly Retries (`1205`)
+
+13. [**13 - Database Lock Exhaustion, Memory Pressure & Lock Escalation (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/13-database-lock-exhaustion-and-escalation-deep-dive.md)
+    - What is Lock Exhaustion & physical memory costs of locks in RAM
+    - The Granularity Hierarchy (Row ➔ Page ➔ Partition ➔ Table Lock)
+    - The 5,000-row Lock Escalation threshold and concurrency collapse
+    - Detecting lock memory pressure in `sys.dm_os_memory_clerks` and `sys.dm_tran_locks`
+    - The 6 Production Strategies: Chunked Batching (batches of 4,000), RCSI snapshot elimination, Partition escalation (`LOCK_ESCALATION = AUTO`), and Lock Timeouts
