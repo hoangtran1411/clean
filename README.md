@@ -51,6 +51,7 @@ clean/
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
 ├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
 ├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
+├── docs-runtime/                         # ⚙️ 10 In-Depth .NET Runtime & Low-Level Internals Modules
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -141,6 +142,18 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 8. [**08 - Secure Coding, Input Validation & Data Sanitization**](file:///C:/Users/Hoang/Desktop/clean/docs-security/08-secure-coding-input-validation-and-data-sanitization.md)
 9. [**09 - Security Logging, Audit Trails & Incident Response**](file:///C:/Users/Hoang/Desktop/clean/docs-security/09-security-logging-auditing-and-incident-response.md)
 10. [**10 - Top 30 Application & Web Security Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-security/10-top-30-application-and-web-security-interview-questions.md)
+
+### ⚙️ .NET Runtime (CoreCLR) & Low-Level Modules (`docs-runtime/`)
+1. [**01 - CLR Architecture, Execution Engine & App Bootstrapping**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/01-clr-architecture-and-execution-engine.md)
+2. [**02 - Memory Management: Stack vs. Heap & Object Layout**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/02-memory-management-stack-heap-and-object-layout.md)
+3. [**03 - Garbage Collection (GC) Internals & Generational Model**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/03-garbage-collection-internals-and-generational-model.md)
+4. [**04 - RyuJIT Compilation, Tiering & Dynamic PGO**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/04-ryujit-compilation-tiering-and-dynamic-pgo.md)
+5. [**05 - High-Performance Zero-Allocation: Span, Memory, Ref Structs & ArrayPool**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/05-zero-allocation-span-memory-ref-structs-and-arraypool.md)
+6. [**06 - Low-Level Pointer Magic: Unsafe, MemoryMarshal & Native Interop**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/06-low-level-pointer-magic-unsafe-and-native-interop.md)
+7. [**07 - Threading, Synchronization Primitives & ThreadPool Architecture**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/07-threading-synchronization-and-threadpool-architecture.md)
+8. [**08 - Async/Await State Machine & SynchronizationContext Mechanics**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/08-async-await-state-machine-and-synchronization-context.md)
+9. [**09 - Runtime Diagnostics, Profiling & Memory Dump Analysis**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/09-runtime-diagnostics-profiling-and-memory-dump-analysis.md)
+10. [**10 - Top 30 .NET Runtime & Low-Level Internals Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/10-top-30-dotnet-runtime-interview-questions.md)
 
 ---
 
