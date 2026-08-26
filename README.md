@@ -53,6 +53,7 @@ clean/
 ├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
 ├── docs-runtime/                         # ⚙️ 10 In-Depth .NET Runtime & Low-Level Internals Modules
 ├── docs-uiux/                            # 🎨 10 In-Depth UI/UX & Design System Modules
+├── docs-system-design/                   # 🏛️ 10 In-Depth Distributed System Design Modules
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -167,6 +168,18 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 8. [**08 - High-Conversion Form UX & Error State Design**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/08-form-ux-validation-and-error-states.md)
 9. [**09 - Usability Testing, User Research & Design Metrics**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/09-usability-testing-user-research-and-metrics.md)
 10. [**10 - Top 30 UI/UX & Frontend Design System Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/10-top-30-uiux-and-design-system-interview-questions.md)
+
+### 🏛️ Large-Scale System Design & Distributed Systems Modules (`docs-system-design/`)
+1. [**01 - System Design Fundamentals, Scalability & Availability**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/01-system-design-fundamentals-scalability-and-availability.md)
+2. [**02 - Distributed System Theorems: CAP, PACELC & Consistency Models**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/02-cap-pacelc-theorems-and-consistency-models.md)
+3. [**03 - Load Balancing, API Gateways & Reverse Proxies**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/03-load-balancing-api-gateways-and-reverse-proxies.md)
+4. [**04 - Caching Strategies, Invalidation & Distributed Caching**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/04-caching-strategies-invalidation-and-distributed-caching.md)
+5. [**05 - Database Architecture: Sharding, Partitioning & Replication**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/05-database-sharding-partitioning-and-replication.md)
+6. [**06 - Asynchronous Messaging, Event-Driven Architecture & Message Queues**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/06-event-driven-architecture-and-message-queues.md)
+7. [**07 - Microservices Architecture, Service Discovery & Resilience Patterns**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/07-microservices-service-discovery-and-resilience.md)
+8. [**08 - Distributed Data Stores & NoSQL Classification**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/08-distributed-data-stores-and-nosql-classification.md)
+9. [**09 - Real-World System Design Case Studies**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/09-real-world-system-design-case-studies.md)
+10. [**10 - Top 30 System Design Interview Questions & Step-by-Step Framework (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/10-top-30-system-design-interview-questions.md)
 
 ---
 
