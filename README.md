@@ -52,6 +52,7 @@ clean/
 ├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
 ├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
 ├── docs-runtime/                         # ⚙️ 10 In-Depth .NET Runtime & Low-Level Internals Modules
+├── docs-uiux/                            # 🎨 10 In-Depth UI/UX & Design System Modules
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -154,6 +155,18 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 8. [**08 - Async/Await State Machine & SynchronizationContext Mechanics**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/08-async-await-state-machine-and-synchronization-context.md)
 9. [**09 - Runtime Diagnostics, Profiling & Memory Dump Analysis**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/09-runtime-diagnostics-profiling-and-memory-dump-analysis.md)
 10. [**10 - Top 30 .NET Runtime & Low-Level Internals Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-runtime/10-top-30-dotnet-runtime-interview-questions.md)
+
+### 🎨 UI/UX Design Systems & Frontend Design Modules (`docs-uiux/`)
+1. [**01 - UI/UX Design Fundamentals & Core Usability Heuristics**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/01-uiux-design-fundamentals-and-heuristics.md)
+2. [**02 - Design Systems & Token Architecture (Tailwind CSS & CSS Variables)**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/02-design-systems-and-token-architecture.md)
+3. [**03 - Typography, Spatial Grids & Responsive Layout Systems**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/03-typography-spatial-grids-and-layouts.md)
+4. [**04 - Color Theory, Palette Architecture & Dark Mode Theming**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/04-color-theory-palette-architecture-and-dark-mode.md)
+5. [**05 - Component Design Patterns with Radix Primitives & shadcn/ui**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/05-component-patterns-radix-and-shadcn.md)
+6. [**06 - Web Accessibility (a11y) & WCAG 2.2 Guidelines**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/06-web-accessibility-and-wcag-guidelines.md)
+7. [**07 - Micro-Interactions, Motion Design & Perceived Performance**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/07-micro-interactions-motion-and-perceived-performance.md)
+8. [**08 - High-Conversion Form UX & Error State Design**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/08-form-ux-validation-and-error-states.md)
+9. [**09 - Usability Testing, User Research & Design Metrics**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/09-usability-testing-user-research-and-metrics.md)
+10. [**10 - Top 30 UI/UX & Frontend Design System Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-uiux/10-top-30-uiux-and-design-system-interview-questions.md)
 
 ---
 
