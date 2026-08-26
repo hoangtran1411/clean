@@ -10,16 +10,16 @@ Junior developers often think procedurally (*"Loop through customers, check thei
 
 ```mermaid
 graph TD
-    subgraph INNER JOIN
+    subgraph IJ ["INNER JOIN"]
         I1["Returns only rows that MATCH in both tables"]
     end
-    subgraph LEFT JOIN
+    subgraph LJ ["LEFT JOIN"]
         L1["Returns ALL rows from Left table + matching rows from Right (NULL if no match)"]
     end
-    subgraph FULL OUTER JOIN
+    subgraph FOJ ["FULL OUTER JOIN"]
         F1["Returns ALL rows when there is a match in EITHER left or right table"]
     end
-    subgraph CROSS JOIN
+    subgraph CJ ["CROSS JOIN"]
         C1["Cartesian product: Every row from Table A paired with every row from Table B"]
     end
 ```

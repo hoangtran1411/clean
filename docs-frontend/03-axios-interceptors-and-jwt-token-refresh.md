@@ -21,7 +21,7 @@ If the user's Access Token expired 10 seconds ago, **all 3 requests fail with `4
 
 ```mermaid
 graph TD
-    subgraph Without Queue (Race Condition - Broken)
+    subgraph NO_QUEUE ["Without Queue (Race Condition - Broken)"]
         R1["Request 1 (401)"] --> Ref1["POST /refresh-token (Uses old RefreshToken)"]
         R2["Request 2 (401)"] --> Ref2["POST /refresh-token (Uses same old RefreshToken)"]
         R3["Request 3 (401)"] --> Ref3["POST /refresh-token (Uses same old RefreshToken)"]

@@ -30,12 +30,12 @@ Relational database engines support multiple levels of lock granularity to balan
 
 ```mermaid
 graph TD
-    subgraph Fine-Grained (High Concurrency, High Memory)
+    subgraph FINE ["Fine-Grained (High Concurrency, High Memory)"]
         Row["1. Row / Key Lock (RID / KEY)<br/>Cost: ~96 bytes per locked row. Concurrency: Maximum"]
         Page["2. Page Lock (PAGE - 8KB)<br/>Cost: ~96 bytes per locked page. Concurrency: Medium"]
     end
 
-    subgraph Coarse-Grained (Low Concurrency, Low Memory)
+    subgraph COARSE ["Coarse-Grained (Low Concurrency, Low Memory)"]
         Part["3. Partition Lock (Hobt / Partition)<br/>Cost: 1 single lock per partition. Concurrency: High for other partitions"]
         Table["4. Table Lock (OBJECT / TAB)<br/>Cost: 1 single lock for entire table (~96 bytes). Concurrency: ZERO (Blocks all other users!)"]
     end

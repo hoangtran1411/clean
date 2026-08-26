@@ -52,7 +52,7 @@ graph LR
 
 ```mermaid
 graph TD
-    subgraph Lock Compatibility
+    subgraph LC ["Lock Compatibility"]
         S_S["Shared (Read) + Shared (Read) -> ✅ COMPATIBLE"]
         S_X["Shared (Read) + Exclusive (Write) -> ❌ BLOCKS"]
         X_X["Exclusive (Write) + Exclusive (Write) -> ❌ BLOCKS"]
@@ -72,13 +72,13 @@ A deadlock occurs when Transaction 1 holds Lock A and waits for Lock B, while Tr
 
 ```mermaid
 graph LR
-    subgraph Optimistic Concurrency (.NET Standard)
+    subgraph OPT ["Optimistic Concurrency (.NET Standard)"]
         O1["Read entity + RowVersion token"] --> O2["Process in memory"] --> O3["UPDATE ... WHERE Id = @Id AND Version = @OrigVersion"]
         O3 -->|Match| O_OK["Commit Success!"]
         O3 -->|Mismatch| O_FAIL["DbUpdateConcurrencyException -> Retry or Alert User!"]
     end
 
-    subgraph Pessimistic Concurrency
+    subgraph PESS ["Pessimistic Concurrency"]
         P1["SELECT ... WITH (UPDLOCK, ROWLOCK)"] --> P2["Acquires Exclusive Lock immediately"] --> P3["All other users wait until Tx completes"]
     end
 ```

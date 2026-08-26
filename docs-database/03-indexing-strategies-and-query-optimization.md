@@ -29,11 +29,11 @@ graph TD
 
 ```mermaid
 graph LR
-    subgraph Clustered Index
+    subgraph CI ["Clustered Index"]
         C_Root["B-Tree Traversal"] --> C_Leaf["Leaf Node = ACTUAL TABLE DATA ROWS (Physical Sort Order)"]
     end
 
-    subgraph Non-Clustered Index
+    subgraph NCI ["Non-Clustered Index"]
         NC_Root["B-Tree Traversal"] --> NC_Leaf["Leaf Node = Index Key + Pointer / Clustered Key"]
         NC_Leaf -.->|Bookmark / Key Lookup| C_Leaf
     end
@@ -105,11 +105,11 @@ When an index is created or rebuilt, **`FILLFACTOR`** specifies the percentage o
 
 ```mermaid
 graph LR
-    subgraph Default: FILLFACTOR = 100% (No Free Space)
+    subgraph DEF ["Default: FILLFACTOR = 100% (No Free Space)"]
         P1["Page 1 (100% Full)"] -->|New mid-page insert arrives| Split["💥 B-Tree Page Split!<br/>Allocates Page 2, moves 50% rows, updates branch pointers (Heavy I/O & Fragmentation)"]
     end
 
-    subgraph Optimized: FILLFACTOR = 80% (20% Headroom)
+    subgraph OPT ["Optimized: FILLFACTOR = 80% (20% Headroom)"]
         P2["Page 1 (80% Data | 20% Free Space)"] -->|New mid-page insert arrives| NoSplit["✅ Fits directly into free space!<br/>Zero page splits, zero I/O spikes!"]
     end
 ```

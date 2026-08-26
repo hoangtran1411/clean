@@ -49,13 +49,13 @@ The **N+1 Problem** occurs when an application executes 1 initial query to fetch
 
 ```mermaid
 graph TD
-    subgraph N+1 Problem (Slow)
+    subgraph N1_PROBLEM ["N+1 Problem (Slow)"]
         Q1["1 Query: SELECT * FROM Orders (Returns 100 orders)"]
         Q2["Loop: 100 queries fired: SELECT * FROM OrderItems WHERE OrderId = @Id"]
         Q1 --> Q2
     end
 
-    subgraph Solution (Eager Loading / Join)
+    subgraph SOLUTION ["Solution (Eager Loading / Join)"]
         S1["1 Single Query with JOIN: SELECT * FROM Orders o JOIN OrderItems oi ON o.Id = oi.OrderId"]
     end
 ```

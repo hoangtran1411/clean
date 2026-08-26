@@ -11,11 +11,11 @@ In modern **EF Core 8/9/10**, bulk operations execute **directly on the database
 
 ```mermaid
 graph LR
-    subgraph Traditional EF Core (Slow)
+    subgraph TRAD ["Traditional EF Core (Slow)"]
         T1["SELECT 10,000 rows into RAM"] --> T2["Change Tracker mutates 10k entities"] --> T3["10,000 UPDATE roundtrips"]
     end
 
-    subgraph Modern ExecuteUpdate (Blazing Fast)
+    subgraph MODERN ["Modern ExecuteUpdate (Blazing Fast)"]
         M1["ExecuteUpdateAsync()"] --> M2["Single Direct SQL: UPDATE Products SET Price = Price * 1.1 WHERE Category = 'Laptops'"]
     end
 ```

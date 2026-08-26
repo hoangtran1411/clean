@@ -4,11 +4,11 @@
 
 ```mermaid
 graph TD
-    subgraph Scale-Up (Vertical)
+    subgraph V_SCALE ["Scale-Up (Vertical)"]
         V1["Single Database Server"] --> V2["Upgrade CPU: 16 -> 64 cores<br/>Upgrade RAM: 64GB -> 512GB<br/>Upgrade Disk: NVMe SSD"]
     end
 
-    subgraph Scale-Out (Horizontal)
+    subgraph H_SCALE ["Scale-Out (Horizontal)"]
         H1["Primary Database (Read & Write)"] -->|Asynchronous Replication| R1["Read Replica 1 (Read Only)"]
         H1 -->|Asynchronous Replication| R2["Read Replica 2 (Read Only)"]
         H1 -->|Asynchronous Replication| R3["Read Replica 3 (Read Only)"]

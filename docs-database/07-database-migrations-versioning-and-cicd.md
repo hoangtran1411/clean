@@ -54,19 +54,19 @@ If you rename `Customer.Name` to `Customer.FullName` in one migration:
 
 ```mermaid
 graph TD
-    subgraph Phase 1: Expand (Non-Breaking)
+    subgraph P1_SUB ["Phase 1: Expand (Non-Breaking)"]
         P1["1. Add new column FullName nullable<br/>2. Add DB trigger / dual-write to populate both Name & FullName<br/>3. Deploy App Version 1.1 (reads from Name, writes to both)"]
     end
 
-    subgraph Phase 2: Migrate
+    subgraph P2_SUB ["Phase 2: Migrate"]
         P2["4. Backfill existing historical data from Name -> FullName<br/>5. Deploy App Version 1.2 (reads & writes exclusively to FullName)"]
     end
 
-    subgraph Phase 3: Contract (Cleanup)
+    subgraph P3_SUB ["Phase 3: Contract (Cleanup)"]
         P3["6. Remove dual-write logic<br/>7. Drop old Name column in final migration"]
     end
 
-    Phase 1 --> Phase 2 --> Phase 3
+    P1 --> P2 --> P3
 ```
 
 ---
