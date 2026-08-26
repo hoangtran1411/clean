@@ -49,7 +49,8 @@ clean/
 │
 ├── docs-backend/                         # 📚 19 In-Depth Backend Learning Modules
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
-├── docs-database/                        # 📚 10 In-Depth Database & SQL Learning Modules
+├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
+├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -128,6 +129,18 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 12. [**12 - Database Deadlocks: Identification, Analysis & Resolution (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/12-deadlocks-identification-and-resolution-deep-dive.md)
 13. [**13 - Database Lock Exhaustion, Memory Pressure & Lock Escalation (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/13-database-lock-exhaustion-and-escalation-deep-dive.md)
 14. [**14 - Database Query Store & Performance Diagnostics (Deep Dive)**](file:///C:/Users/Hoang/Desktop/clean/docs-database/14-database-query-store-and-performance-diagnostics.md)
+
+### 🛡️ Security & Zero Trust Modules (`docs-security/`)
+1. [**01 - Security Fundamentals, Zero Trust & Threat Modeling**](file:///C:/Users/Hoang/Desktop/clean/docs-security/01-security-fundamentals-and-threat-modeling.md)
+2. [**02 - OWASP Top 10 & API Security Best Practices**](file:///C:/Users/Hoang/Desktop/clean/docs-security/02-owasp-top-10-and-api-security-best-practices.md)
+3. [**03 - Authentication & JWT Security Hardening**](file:///C:/Users/Hoang/Desktop/clean/docs-security/03-authentication-and-jwt-security-hardening.md)
+4. [**04 - Authorization, RBAC, ABAC & Dynamic Permission Enforcement**](file:///C:/Users/Hoang/Desktop/clean/docs-security/04-authorization-rbac-abac-and-dynamic-permissions.md)
+5. [**05 - Cryptography, Data Protection & Enterprise Secrets Management**](file:///C:/Users/Hoang/Desktop/clean/docs-security/05-cryptography-data-protection-and-secrets-management.md)
+6. [**06 - Network Security, CORS, CSRF & Defensive HTTP Headers**](file:///C:/Users/Hoang/Desktop/clean/docs-security/06-network-security-cors-csrf-and-security-headers.md)
+7. [**07 - Rate Limiting, DDoS Mitigation & API Defense Strategies**](file:///C:/Users/Hoang/Desktop/clean/docs-security/07-rate-limiting-ddos-protection-and-api-defense.md)
+8. [**08 - Secure Coding, Input Validation & Data Sanitization**](file:///C:/Users/Hoang/Desktop/clean/docs-security/08-secure-coding-input-validation-and-data-sanitization.md)
+9. [**09 - Security Logging, Audit Trails & Incident Response**](file:///C:/Users/Hoang/Desktop/clean/docs-security/09-security-logging-auditing-and-incident-response.md)
+10. [**10 - Top 30 Application & Web Security Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-security/10-top-30-application-and-web-security-interview-questions.md)
 
 ---
 
