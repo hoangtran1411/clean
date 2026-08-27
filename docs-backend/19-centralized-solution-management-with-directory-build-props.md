@@ -51,6 +51,7 @@ graph TD
 ## 3. Before vs. After in `.csproj` Files
 
 ### ❌ Before: Duplicated across 6 `.csproj` files
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -66,12 +67,16 @@ graph TD
 ```
 
 ### ✅ After: Ultra-Clean Project Files
+
 In [CleanArch.Domain.csproj](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/CleanArch.Domain.csproj):
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 </Project>
 ```
+
 In [CleanArch.Application.csproj](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/CleanArch.Application.csproj):
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>

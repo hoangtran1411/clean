@@ -172,6 +172,7 @@ dotnet dump analyze dump_file.dmp
 
 1. **Pinning SDK Version with `global.json`**:
    To ensure everyone on your team and in CI uses the exact same SDK version:
+
    ```powershell
    dotnet new globaljson --sdk-version 10.0.100 --roll-forward latestFeature
    ```
@@ -183,6 +184,7 @@ dotnet dump analyze dump_file.dmp
 
 3. **Clearing Local NuGet Caches**:
    When experiencing corrupted package downloads or caching issues:
+
    ```powershell
    dotnet nuget locals all --clear
    ```

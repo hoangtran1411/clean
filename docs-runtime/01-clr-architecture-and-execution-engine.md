@@ -6,7 +6,7 @@ The Common Language Runtime (CoreCLR) is the high-performance execution engine t
 
 ## 1. CoreCLR High-Level Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              CoreCLR RUNTIME                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -35,7 +35,7 @@ The Common Language Runtime (CoreCLR) is the high-performance execution engine t
 
 When you compile and run a C# application, execution proceeds through two distinct phases: **Build-Time Compilation** and **Runtime JIT Compilation**.
 
-```
+```text
     [C# Source Files]
            │
            ▼ (Roslyn: csc.exe)
@@ -53,6 +53,7 @@ When you compile and run a C# application, execution proceeds through two distin
 ```
 
 ### A. Common Intermediate Language (CIL / IL)
+
 CIL is a stack-based, CPU-independent instruction set. For example, adding two integers:
 
 ```cil
@@ -64,7 +65,9 @@ stloc.2      // Pop result from stack and store into local variable 2
 ```
 
 ### B. Metadata Tables
+
 Assemblies contain structured binary tables describing everything in the binary:
+
 - `TypeDef`: Declares classes, structs, interfaces.
 - `MethodDef`: Declares methods, signatures, and IL offsets.
 - `MemberRef`: References to external assemblies (e.g., `System.Console.WriteLine`).
@@ -76,7 +79,7 @@ Assemblies contain structured binary tables describing everything in the binary:
 
 When you run `dotnet run` or launch an executable produced by .NET:
 
-```
+```text
 [OS creates Process] ──► [apphost (native .exe)] ──► [hostfxr.dll] ──► [hostpolicy.dll]
                                                                              │
                                                                              ▼
@@ -132,6 +135,7 @@ GC.WaitForPendingFinalizers();
 ## 5. Type System & Metadata Resolution: The `MethodTable`
 
 Every loaded type in .NET is represented internally by a C++ struct called **`MethodTable`** in unmanaged CoreCLR memory:
+
 - Points to the EEClass (describes fields, layout, attributes).
 - Contains the Virtual Method Table (vtable) for polymorphic dispatch.
 - Contains interface map pointers and type flags (ValueType vs ReferenceType, Sealed, Generic).

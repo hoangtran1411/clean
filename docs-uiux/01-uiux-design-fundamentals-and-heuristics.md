@@ -6,7 +6,7 @@ Understanding the fundamental psychological and architectural principles behind 
 
 ## 1. UI vs. UX: The Core Distinctions
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ USER EXPERIENCE (UX)                                        │ USER INTERFACE (UI)                                         │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -22,7 +22,7 @@ Understanding the fundamental psychological and architectural principles behind 
 
 Jakob Nielsen's 10 Heuristics are the golden standard for evaluating interface usability:
 
-```
+```text
  ┌─────────────────────────────────────────────────────────────────────────────────────────┐
  │                       10 USABILITY HEURISTICS FOR UI DESIGN                             │
  ├─────────────────────────────────────────────────────────────────────────────────────────┤
@@ -44,26 +44,34 @@ Jakob Nielsen's 10 Heuristics are the golden standard for evaluating interface u
 ## 3. Fundamental Laws of UX & Psychology
 
 ### A. Fitts's Law
+>
 > *The time required to rapidly move to a target area is a function of the ratio between the distance to the target and the width of the target.*
+
 - **UI Application**: Make primary Call-To-Action (CTA) buttons large and place them within natural thumb/mouse reaching zones (e.g. bottom navigation on mobile, sticky checkout footers).
 
 ### B. Hick's Law
+>
 > *The time it takes to make a decision increases logarithmically with the number and complexity of choices.*
+
 - **UI Application**: Avoid presenting 20 options in a single menu. Break complex onboarding or multi-step checkout processes into progressive disclosure steps (Wizards).
 
 ### C. Miller's Law
+>
 > *The average person can only keep $7 \pm 2$ items in their working memory.*
+
 - **UI Application**: Chunk information into digestible groups (e.g., chunk credit card numbers as `4444 5555 6666 7777`, group form fields into logical cards).
 
 ### D. Peak-End Rule
+>
 > *People judge an experience largely based on how they felt at its peak (most intense point) and at its end.*
+
 - **UI Application**: Celebrate successful user completions (e.g. delightful celebratory confetti animations when an order is submitted or payment is confirmed).
 
 ---
 
 ## 4. Gestalt Principles in UI Layouts
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Principle          │ Definition                       │ UI / Frontend Implementation        │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤

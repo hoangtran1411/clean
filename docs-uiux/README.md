@@ -67,7 +67,7 @@ Welcome to the comprehensive **UI/UX Engineering & Design Systems Curriculum** c
 
 ## 🎨 UI/UX Component & Token Architecture Overview
 
-```
+```text
                                   BRAND & DESIGN TOKENS
                      [Colors (OKLCH), Spacing (8pt), Typography, Radii]
                                             │

@@ -8,7 +8,7 @@ Authentication verifies **who** the client is. This guide explores state-of-the-
 
 Never store passwords in plain text or using outdated fast hash functions (MD5, SHA-1, SHA-256). Fast hashes enable attackers to test billions of combinations per second on consumer GPUs.
 
-```
+```text
        Hash Algorithm Speed Comparison (Attacker cracking cost):
        
        MD5 / SHA-256: ═══════════════════════════════════► (100 Billion guesses/sec on GPU - INSECURE)
@@ -18,7 +18,9 @@ Never store passwords in plain text or using outdated fast hash functions (MD5, 
 ```
 
 ### Password Hashing in ASP.NET Core Identity
+
 ASP.NET Core Identity uses **PBKDF2 with HMAC-SHA512** and `100,000` iterations (Version 3 format):
+
 - Format: `[0x01 (version)] [4-byte KeyDerivationPrf] [4-byte iteration count] [4-byte salt length] [128-bit salt] [256-bit subkey]`
 - Automatically generates a cryptographically secure random salt per user.
 
@@ -27,6 +29,7 @@ ASP.NET Core Identity uses **PBKDF2 with HMAC-SHA512** and `100,000` iterations 
 ## 2. JWT Vulnerabilities & Hardening Tactics
 
 ### A. Algorithm Confusion Attack (`alg: none` or RSA/HMAC mismatch)
+
 - **Vulnerability**: An attacker changes `{"alg": "HS256"}` to `{"alg": "none"}` in the JWT header, strips the signature, and submits the token. Or if an API expects RS256 (asymmetric public key), an attacker signs the token using HMAC-SHA256 with the server's public key as the secret.
 - **Fix in .NET 10**: Explicitly define `TokenValidationParameters`:
 
@@ -58,7 +61,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### B. Access Token vs. Refresh Token Lifespans
 
-```
+```text
    ┌───────────────────────────┐           ┌────────────────────────────┐
    │ Access Token (JWT)        │           │ Refresh Token (Opaque GUID)│
    ├───────────────────────────┤           ├────────────────────────────┤
@@ -77,7 +80,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 Refresh Token Rotation ensures that **every time a refresh token is used, it is invalidated and replaced with a new one**. If an attacker steals a token and attempts to use it after the legitimate user already used it (or vice-versa), the system detects token reuse and invalidates the entire token family!
 
-```
+```text
      Legitimate Flow:
      Client ─── (Token A) ───► Server (Validates A, Revokes A, Issues Token B) ───► Client stores B
 

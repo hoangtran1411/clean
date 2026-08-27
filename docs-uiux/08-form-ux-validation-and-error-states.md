@@ -6,7 +6,7 @@ Forms are the primary conversion engine in digital products. Poor form design le
 
 ## 1. Form Layout Best Practices
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ ❌ POOR FORM DESIGN                                         │ ✅ HIGH-CONVERSION FORM DESIGN                              │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -21,7 +21,7 @@ Forms are the primary conversion engine in digital products. Poor form design le
 
 ## 2. Validation Timing Matrix
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Validation Timing  │ Mechanism                        │ Best Use Case                       │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤
@@ -42,7 +42,7 @@ Forms are the primary conversion engine in digital products. Poor form design le
 
 Never rely solely on red border colors to signal errors, as colorblind users cannot perceive red/green distinctions:
 
-```
+```text
   Label: Email Address *
  ┌─────────────────────────────────────────────────────────────┐
  │ user@invalid                                          [ ⚠️ ]│ ──► Red border + Error icon
@@ -51,6 +51,7 @@ Never rely solely on red border colors to signal errors, as colorblind users can
 ```
 
 ### Accessible Form Field Component:
+
 ```tsx
 interface FormFieldProps {
   id: string;

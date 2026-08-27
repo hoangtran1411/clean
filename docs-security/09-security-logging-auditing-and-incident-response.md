@@ -6,7 +6,7 @@ Security logging and audit trails provide visibility into authentication attempt
 
 ## 1. What to Log vs. What NEVER to Log
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │ ✅ ALWAYS LOG (Security Relevant Events)                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -125,7 +125,7 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
 
 When a security incident is detected, follow the standardized 4-step lifecycle:
 
-```
+```text
         ┌─────────────────────────────────────────────────────────────┐
         │                 1. PREPARATION                              │
         │  • SIEM configured (Elastic / Datadog / Sentinel)           │

@@ -8,7 +8,7 @@ A Design System is a single source of truth for design tokens, reusable UI compo
 
 Created by Brad Frost, Atomic Design breaks UI hierarchy into 5 distinct levels:
 
-```
+```text
     [Atoms] ──► [Molecules] ──► [Organisms] ──► [Templates] ──► [Pages]
       │              │               │               │            │
    Button,        SearchBar       NavBar,       Page Layout    Production
@@ -23,7 +23,7 @@ Created by Brad Frost, Atomic Design breaks UI hierarchy into 5 distinct levels:
 
 Design tokens are the atomic visual parameters of a design system (colors, typography scales, spacing, border radii) stored as agnostic variables.
 
-```
+```text
  Tier 1: GLOBAL / RAW TOKENS (Brand Palette)
  ┌─────────────────────────────────────────────────────────────┐
  │ --blue-500: oklch(0.62 0.19 250);                          │

@@ -8,7 +8,7 @@ Modern high-throughput .NET programming revolves around eliminating heap allocat
 
 `Span<T>` provides type-safe, contiguous memory representation across **Stack Memory**, **Managed Heap Memory**, or **Native Unmanaged Memory** with zero copying or allocations.
 
-```
+```text
                   ┌─────────────────────────────────────────────────────────┐
                   │                 Span<T> (16 bytes on x64)               │
                   ├────────────────────────────┬────────────────────────────┤
@@ -29,6 +29,7 @@ Modern high-throughput .NET programming revolves around eliminating heap allocat
 Because `Span<T>` contains an interior reference pointer (`ref byte`), it is declared as a **`ref struct`**. This enforces strict compile-time safety rules to prevent dangling stack pointers:
 
 ### `ref struct` Rules:
+
 - ❌ Cannot be boxed to `object` or interfaces.
 - ❌ Cannot be stored as a field in normal classes or regular structs.
 - ❌ Cannot be used across `async` / `await` boundaries or inside iterator blocks (`yield return`).
@@ -41,7 +42,7 @@ Because `Span<T>` contains an interior reference pointer (`ref byte`), it is dec
 
 Because `Span<T>` cannot survive `await` boundaries, use **`Memory<T>`** for heap-surviving, asynchronous streaming operations:
 
-```
+```text
 ┌─────────────────────────────────┬─────────────────────────────────┐
 │ `Span<T>`                       │ `Memory<T>`                     │
 ├─────────────────────────────────┼─────────────────────────────────┤
@@ -57,7 +58,7 @@ Because `Span<T>` cannot survive `await` boundaries, use **`Memory<T>`** for hea
 
 Renting temporary buffers from `ArrayPool<T>` avoids creating short-lived heap arrays that trigger Gen 0 garbage collections.
 
-```
+```text
        App Thread ──► Rent(minSize: 4096) ──► ArrayPool Bucket (Returns pre-allocated byte[4096])
                             │
                       Execute Operations
@@ -66,6 +67,7 @@ Renting temporary buffers from `ArrayPool<T>` avoids creating short-lived heap a
 ```
 
 ### Complete Implementation Pattern:
+
 ```csharp
 using System.Buffers;
 

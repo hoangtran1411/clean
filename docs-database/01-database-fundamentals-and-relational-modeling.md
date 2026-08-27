@@ -20,6 +20,7 @@ graph TD
 ```
 
 ### Core Engine Components:
+
 1. **Query Optimizer (CBO)**: Analyzes table statistics, available indexes, and data distribution to generate the cheapest **Execution Plan**.
 2. **Buffer Pool (Cache)**: Keeps database pages (typically 8KB chunks) in memory to avoid costly physical disk reads.
 3. **Write-Ahead Log (WAL / Transaction Log)**: Ensures **Durability (ACID)**. Every insert, update, or delete is written sequentially to disk in the WAL *before* modifying data pages in the buffer pool. If the server crashes or power fails, uncommitted changes are rolled back and committed changes are replayed upon restart.
@@ -111,6 +112,7 @@ graph TD
 While 3NF is ideal for **Write-Heavy OLTP** (Online Transaction Processing) systems to eliminate update anomalies, pure 3NF can cause **excessive multi-table JOINs** in high-throughput read operations.
 
 **Valid Scenarios for Denormalization**:
+
 - **E-Commerce Order Snapshots**: Copying `CustomerAddress` and `ProductPriceAtPurchase` directly into the `OrderItems` table to preserve historical integrity even if customer changes address or product price changes later.
 - **Pre-Aggregated Totals**: Storing `TotalRevenue` or `ProductCount` directly on a Category row to prevent running expensive `SUM()` / `COUNT()` queries across millions of rows on every home page visit.
 - **CQRS Read Databases**: Storing pre-computed JSON read models or read-replica tables tailored specifically for UI display.

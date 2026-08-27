@@ -6,7 +6,7 @@ Understanding how the .NET runtime allocates, aligns, and structures memory at t
 
 ## 1. Stack vs. Heap Memory
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ STACK MEMORY (LIFO - Execution Thread Frames)               │ HEAP MEMORY (Dynamic Managed Memory)                        │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -24,7 +24,7 @@ Understanding how the .NET runtime allocates, aligns, and structures memory at t
 
 Every managed reference-type object allocated on the 64-bit CoreCLR heap has a mandatory **16-byte object header overhead**:
 
-```
+```text
  ┌───────────────────────────────┬───────────────────────────────┬───────────────────────────────┬───────────────────┐
  │     SyncBlock Index           │      MethodTable Pointer      │        Instance Fields        │ Alignment Padding │
  │         (8 bytes)             │        (MethodTable*)         │       (Payload Data)          │   (0 - 7 bytes)   │
@@ -35,6 +35,7 @@ Every managed reference-type object allocated on the 64-bit CoreCLR heap has a m
 ```
 
 ### Components:
+
 1. **SyncBlock Index (8 bytes on x64)**:
    - Used for `lock(obj)` synchronization (points to an entry in the global SyncBlock table).
    - Stores the object's default `GetHashCode()` when computed.
@@ -54,7 +55,7 @@ Every managed reference-type object allocated on the 64-bit CoreCLR heap has a m
 
 Arrays in .NET are reference types with an extra **4-byte Length field**:
 
-```
+```text
  ┌───────────────────────┬───────────────────────┬─────────────────┬───────────────────────┬───────────────────┐
  │    SyncBlock Index    │  MethodTable Pointer  │ Length (Int32)  │    Array Elements     │ Alignment Padding │
  │       (8 bytes)       │       (8 bytes)       │    (4 bytes)    │   (Length * sizeof(T))│   (0 - 7 bytes)   │
@@ -62,13 +63,14 @@ Arrays in .NET are reference types with an extra **4-byte Length field**:
 ```
 
 For example, an empty array `new byte[0]`:
+
 - SyncBlock (8B) + MethodTable (8B) + Length (4B) + Padding (4B) = **24 bytes minimum overhead**.
 
 ---
 
 ## 4. Value Types, Reference Types & Boxing Mechanics
 
-```
+```text
 ┌───────────────────────────────────────────────────────────┐
 │ Value Types (struct, int, double, bool, enum)             │
 │ • Stored inline wherever declared (on Stack or inside     │
@@ -82,7 +84,9 @@ For example, an empty array `new byte[0]`:
 ```
 
 ### Boxing Behind the Scenes
+
 When a value type is cast to `object` or an interface (e.g. `IComparable`), the runtime performs **Boxing**:
+
 1. Allocates a new 24-byte object on the GC heap.
 2. Writes the value type's `MethodTable*` and SyncBlock.
 3. Copies the raw bytes of the value type into the heap object's payload.
@@ -104,7 +108,7 @@ void PrintValue<T>(T value) where T : struct // Avoids boxing!
 
 ## 5. Managed Heap Segments: SOH, LOH & POH
 
-```
+```text
                                   MANAGED MEMORY HEAP
  ┌─────────────────────────────────────────────────────────────────────────────────────────┐
  │ 1. Small Object Heap (SOH)                                                              │
@@ -123,7 +127,8 @@ void PrintValue<T>(T value) where T : struct // Avoids boxing!
  └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Allocating on POH in C#
+### Allocating on POH in `C#`
+
 ```csharp
 // Allocate directly on Pinned Object Heap (.NET 5+)
 byte[] pinnedBuffer = GC.AllocateArray<byte>(length: 1024, pinned: true);

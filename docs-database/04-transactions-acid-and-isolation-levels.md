@@ -64,6 +64,7 @@ graph TD
 - **Intent Locks (IS, IX)**: Placed on tables and pages to signal that a lock exists on child rows, preventing table-level lock conflicts.
 
 ### Deadlocks
+
 A deadlock occurs when Transaction 1 holds Lock A and waits for Lock B, while Transaction 2 holds Lock B and waits for Lock A. The database engine periodically runs a **Deadlock Monitor** thread, selects the cheapest transaction as the **Deadlock Victim**, and aborts/rolls it back.
 
 ---
@@ -84,6 +85,7 @@ graph LR
 ```
 
 ### 1. Optimistic Concurrency in EF Core 10 (High Scalability):
+
 ```csharp
 public class ProductItem
 {
@@ -98,10 +100,12 @@ public class ProductItem
 ```
 
 When two users edit product #1 simultaneously:
+
 - User A saves first: `UPDATE Products SET Price = 100 WHERE Id = 1 AND RowVersion = 0x01` (Succeeds, updates RowVersion to `0x02`).
 - User B saves second: `UPDATE Products SET Price = 120 WHERE Id = 1 AND RowVersion = 0x01` (0 rows affected ➔ EF Core throws `DbUpdateConcurrencyException`).
 
 ### 2. Pessimistic Concurrency (For high-conflict financial transactions):
+
 ```sql
 BEGIN TRANSACTION;
 -- Locks the row so nobody else can read for update or modify until we commit

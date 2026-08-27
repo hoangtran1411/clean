@@ -20,10 +20,12 @@ graph TD
 ## 2. Generating Idempotent SQL Scripts for Production CI/CD
 
 Applying migrations on API startup using `context.Database.Migrate()` in production is **dangerous** because:
+
 1. Multiple API instances scaling up simultaneously will create race conditions on schema locks.
 2. It requires production database `DDL` (admin) permissions on the runtime application user.
 
 ### ✅ The Production CI/CD Standard:
+
 Generate an **Idempotent SQL Script** at build time and execute it via your CI/CD pipeline (Azure DevOps / GitHub Actions):
 
 ```powershell
@@ -32,6 +34,7 @@ dotnet ef migrations script --idempotent -o ./deploy/migrate.sql --project src/C
 ```
 
 Sample generated script structure:
+
 ```sql
 IF NOT EXISTS (SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20260826_AddStockQuantity')
 BEGIN
@@ -47,7 +50,9 @@ END;
 When deploying new versions of an application with database changes, the old version of the app and the new version of the app often run simultaneously for several minutes (Blue/Green or Rolling deployment).
 
 ### ❌ Breaking Change (Renaming a column directly):
+
 If you rename `Customer.Name` to `Customer.FullName` in one migration:
+
 - The old app immediately crashes because `Name` no longer exists!
 
 ### ✅ The Expand and Contract Solution (3-Phase Deployment):

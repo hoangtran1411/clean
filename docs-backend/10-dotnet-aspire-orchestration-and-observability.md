@@ -43,7 +43,7 @@ graph TD
 
 Our Clean Architecture solution now contains 6 projects:
 
-```
+```text
 IdentityCleanArch/
 ├── src/
 │   ├── CleanArch.AppHost/           # 🌟 Aspire Orchestrator (Starts APIs, DBs, Dashboard)
@@ -67,6 +67,7 @@ IdentityCleanArch/
 In [Extensions.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.ServiceDefaults/Extensions.cs):
 
 ### A. OpenTelemetry & Structured Logging
+
 Configures OpenTelemetry for ASP.NET Core request tracing, HTTP client calls, and runtime metrics (GC memory, threadpool starvation):
 
 ```csharp
@@ -96,6 +97,7 @@ public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) w
 ```
 
 ### B. Standard Health Checks (`/health` & `/alive`)
+
 ```csharp
 public static WebApplication MapDefaultEndpoints(this WebApplication app)
 {
@@ -112,7 +114,9 @@ public static WebApplication MapDefaultEndpoints(this WebApplication app)
 ```
 
 ### C. Standard HTTP Resilience (Polly)
+
 Turns on automatic retries, exponential backoffs, and circuit breakers for outgoing HTTP calls:
+
 ```csharp
 builder.Services.ConfigureHttpClientDefaults(http =>
 {
@@ -138,6 +142,7 @@ builder.Build().Run();
 
 > [!TIP]
 > If you add external services like Redis or PostgreSQL in the future, you can simply add:
+>
 > ```csharp
 > var redis = builder.AddRedis("cache");
 > var postgres = builder.AddPostgres("postgres").AddDatabase("cleanidentitydb");
@@ -146,6 +151,7 @@ builder.Build().Run();
 >                         .WithReference(redis)
 >                         .WithReference(postgres);
 > ```
+>
 > Aspire will automatically spin up Docker containers for Redis & Postgres and inject the connection strings into `CleanArch.WebApi` without manual configuration!
 
 ---
@@ -159,6 +165,7 @@ dotnet run --project src/CleanArch.AppHost
 ```
 
 The console will print the **Aspire Dashboard URL** (e.g., `https://localhost:17180`). Open it in your browser to inspect:
+
 - 📊 **Resources**: Live health status of `webapi` and other services.
 - 📜 **Console Logs**: Aggregated real-time logs across all services.
 - 🔀 **Traces**: Full distributed waterfall traces showing how requests flow through your APIs.

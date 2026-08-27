@@ -72,7 +72,7 @@ Welcome to the comprehensive **System Design & Distributed Systems Curriculum** 
 
 ## 🏗️ Large-Scale Distributed System Architecture
 
-```
+```text
                                     GLOBAL CLIENTS (Web / Mobile / IoT)
                                                    │
                                                    ▼

@@ -25,33 +25,39 @@ graph LR
 ## 🏛️ 2. The 6 Core Knowledge Pillars for Frontend Mastery
 
 ### 1. JavaScript & TypeScript Runtime Internals
+
 - **Event Loop**: Call stack, Web APIs, Microtask queue (`Promise`, `queueMicrotask`) vs. Macrotask queue (`setTimeout`, `setInterval`, I/O).
 - **Memory Management**: Garbage collection (Mark-and-sweep), identifying and fixing closures and detached DOM node memory leaks.
 - **TypeScript Strict Mode**: Generics, Discriminated Unions, Template Literal Types, Utility types (`ReturnType`, `Parameters`, `Extract`, `Omit`), type guards.
 
 ### 2. Modern React 19 & Architecture
+
 - **React 19 Primitives**: Actions, `useActionState`, `useOptimistic`, `use()`, `useFormStatus`.
 - **Reconciliation Engine**: React Fiber tree, double buffering, work-in-progress tree, diffing algorithm.
 - **Concurrent React**: `useTransition`, `useDeferredValue` for non-blocking UI rendering during CPU-heavy operations.
 - **Rendering Paradigms**: Single Page Applications (SPA) vs. Server-Side Rendering (SSR) vs. Static Site Generation (SSG) vs. React Server Components (RSC).
 
 ### 3. Server State & Network Resilience
+
 - **TanStack Query (React Query v5)**: Stale-while-revalidate, query keys hierarchy, garbage collection vs. stale time, optimistic UI updates, mutation rollbacks.
 - **Resilient HTTP Communication**: Axios request/response interceptors, 401 refresh token queueing, distributed tracing (`X-Correlation-ID`), backoff retries.
 - **Real-Time Data**: WebSockets, Server-Sent Events (SSE), resilient auto-reconnect logic.
 
 ### 4. Web Performance & Core Web Vitals
+
 - **LCP (Largest Contentful Paint)**: Resource preloading, critical CSS, modern image formats (WebP/AVIF), font display swap.
 - **INP (Interaction to Next Paint)**: Yielding main thread with `scheduler.yield()`, debouncing, requestIdleCallback.
 - **CLS (Cumulative Layout Shift)**: Dimension placeholders, skeleton loaders, aspect-ratio preservation.
 - **Bundle Optimization**: Dynamic `import()`, route-based code-splitting, tree-shaking, bundle visualizer analysis.
 
 ### 5. Styling, Design Systems & Accessibility (a11y)
+
 - **Modern CSS & Tailwind**: CSS variables, container queries, Tailwind CSS v4 engine.
 - **Design System Architecture**: Headless primitives (Radix UI), `class-variance-authority` (cva), `clsx` + `tailwind-merge` (`cn()`).
 - **WCAG 2.1 AA Compliance**: Semantic HTML5, ARIA roles, focus traps in modals, full keyboard navigation.
 
 ### 6. Security, Testing & DevOps
+
 - **Security**: Cross-Site Scripting (XSS) defense, Content Security Policy (CSP), Cross-Site Request Forgery (CSRF), iframe sandboxing.
 - **Testing Pyramid**: Unit & Component testing (Vitest, React Testing Library), End-to-End testing (Playwright).
 - **CI/CD**: GitHub Actions, Dockerizing frontend with Nginx multi-stage builds.

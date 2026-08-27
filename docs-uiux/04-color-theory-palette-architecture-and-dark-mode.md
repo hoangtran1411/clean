@@ -6,7 +6,7 @@ Color evokes emotion, establishes visual hierarchy, and guides user attention. M
 
 ## 1. Color Spaces: Why OKLCH Replaces HSL & RGB
 
-```
+```text
  Traditional HSL Flaw:
  • Yellow at 50% Lightness appears blindingly bright to human eyes.
  • Blue at 50% Lightness appears very dark.
@@ -25,7 +25,7 @@ Color evokes emotion, establishes visual hierarchy, and guides user attention. M
 
 To prevent sensory overload, distribute color across your interface following the 60-30-10 ratio:
 
-```
+```text
  ┌─────────────────────────────────────────────────────────────┐
  │ 60% DOMINANT COLOR (Neutral Backgrounds & Canvas)           │
  │ - White, light gray in light mode; dark slate in dark mode  │
@@ -44,7 +44,7 @@ To prevent sensory overload, distribute color across your interface following th
 
 Dark mode is **not** simply inverting colors from `#FFFFFF` to `#000000`. Pure black (`#000000`) creates excessive visual contrast and eye fatigue against white text.
 
-```
+```text
        LIGHT MODE ELEVATION:                  DARK MODE ELEVATION:
        Surface Elevation via SHADOWS          Surface Elevation via LIGHTER TINTS
        
@@ -64,7 +64,7 @@ Dark mode is **not** simply inverting colors from `#FFFFFF` to `#000000`. Pure b
 
 ## 4. WCAG 2.2 Color Contrast Ratios
 
-```
+```text
 ┌────────────────────────┬───────────────────┬────────────────────────────────────────────────────────┐
 │ Conformance Level      │ Normal Text       │ Large Text ($\ge 18\text{pt}$ / $\ge 14\text{pt}$ Bold)│
 ├────────────────────────┼───────────────────┼────────────────────────────────────────────────────────┤
@@ -75,6 +75,7 @@ Dark mode is **not** simply inverting colors from `#FFFFFF` to `#000000`. Pure b
 ```
 
 ### React Dark Mode Hook & Theme Provider:
+
 ```tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 

@@ -7,10 +7,11 @@ The .NET Garbage Collector is an automatic, generational, tracing garbage collec
 ## 1. The Generational Hypothesis
 
 The .NET GC is designed around two empirical observations:
+
 1. **Most newly allocated objects have very short lifespans** (e.g. local method variables, HTTP request DTOs, string concatenations).
 2. **Older objects tend to remain alive for a long time** (e.g. singletons, configuration caches, DB connection pools).
 
-```
+```text
                       GENERATIONAL SURVIVAL PROMOTION LIFECYCLE
                       
     Allocations ──► ┌──────────────────────────────────────────────┐
@@ -34,7 +35,7 @@ The .NET GC is designed around two empirical observations:
 
 When a generation's allocation budget is exceeded, the GC executes the following four phases:
 
-```
+```text
  ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐      ┌──────────────────┐
  │  1. MARK PHASE  │ ───► │  2. PLAN PHASE  │ ───► │  3. SWEEP PHASE │ ───► │ 4. COMPACT PHASE │
  │ (Find live roots│      │ (Decide sweep   │      │ (Reclaim dead   │      │ (Relocate objects│
@@ -66,7 +67,7 @@ When a generation's allocation budget is exceeded, the GC executes the following
 
 ## 3. Workstation GC vs. Server GC
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ WORKSTATION GC                                              │ SERVER GC (Default for ASP.NET Core)                        │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -81,6 +82,7 @@ When a generation's allocation budget is exceeded, the GC executes the following
 ## 4. Background GC (`BGC`)
 
 In older .NET versions, full Gen 2 GCs paused all application threads for the entire collection duration. **Background GC** solves this:
+
 - Gen 2 collections run concurrently on dedicated background threads alongside application execution.
 - Ephemeral GCs (Gen 0 and Gen 1) can interrupt a running Background Gen 2 GC to keep short-lived allocations running smoothly.
 
@@ -111,7 +113,7 @@ You can fine-tune CoreCLR GC behavior inside your project's `runtimeconfig.json`
 
 ## 6. Finalization Queue, F-Reachable & `GC.SuppressFinalize`
 
-```
+```text
  [Object with Finalizer ~MyClass()] ──► Allocated on Heap & Registered in Finalization Queue
                                                        │
                                                        ▼ (Object dies during GC)

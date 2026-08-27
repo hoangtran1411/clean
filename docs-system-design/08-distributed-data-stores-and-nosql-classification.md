@@ -6,7 +6,7 @@ Selecting the appropriate storage technology for each microservice depends on ac
 
 ## 1. The 6 Major Database Paradigms
 
-```
+```text
 ┌────────────────────┬────────────────────────────┬─────────────────────────────────────┐
 │ Category           │ Popular Engines            │ Primary Use Case                    │
 ├────────────────────┼────────────────────────────┼─────────────────────────────────────┤
@@ -34,7 +34,7 @@ Selecting the appropriate storage technology for each microservice depends on ac
 
 ## 2. Deep Dive: B-Tree (RDBMS) vs. LSM-Tree (Cassandra / RocksDB)
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ B+TREE (Read-Optimized - PostgreSQL / SQL Server)           │ LSM-TREE (Write-Optimized - Cassandra / ScyllaDB / RocksDB) │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -51,7 +51,7 @@ Selecting the appropriate storage technology for each microservice depends on ac
 
 Modern systems employ **Polyglot Persistence**, assigning different data stores to the components best suited for them:
 
-```
+```text
                   ┌───────────────────────────────────────────────┐
                   │              E-COMMERCE SYSTEM                │
                   └───────────────────────┬───────────────────────┘

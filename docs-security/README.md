@@ -67,7 +67,7 @@ Welcome to the comprehensive **Security Helper & Engineering Curriculum** coveri
 
 ## 🔒 Security Architecture Overview
 
-```
+```text
                                     EXTERNAL CLIENT / ATTACKER
                                                 │
                                                 ▼

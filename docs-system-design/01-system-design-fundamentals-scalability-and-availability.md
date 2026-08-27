@@ -6,7 +6,7 @@ System design is the process of defining architecture, modules, interfaces, and 
 
 ## 1. Vertical Scaling (Scale-Up) vs. Horizontal Scaling (Scale-Out)
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ VERTICAL SCALING (Scale-Up)                                 │ HORIZONTAL SCALING (Scale-Out)                              │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -27,9 +27,9 @@ $$\text{Availability} = \frac{\text{Total Uptime}}{\text{Total Uptime} + \text{D
 | Availability SLA | Downtime per Day | Downtime per Month | Downtime per Year | Target System Profile |
 | :--- | :--- | :--- | :--- | :--- |
 | **99% ("2 nines")** | 14.4 minutes | 7.3 hours | 3.65 days | Internal non-critical batch tools |
-| **99.9% ("3 nines")**| 1.44 minutes | 43.8 minutes | 8.77 hours | Standard commercial SaaS products |
-| **99.99% ("4 nines")**| 8.64 seconds | 4.38 minutes | 52.6 minutes | Cloud infrastructure, payment systems |
-| **99.999% ("5 nines")**| 0.86 seconds | 26.3 seconds | 5.26 minutes | Telecommunications, financial exchanges |
+| **99.9% ("3 nines")** | 1.44 minutes | 43.8 minutes | 8.77 hours | Standard commercial SaaS products |
+| **99.99% ("4 nines")** | 8.64 seconds | 4.38 minutes | 52.6 minutes | Cloud infrastructure, payment systems |
+| **99.999% ("5 nines")** | 0.86 seconds | 26.3 seconds | 5.26 minutes | Telecommunications, financial exchanges |
 
 ---
 
@@ -37,7 +37,7 @@ $$\text{Availability} = \frac{\text{Total Uptime}}{\text{Total Uptime} + \text{D
 
 A Single Point of Failure is any individual component whose failure causes the entire system to stop functioning.
 
-```
+```text
        ❌ ARCHITECTURE WITH SPOF:
        [Clients] ──► [Single Load Balancer (SPOF!)] ──► [Single App Server (SPOF!)] ──► [Single DB (SPOF!)]
 
@@ -62,11 +62,13 @@ A Single Point of Failure is any individual component whose failure causes the e
 In system design interviews, back-of-the-envelope calculations estimate storage, bandwidth, and compute requirements:
 
 ### Key Powers of Two / Ten Rules:
+
 - 1 Day $\approx 86,400$ seconds $\approx 10^5$ seconds (use $10^5$ for easy mental math).
 - $1 \text{ Million requests / day} \approx \frac{10^6}{10^5} = 10 \text{ requests / second (QPS)}$.
 - $100 \text{ Million requests / day} \approx 1,000 \text{ QPS}$ (with $2,000 \text{ Peak QPS}$ at $2\times$).
 
 ### Storage Estimation Example:
+
 - 100 Million daily active users write 1 photo post per day ($200\text{ KB}$ metadata + image link).
 - Storage per day: $10^8 \times 200\text{ KB} = 20\text{ TB / day}$.
 - Storage for 5 years: $20\text{ TB} \times 365 \times 5 \approx 36.5\text{ Petabytes}$.

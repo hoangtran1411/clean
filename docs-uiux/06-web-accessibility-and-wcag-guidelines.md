@@ -6,7 +6,7 @@ Web Accessibility (a11y) ensures digital products can be used by everyone, inclu
 
 ## 1. The 4 POUR Principles (WCAG 2.2 Foundation)
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ 1. PERCEIVABLE                                                              │
 │ • Information and UI components must be presentable to users in ways they   │
@@ -55,7 +55,7 @@ Web Accessibility (a11y) ensures digital products can be used by everyone, inclu
 
 ## 3. Keyboard Navigation & Focus Management
 
-```
+```text
 ┌─────────────────────────┬────────────────────────────────────────────────────────────┐
 │ Scenario                │ Proper Focus Behavior                                      │
 ├─────────────────────────┼────────────────────────────────────────────────────────────┤

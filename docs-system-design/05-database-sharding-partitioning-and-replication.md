@@ -6,7 +6,7 @@ When database storage or write throughput exceeds the limits of a single machine
 
 ## 1. Database Replication Topologies
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ 1. SINGLE-LEADER (Primary-Replica / Master-Slave)           │ 2. LEADERLESS (Dynamo-Style Quorum)                         │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -25,7 +25,7 @@ When database storage or write throughput exceeds the limits of a single machine
 - **Vertical Partitioning**: Splitting a large table by columns (e.g. moving `UserCredentials` to DB 1 and `UserProfilePhotos` to DB 2).
 - **Horizontal Sharding**: Splitting a single table by rows across multiple independent database instances.
 
-```
+```text
                   HORIZONTAL DATABASE SHARDING ARCHITECTURE
                   
                                 [Application Layer]
@@ -44,7 +44,7 @@ When database storage or write throughput exceeds the limits of a single machine
 
 ## 3. Sharding Strategies
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Strategy           │ How it Works                     │ Trade-Offs                          │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤

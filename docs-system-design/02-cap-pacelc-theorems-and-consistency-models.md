@@ -8,7 +8,7 @@ When designing distributed databases and storage systems, physical constraints (
 
 In any asynchronous distributed data store, you can guarantee at most **two out of three** properties:
 
-```
+```text
                             ┌───────────────────────────────────┐
                             │           CONSISTENCY (C)         │
                             │  Every read receives the most     │
@@ -47,7 +47,7 @@ $$\text{If } \mathbf{P} \text{ (Partition)} \rightarrow \text{Choose between } \
 
 ## 3. The Spectrum of Consistency Models
 
-```
+```text
  Strongest ─────────────────────────────────────────────────────────────────────────────► Weakest
  
  ┌───────────────┐   ┌───────────────┐   ┌───────────────────┐   ┌────────────────────────┐
@@ -61,7 +61,7 @@ $$\text{If } \mathbf{P} \text{ (Partition)} \rightarrow \text{Choose between } \
 
 ## 4. Distributed Transactions: 2PC vs. Saga Pattern
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ TWO-PHASE COMMIT (2PC - Synchronous / Blocking)             │ SAGA PATTERN (Asynchronous Compensating Transactions)       │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤

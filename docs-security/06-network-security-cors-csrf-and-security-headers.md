@@ -8,7 +8,7 @@ Securing HTTP transport and controlling cross-origin behavior prevents attacks s
 
 CORS is a **browser security mechanism** (enforced by the browser, not the server) that controls whether a web application on origin `https://frontend.example.com` can read HTTP responses from `https://api.example.com`.
 
-```
+```text
 Frontend (http://localhost:3000)                   Backend API (http://localhost:5000)
        │                                                          │
        ├─── Preflight OPTIONS /api/products ─────────────────────►│
@@ -25,10 +25,12 @@ Frontend (http://localhost:3000)                   Backend API (http://localhost
 ```
 
 ### ❌ Dangerous CORS Misconfigurations
+
 - `AllowAnyOrigin()` + `AllowCredentials()`: Browsers forbid wildcard origins with credentials, but improper reflection (echoing `Origin` header dynamically) allows malicious sites to steal authenticated data!
 - Leaving `localhost` enabled in Production environments.
 
 ### ✅ Production CORS Setup in ASP.NET Core
+
 ```csharp
 var allowedOrigins = builder.Configuration
     .GetSection("Cors:AllowedOrigins")
@@ -53,7 +55,7 @@ builder.Services.AddCors(options =>
 
 CSRF occurs when a malicious site tricks a user's browser into executing unwanted actions on a trusted site where the user is currently authenticated via cookies.
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │ COOKIE AUTHENTICATION vs. BEARER TOKEN IN API ARCHITECTURE  │
 ├─────────────────────────────────────────────────────────────┤
@@ -68,7 +70,9 @@ CSRF occurs when a malicious site tricks a user's browser into executing unwante
 ```
 
 ### Cookie Hardening Flags
+
 If using authentication cookies:
+
 ```csharp
 options.Cookie.HttpOnly = true;                 // Inaccessible to JavaScript (mitigates XSS cookie theft)
 options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // HTTPS only
@@ -128,8 +132,11 @@ public class SecurityHeadersMiddleware
 ---
 
 ## 4. Testing Headers with Security Analyzers
+
 Verify your headers against [SecurityHeaders.com](https://securityheaders.com) or via curl:
+
 ```bash
 curl -I https://localhost:5000/api/products
 ```
+
 Ensure that all security headers return `A+` grade metrics.

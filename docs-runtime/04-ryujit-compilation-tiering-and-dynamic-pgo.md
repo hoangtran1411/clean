@@ -6,7 +6,7 @@ RyuJIT is the state-of-the-art Just-In-Time (JIT) compiler in CoreCLR. It transl
 
 ## 1. Compilation Models in Modern .NET
 
-```
+```text
 ┌────────────────────────────┬────────────────────────────┬────────────────────────────┐
 │ JIT (Just-In-Time)         │ NativeAOT (Ahead-of-Time)  │ ReadyToRun (R2R)           │
 ├────────────────────────────┼────────────────────────────┼────────────────────────────┤
@@ -24,7 +24,7 @@ RyuJIT is the state-of-the-art Just-In-Time (JIT) compiler in CoreCLR. It transl
 
 To achieve both **blazing fast cold startup** and **maximum sustained throughput**, RyuJIT uses a two-tier compilation strategy:
 
-```
+```text
      Method Invocation ──► Tier 0 (QuickJIT / MinOpts)
                                    │
                                    ├──► Executes immediately (No expensive optimizations)
@@ -47,6 +47,7 @@ To achieve both **blazing fast cold startup** and **maximum sustained throughput
 Introduced in .NET 7/8 and expanded in .NET 9/10, **Dynamic PGO** uses real-time runtime metrics gathered during Tier 0 execution to generate bespoke native machine code.
 
 ### Interface Devirtualization & Monomorphic Inlining
+
 Virtual methods and interface dispatches normally require an indirect lookup through the `MethodTable` vtable (incurring branch prediction penalties).
 
 Dynamic PGO observes which concrete types actually flow through the interface:
@@ -60,6 +61,7 @@ public int Process(ICalculator calc, int val) => calc.Compute(val);
 ```
 
 #### What Dynamic PGO generates in native machine code:
+
 ```asm
 ; Dynamic PGO checks if 'calc' is FastCalculator (Type Test)
 cmp [rcx], OFFSET FastCalculator_MethodTable

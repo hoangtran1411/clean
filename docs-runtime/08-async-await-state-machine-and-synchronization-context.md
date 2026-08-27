@@ -17,6 +17,7 @@ public async Task<int> FetchDataAsync(string url)
 ```
 
 ### What the Roslyn Compiler Generates Under the Hood:
+
 ```csharp
 [StructLayout(LayoutKind.Auto)]
 [CompilerGenerated]
@@ -90,7 +91,7 @@ private struct <FetchDataAsync>d__1 : IAsyncStateMachine
 
 `Task<T>` is a managed reference type (class) that always allocates on the heap when created. `ValueTask<T>` is a discriminated union struct (`struct`) containing either a direct result `T` or a `Task<T>`.
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │ WHEN TO USE ValueTask<T>                                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -119,7 +120,7 @@ public ValueTask<Product?> GetProductAsync(int id)
 
 ## 4. SynchronizationContext & `ConfigureAwait(false)`
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ SYNCHRONIZATION CONTEXT BEHAVIOR                                            │
 ├─────────────────────────────────────────────────────────────────────────────┤

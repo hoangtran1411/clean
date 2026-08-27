@@ -6,7 +6,7 @@ Authorization answers **"What is this authenticated user permitted to do?"**. Wh
 
 ## 1. Access Control Paradigms
 
-```
+```text
 ┌───────────────────────────┐    ┌───────────────────────────┐    ┌───────────────────────────┐
 │           RBAC            │    │           PBAC            │    │           ABAC            │
 │ (Role-Based Access Ctrl)  │    │(Permission-Based Access)  │    │(Attribute-Based Access)   │
@@ -25,6 +25,7 @@ Authorization answers **"What is this authenticated user permitted to do?"**. Wh
 In enterprise systems, hardcoding roles (e.g. `[Authorize(Roles = "Admin,Manager")]`) causes tight coupling. Instead, we use fine-grained permission claims evaluated at runtime using `IAuthorizationPolicyProvider`.
 
 ### Step 1: Define Static Permission Constants
+
 ```csharp
 namespace CleanArch.Domain.Constants;
 
@@ -41,6 +42,7 @@ public static class AppPermissions
 ```
 
 ### Step 2: Custom Policy Requirement
+
 ```csharp
 public class PermissionRequirement : IAuthorizationRequirement
 {
@@ -50,6 +52,7 @@ public class PermissionRequirement : IAuthorizationRequirement
 ```
 
 ### Step 3: Dynamic Policy Provider
+
 Instead of manually registering hundreds of policies in `Program.cs`, the custom provider dynamically builds the policy on demand when an endpoint requests it:
 
 ```csharp
@@ -85,6 +88,7 @@ public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvide
 ```
 
 ### Step 4: Authorization Handler
+
 Evaluates whether the user's claims contain the required permission:
 
 ```csharp
@@ -116,6 +120,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 ```
 
 ### Step 5: Clean Custom Attribute
+
 ```csharp
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = false)]
 public sealed class HasPermissionAttribute : AuthorizeAttribute
@@ -127,6 +132,7 @@ public sealed class HasPermissionAttribute : AuthorizeAttribute
 ```
 
 ### Usage in Controller:
+
 ```csharp
 [HttpPost]
 [HasPermission(AppPermissions.ProductsCreate)]

@@ -19,13 +19,16 @@ graph LR
 ## 2. 🟢 Beginner Level: Setup, Worksheets & Cell Access
 
 ### Step 1: Set License Context (Mandatory in EPPlus)
+
 In [ExcelService.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Services/ExcelService.cs):
+
 ```csharp
 // Set Non-Commercial License in constructor or Program.cs
 ExcelPackage.License.SetNonCommercialPersonal("CleanArchitectureStudent");
 ```
 
 ### Step 2: Creating a Workbook & Writing Cells
+
 ```csharp
 using var package = new ExcelPackage();
 var worksheet = package.Workbook.Worksheets.Add("Sheet1");
@@ -45,6 +48,7 @@ byte[] excelBytes = package.GetAsByteArray();
 ## 3. 🟡 Mid-Level: Production Styling, Tables & Clean Architecture
 
 ### A. Number Formatting, Styles & Colors
+
 ```csharp
 // Styling headers with dark blue background and white bold font
 ws.Cells["A1:D1"].Style.Font.Bold = true;
@@ -58,6 +62,7 @@ ws.Cells["D2:D100"].Style.Numberformat.Format = "#,##0";
 ```
 
 ### B. Auto-Fit Columns & Freeze Panes
+
 ```csharp
 // Freeze top header row so it stays visible while scrolling
 ws.View.FreezePanes(2, 1);
@@ -67,6 +72,7 @@ ws.Cells[ws.Dimension.Address].AutoFitColumns(15, 45);
 ```
 
 ### C. Excel Table Styling
+
 ```csharp
 var dataRange = ws.Cells[1, 1, lastRow, columnCount];
 var table = ws.Tables.Add(dataRange, "ProductsTable");
@@ -74,7 +80,9 @@ table.TableStyle = TableStyles.Medium9;
 ```
 
 ### D. Returning Files from ASP.NET Core Web API
+
 In [ExcelController.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/ExcelController.cs):
+
 ```csharp
 [HttpGet("export-products")]
 public async Task<IActionResult> ExportProducts()
@@ -90,7 +98,9 @@ public async Task<IActionResult> ExportProducts()
 ## 4. 🔴 Expert Level: Advanced Excel Features
 
 ### 1. Summary Formulas (`SUM`, `AVERAGE`)
+
 Write real native Excel formulas that recalculate dynamically when opened in Excel:
+
 ```csharp
 ws.Cells[summaryRow, 3].Value = "Average Price:";
 ws.Cells[summaryRow, 4].Formula = $"AVERAGE(D2:D{lastDataRow})";
@@ -101,7 +111,9 @@ ws.Cells[summaryRow + 1, 5].Formula = $"SUM(E2:E{lastDataRow})";
 ```
 
 ### 2. Conditional Formatting (Visual Alerts)
+
 Automatically highlight low-stock products ($< 10$ units) with a light red background:
+
 ```csharp
 var stockRange = ws.Cells[2, 5, lastDataRow, 5];
 var condition = ws.ConditionalFormatting.AddLessThan(stockRange);
@@ -112,7 +124,9 @@ condition.Style.Font.Color.Color = Color.FromArgb(156, 0, 6);
 ```
 
 ### 3. Data Validation Dropdowns (Preventing Bad Imports)
+
 Locks the Category column into a predefined dropdown list inside Excel:
+
 ```csharp
 var categoryValidation = ws.DataValidations.AddListValidation("B2:B1000");
 categoryValidation.ShowErrorMessage = true;
@@ -126,6 +140,7 @@ categoryValidation.Formula.Values.Add("Tablets");
 ```
 
 ### 4. Resilient Import with Row-by-Row Error Aggregation
+
 Instead of aborting the entire upload on the first invalid cell, the parser collects all row errors, imports all valid items, and returns a detailed audit report:
 
 ```csharp

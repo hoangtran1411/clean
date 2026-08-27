@@ -48,11 +48,14 @@ sequenceDiagram
 ```
 
 ### Expiration Strategies:
+
 1. **`AbsoluteExpirationRelativeToNow`**: Hard expiration time (e.g. 5 minutes). The item is evicted once this duration passes, regardless of access frequency.
 2. **`SlidingExpiration`**: Rolling expiration (e.g. 1 minute). If the item is accessed within 1 minute, its expiration timer resets. To prevent an item from staying in cache forever, combine sliding expiration with an absolute expiration.
 
 ### Implementation in Application Layer:
+
 In [GetCachedProductsQuery.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Features/Products/Queries/GetCachedProducts/GetCachedProductsQuery.cs):
+
 ```csharp
 var products = await _memoryCache.GetOrCreateAsync(cacheKey, async entry =>
 {
@@ -98,6 +101,7 @@ sequenceDiagram
 ### Powerful Features of Output Cache:
 
 #### A. Tag-Based Invalidation (`EvictByTagAsync`)
+
 You can tag multiple related endpoints with a common tag (e.g. `"products-tag"`). When a mutation occurs (`POST /api/products`), a single call invalidates all related cached endpoints at once!
 
 ```csharp
@@ -117,11 +121,13 @@ public async Task<IActionResult> CreateProduct(...)
 ```
 
 #### B. VaryBy Configurations
+
 - **`VaryByRouteValueNames = ["category"]`**: Caches separate responses for `/category/Laptops` vs `/category/Audio`.
 - **`VaryByQueryKeys = ["page", "pageSize"]`**: Caches separate responses for each pagination query.
 - **`VaryByHeaderNames = ["Accept-Language"]`**: Caches localized responses based on header.
 
 #### C. Built-in Cache Stampede Protection (Resource Locking)
+
 If 1,000 concurrent requests hit an expired endpoint simultaneously, OutputCache **locks the key** so only **one** request executes the controller action while the other 999 wait for the response to be cached, completely preventing database thundering herd problems!
 
 ---

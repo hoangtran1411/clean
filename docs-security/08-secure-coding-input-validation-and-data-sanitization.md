@@ -8,7 +8,7 @@ Input validation ensures that **untrusted data from external callers conforms to
 
 Validation must occur early in the request lifecycle (within Application CQRS commands using FluentValidation), before database transactions or third-party API calls execute.
 
-```
+```text
        HTTP Request ──► Controller ──► MediatR Pipeline ──► ValidationBehavior (FluentValidation)
                                                                        │
                                                ┌───────────────────────┴───────────────────────┐
@@ -21,6 +21,7 @@ Validation must occur early in the request lifecycle (within Application CQRS co
 ```
 
 ### FluentValidation Implementation Example
+
 ```csharp
 public sealed class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
@@ -52,7 +53,7 @@ public sealed class CreateProductCommandValidator : AbstractValidator<CreateProd
 
 XSS occurs when an application includes untrusted data in a web page without proper validation or contextual escaping.
 
-```
+```text
 ┌───────────────────────────┬────────────────────────────────────────────────────────┐
 │ Context                   │ Correct Sanitization / Encoding Technique              │
 ├───────────────────────────┼────────────────────────────────────────────────────────┤
@@ -73,14 +74,15 @@ XSS occurs when an application includes untrusted data in a web page without pro
 
 File upload endpoints represent a severe threat surface (malicious executable uploads, path traversal, Zip bombs, and denial of service).
 
-```
+```text
    Client Upload ──► [1. File Extension Whitelist] ──► [2. Magic Byte Check] ──► [3. Anti-Virus Scan]
                                                                                        │
                                                                                        ▼
                                  [Store in Isolated Blob Storage / Sandbox (Not Web Root!)]
 ```
 
-### Step 1: Magic Byte Inspection in C#
+### Step 1: Magic Byte Inspection in `C#`
+
 Never trust `Content-Type` headers or file extensions alone, as attackers can rename `evil.exe` to `invoice.png`.
 
 ```csharp
@@ -119,6 +121,7 @@ public static class FileSecurityValidator
 When exporting user-generated data to Excel using EPPlus or CSV, characters such as `=`, `+`, `-`, or `@` at the beginning of a cell cause Excel to interpret the cell as an executable formula (e.g. `=CMD|' /C calc'!A0`).
 
 ### Sanitizing Excel Cell Values
+
 ```csharp
 public static class ExcelSanitizer
 {

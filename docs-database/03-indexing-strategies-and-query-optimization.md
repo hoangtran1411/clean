@@ -20,6 +20,7 @@ graph TD
 ```
 
 ### Why B+Trees are ideal for databases:
+
 - **Balanced Depth**: The tree is auto-balanced. Lookup time is always $O(\log N)$.
 - **Doubly-Linked Leaf Nodes**: Range queries (`WHERE CreatedAt >= '2026-01-01' AND CreatedAt <= '2026-01-31'`) jump directly to the start key and traverse sequentially across leaf nodes without re-navigating the root tree!
 
@@ -101,6 +102,7 @@ WHERE Status = 'Pending';
 ## 6. Index `FILLFACTOR` & `PAD_INDEX`: Preventing Page Splits
 
 ### What is `FILLFACTOR`?
+
 When an index is created or rebuilt, **`FILLFACTOR`** specifies the percentage of space on each **8KB leaf-level page** that the database engine fills with data, reserving the remaining percentage as **empty headroom (free space)** for future `INSERT` and `UPDATE` operations.
 
 ```mermaid
@@ -115,6 +117,7 @@ graph LR
 ```
 
 ### Why Default `FILLFACTOR = 0 / 100` Causes Performance Degradation on Writes:
+
 1. When inserting a row into the middle of a **100% full leaf page** (e.g. inserting random GUIDs or non-sequential text), the page cannot accommodate the row.
 2. The storage engine performs an expensive **Page Split**:
    - Allocates a brand-new 8KB page from disk.
@@ -139,6 +142,7 @@ When an index was created in the past without specifying `FILLFACTOR`:
    - The index is now likely **heavily fragmented** (e.g. 40% - 60% fragmentation in `sys.dm_db_index_physical_stats`), meaning the pages are scattered randomly across the disk and are half-empty anyway!
 
 3. **How to Check Current FILLFACTOR & Fragmentation of Existing Indexes**:
+
 ```sql
 -- SQL Server: Check current fill factor and fragmentation percentage across all tables
 SELECT
@@ -153,7 +157,7 @@ WHERE i.type > 0 AND ps.page_count > 100
 ORDER BY ps.avg_fragmentation_in_percent DESC;
 ```
 
-4. **How to Fix / Set FILLFACTOR on Existing Indexes (Without Dropping Them)**:
+1. **How to Fix / Set FILLFACTOR on Existing Indexes (Without Dropping Them)**:
 You do **not** need to drop and recreate the index. Rebuilding the index applies the new `FILLFACTOR` and resets fragmentation to **0%**:
 
 ```sql
@@ -191,14 +195,15 @@ graph TD
 
 | Feature | `ALTER INDEX REORGANIZE` | `ALTER INDEX REBUILD` |
 | :--- | :--- | :--- |
-| **Fragmentation Threshold**| **10% to 30%** | **> 30%** |
+| **Fragmentation Threshold** | **10% to 30%** | **> 30%** |
 | **How it Works** | Defragments existing leaf pages in-place; compacts pages. | Drops and recreates the entire B+Tree from scratch. |
 | **Locks & Availability** | Always fully **ONLINE** (no table locks). | Supports `ONLINE = ON` (Enterprise/Standard editions). |
 | **Applies `FILLFACTOR`?** | ❌ No (Preserves existing page fills). | ✅ **Yes** (Repacks all pages to new `FILLFACTOR`). |
-| **Updates Statistics?** | ❌ No (Must run `UPDATE STATISTICS` separately).| ✅ **Yes** (Automatically updates stats with FullScan).|
-| **Resource & Log Impact**| Very low CPU & minimal transaction log usage. | High CPU, high I/O, substantial transaction log generation. |
+| **Updates Statistics?** | ❌ No (Must run `UPDATE STATISTICS` separately). | ✅ **Yes** (Automatically updates stats with FullScan). |
+| **Resource & Log Impact** | Very low CPU & minimal transaction log usage. | High CPU, high I/O, substantial transaction log generation. |
 
 ### SQL Maintenance Commands:
+
 ```sql
 -- 1. Reorganize index (Lightweight maintenance for 10-30% fragmentation)
 ALTER INDEX IX_Orders_CustomerId ON Orders REORGANIZE;
@@ -215,7 +220,9 @@ UPDATE STATISTICS Orders IX_Orders_CustomerId WITH FULLSCAN;
 ## 8. Identifying Unused, Ineffective & Duplicate Indexes
 
 ### ⚠️ Why Unused Indexes are Dangerous:
+
 Indexes are not free! Every time an application runs an `INSERT`, `UPDATE`, or `DELETE`, the database engine must **lock, write, and maintain every single index on that table**.
+
 - If a table has 15 indexes and 8 are never used by queries, **write throughput drops by 50%+**, disk space is wasted, and the Buffer Pool memory cache is bloated with useless index pages!
 
 ```mermaid
@@ -261,6 +268,7 @@ ORDER BY us.user_updates DESC;
 ```
 
 In **PostgreSQL**:
+
 ```sql
 -- Find unused indexes in PostgreSQL (idx_scan = 0)
 SELECT
@@ -280,6 +288,7 @@ ORDER BY pg_relation_size(i.indexrelid) DESC;
 ### 🔍 2. Finding Duplicate & Overlapping Redundant Indexes
 
 An index is **duplicate / redundant** if another index already contains its leading columns in the same order:
+
 - **Index A**: `(CustomerId)`
 - **Index B**: `(CustomerId, OrderDate)`
 - **Problem**: Index A is 100% redundant! The database engine can use **Index B** for any query filtering by `CustomerId` (via the Leftmost Prefix Rule). Index A should be dropped immediately to save disk and write I/O.
@@ -317,7 +326,7 @@ When debugging slow queries (`EXPLAIN ANALYZE` in PostgreSQL or *Execution Plan*
 | **Index Seek** | 🟢 **Best** | Direct B-Tree traversal to pinpoint exact matching rows in $O(\log N)$ time. |
 | **Index Scan** | 🟡 **Medium** | Reads the entire leaf level of the index (scanning all index rows). |
 | **Table / Clustered Scan** | 🔴 **Slow** | Scans every single page of the physical table on disk ($O(N)$). |
-| **Key Lookup / Bookmark Lookup**| 🟡 **Costly** | Jumps from non-clustered index leaf back to clustered table to fetch non-indexed columns. |
+| **Key Lookup / Bookmark Lookup** | 🟡 **Costly** | Jumps from non-clustered index leaf back to clustered table to fetch non-indexed columns. |
 | **Nested Loops Join** | 🟢 Fast for small sets | Outer row loop looking up matching inner rows via Index Seek. |
 | **Hash Match Join** | 🟡 Fast for large sets | Builds an in-memory hash table of the smaller dataset, probes with larger dataset. |
 | **Merge Join** | 🟢 Ultra-fast | Both inputs are pre-sorted by join key; iterates through both streams simultaneously. |

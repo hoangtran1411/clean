@@ -5,6 +5,7 @@
 In API design, unhandled exceptions can leak dangerous server internals (stack traces, SQL queries, server paths) to clients if not properly handled. Furthermore, returning inconsistent error shapes across different controllers frustrates frontend and mobile developers.
 
 ### The RFC 7807 / RFC 9457 Standard
+
 Modern REST APIs return errors in standard **Problem Details** JSON format:
 
 ```json
@@ -25,6 +26,7 @@ Modern REST APIs return errors in standard **Problem Details** JSON format:
 Prior to .NET 8, developers wrote custom middleware with `try { await _next(context); } catch (Exception ex) { ... }`.
 
 In **.NET 8, 9, and 10**, Microsoft introduced **`IExceptionHandler`** and **`IProblemDetailsService`**:
+
 - Integrates directly with ASP.NET Core diagnostics.
 - Avoids custom try/catch middleware allocations.
 - Supports chaining multiple specialized exception handlers.
@@ -54,7 +56,7 @@ sequenceDiagram
 
 Exceptions are defined in `CleanArch.Domain` and `CleanArch.Application` so that business rules can throw domain-specific exceptions without knowing anything about HTTP status codes:
 
-```
+```text
 Exception (System)
  ├── ValidationException (CleanArch.Application) ──> 400 Bad Request + Validation Errors
  ├── DomainException (CleanArch.Domain) ──────────> 400 Bad Request + Rule message
@@ -69,7 +71,9 @@ Exception (System)
 ## 4. Implementation Details
 
 ### Step 1: Create Domain & Application Exceptions
+
 In [NotFoundException.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Exceptions/NotFoundException.cs):
+
 ```csharp
 public class NotFoundException : Exception
 {
@@ -79,7 +83,9 @@ public class NotFoundException : Exception
 ```
 
 ### Step 2: Implement `IExceptionHandler`
+
 In [GlobalExceptionHandler.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Middleware/GlobalExceptionHandler.cs):
+
 ```csharp
 public class GlobalExceptionHandler : IExceptionHandler
 {
@@ -134,7 +140,9 @@ public class GlobalExceptionHandler : IExceptionHandler
 ```
 
 ### Step 3: Register in `Program.cs`
+
 In [Program.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Program.cs):
+
 ```csharp
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();

@@ -3,6 +3,7 @@
 ## 1. What makes shadcn/ui unique?
 
 Unlike traditional component libraries (Material UI, Ant Design, Bootstrap) which are installed as bloated black-box npm packages, **shadcn/ui** is a design system approach:
+
 - You **own the source code** directly in your project under `src/components/ui/`.
 - Built on top of accessible Radix UI primitives.
 - Styled using pure Tailwind CSS utility classes.

@@ -29,13 +29,17 @@ graph TD
 An `.http` file consists of 5 core building blocks:
 
 ### 1. Variables (`@var = value`)
+
 Define reusable variables at the top of the file:
+
 ```http
 @HostAddress = http://localhost:5000
 ```
 
 ### 2. Request Delimiters (`###`)
+
 Every HTTP request must be separated by three hash characters (`###`):
+
 ```http
 ### Request 1
 GET {{HostAddress}}/api/products
@@ -45,6 +49,7 @@ GET {{HostAddress}}/api/users
 ```
 
 ### 3. Request Naming & Dynamic Response Chaining (`# @name`)
+
 By naming a request with `# @name requestName`, you can extract values from its JSON response body or headers in subsequent requests!
 
 ```http
@@ -67,7 +72,9 @@ Authorization: Bearer {{adminToken}}
 ```
 
 ### 4. Headers
+
 Headers follow immediately after the request URL line on separate lines:
+
 ```http
 POST {{HostAddress}}/api/payments/charge
 Authorization: Bearer {{userToken}}
@@ -76,6 +83,7 @@ Content-Type: application/json
 ```
 
 ### 5. Blank Line Before Request Body (Critical Rule!)
+
 In the HTTP protocol, **there MUST be at least one blank line** between headers and the JSON request body:
 
 ```http
@@ -94,7 +102,7 @@ Content-Type: application/json
 
 Here is what each section of [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) accomplishes:
 
-```
+```text
 IdentityJwtDemo.http
 ├── 1. Authentication & Token Extraction
 │   ├── adminLogin (Super Admin credentials) ──> Extracts @adminToken
@@ -137,12 +145,14 @@ IdentityJwtDemo.http
 ## 4. How to Execute `.http` Files in Your IDE
 
 ### In Visual Studio 2022 / 2025:
+
 1. Open [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http).
 2. Ensure the API is running (`dotnet run --project src/CleanArch.WebApi` or `src/CleanArch.AppHost`).
 3. Click the green **`Send request`** play button directly above any request.
 4. The response headers and formatted JSON body appear in the right-hand panel.
 
 ### In Visual Studio Code:
+
 1. Install the extension: **REST Client** (by *Huachao Mao*).
 2. Open `IdentityJwtDemo.http`.
 3. Click the blue **`Send Request`** link above any request.

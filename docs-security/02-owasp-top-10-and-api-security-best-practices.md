@@ -6,7 +6,7 @@ The Open Web Application Security Project (OWASP) maintains the authoritative ba
 
 ## 1. OWASP API Security Top 10 Overview
 
-```
+```text
                                ┌─────────────────────────────────────────┐
                                │       OWASP API SECURITY TOP 10         │
                                ├─────────────────────────────────────────┤
@@ -28,9 +28,11 @@ The Open Web Application Security Project (OWASP) maintains the authoritative ba
 ## 2. Deep-Dive: Critical OWASP Vulnerabilities & .NET Fixes
 
 ### A. API1: Broken Object Level Authorization (BOLA / IDOR)
+
 **The Vulnerability**: An attacker alters the ID parameter in an API request (e.g. `GET /api/orders/1234` ➔ `GET /api/orders/1235`) to access another customer's private data.
 
 **❌ Vulnerable Code**:
+
 ```csharp
 [HttpGet("orders/{id:guid}")]
 public async Task<IActionResult> GetOrder(Guid id)
@@ -42,6 +44,7 @@ public async Task<IActionResult> GetOrder(Guid id)
 ```
 
 **✅ Secure Pattern with User Context & Tenant Isolation**:
+
 ```csharp
 [HttpGet("orders/{id:guid}")]
 [Authorize]
@@ -74,9 +77,11 @@ public async Task<IActionResult> GetOrder(Guid id, [FromServices] ICurrentUserSe
 ---
 
 ### B. API3: Broken Object Property Level Authorization (Mass Assignment)
+
 **The Vulnerability**: Over-posting sensitive fields during entity creation or updating (e.g., passing `"isAdmin": true` or `"role": "SuperAdmin"` in an update profile request body).
 
 **❌ Vulnerable Code**:
+
 ```csharp
 [HttpPut("profile")]
 public async Task<IActionResult> UpdateProfile([FromBody] ApplicationUser userUpdate)
@@ -89,6 +94,7 @@ public async Task<IActionResult> UpdateProfile([FromBody] ApplicationUser userUp
 ```
 
 **✅ Secure Pattern with Explicit CQRS DTOs**:
+
 ```csharp
 // 1. Strict Request DTO exposing only allowed fields
 public sealed record UpdateUserProfileCommand(
@@ -119,9 +125,11 @@ public class UpdateUserProfileHandler : IRequestHandler<UpdateUserProfileCommand
 ---
 
 ### C. API7: Server-Side Request Forgery (SSRF)
+
 **The Vulnerability**: An application accepts a remote URL from a user (e.g., webhook URL, avatar URL) and fetches it without validating if it targets internal infrastructure (e.g., `http://169.254.169.254/latest/meta-data` for AWS metadata, or `http://localhost:6379` for internal Redis).
 
 **✅ Secure SSRF Prevention Validator**:
+
 ```csharp
 public static class UrlSecurityValidator
 {
@@ -178,6 +186,7 @@ public static class UrlSecurityValidator
 ---
 
 ### D. SQL Injection & EF Core Raw Queries
+
 EF Core LINQ queries are completely parameterized by default. However, when using raw SQL, **never** concatenate unvalidated strings:
 
 ```csharp

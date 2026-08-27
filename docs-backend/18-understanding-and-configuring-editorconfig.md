@@ -1,4 +1,4 @@
-# 18 - Understanding and Configuring `.editorconfig` in .NET & C#
+# 18 - Understanding and Configuring `.editorconfig` in .NET & `C#`
 
 ## 1. What is `.editorconfig`?
 
@@ -19,6 +19,7 @@ graph TD
 ## 2. The 4 Core Sections of `.editorconfig`
 
 ### Section 1: `root = true` & Global Formatting Rules
+
 ```ini
 # Top-most EditorConfig file; stops searching parent directories
 root = true
@@ -38,6 +39,7 @@ indent_size = 2
 ---
 
 ### Section 2: C# Modern Language Style Rules
+
 Controls modern C# 10/11/12/13 idioms:
 
 ```ini
@@ -59,6 +61,7 @@ csharp_style_var_when_type_is_apparent = true:suggestion
 ---
 
 ### Section 3: .NET Naming Conventions
+
 Enforces naming standards with compiler diagnostics:
 
 ```ini
@@ -109,19 +112,25 @@ dotnet_diagnostic.CA1822.severity = suggestion
 ## 3. How to Use `.editorconfig` in Daily Development & CI/CD
 
 ### 1. Auto-Format Codebase via CLI
+
 Automatically formats every file in the solution according to [.editorconfig](file:///C:/Users/Hoang/Desktop/clean/.editorconfig):
+
 ```powershell
 dotnet format
 ```
 
 ### 2. Enforce Formatting in CI/CD Pipelines
+
 Add this step to your GitHub Actions / Azure DevOps pipeline. If any developer submits unformatted code or style violations, the pull request build fails:
+
 ```powershell
 dotnet format --verify-no-changes
 ```
 
 ### 3. Enforce Code Style in MSBuild Build Time
+
 To treat code style warnings as build errors automatically, enable this in `Directory.Build.props` or `.csproj`:
+
 ```xml
 <PropertyGroup>
   <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>

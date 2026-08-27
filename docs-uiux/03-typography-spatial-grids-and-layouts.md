@@ -8,7 +8,7 @@ Typography and spatial systems form the foundational grid of visual communicatio
 
 Rather than picking arbitrary font sizes, design systems use mathematical scale ratios to ensure harmonious progression from caption to display titles.
 
-```
+```text
  Common Modular Ratios:
  • Major Second (1.125): Subtle, ideal for dense desktop dashboards.
  • Major Third  (1.250): Balanced, standard for web applications (Tailwind default).
@@ -21,8 +21,8 @@ Rather than picking arbitrary font sizes, design systems use mathematical scale 
 | **Display / H1** | $16 \times 1.25^4$ | ~`38px` (`2.375rem`) | `1.15` (`leading-tight`) | `Bold (700)` |
 | **Heading 2** | $16 \times 1.25^3$ | ~`30px` (`1.875rem`) | `1.2` (`leading-snug`) | `SemiBold (600)` |
 | **Heading 3** | $16 \times 1.25^2$ | ~`24px` (`1.5rem`) | `1.3` | `SemiBold (600)` |
-| **Body (Base)** | $16 \times 1.25^0$ | `16px` (`1rem`) | `1.5` (`leading-relaxed`)| `Regular (400)` |
-| **Caption / Small**| $16 \div 1.25^1$ | `13px` (`0.8125rem`)| `1.4` | `Medium (500)` |
+| **Body (Base)** | $16 \times 1.25^0$ | `16px` (`1rem`) | `1.5` (`leading-relaxed`) | `Regular (400)` |
+| **Caption / Small** | $16 \div 1.25^1$ | `13px` (`0.8125rem`) | `1.4` | `Medium (500)` |
 
 ---
 
@@ -38,7 +38,7 @@ Rather than picking arbitrary font sizes, design systems use mathematical scale 
 
 All margins, paddings, gaps, and component dimensions must be multiples of **8px** (with **4px** half-steps for micro-alignments like icons and badge padding).
 
-```
+```text
    ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    │ 4px │ 8px │12px │16px │24px │32px │48px │64px │
    │ 0.5 │  1  │ 1.5 │  2  │  3  │  4  │  6  │  8  │ (Tailwind Units: rem * 4)
@@ -46,6 +46,7 @@ All margins, paddings, gaps, and component dimensions must be multiples of **8px
 ```
 
 ### Why the 8pt Grid Works:
+
 - Most modern screen resolutions (1080p, 1440p, 4K, Retina) scale cleanly by factors of 8.
 - Eliminates developer guesswork when choosing spacing (`gap-2` = 8px, `gap-4` = 16px, `gap-6` = 24px).
 
@@ -53,7 +54,7 @@ All margins, paddings, gaps, and component dimensions must be multiples of **8px
 
 ## 4. Modern Responsive Layouts: Grid, Flexbox & Container Queries
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ CSS GRID (2-Dimensional Layouts)                            │ CONTAINER QUERIES (`@container`)                            │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤

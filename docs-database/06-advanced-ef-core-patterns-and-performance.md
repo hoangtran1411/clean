@@ -3,6 +3,7 @@
 ## 1. Bulk Operations: `ExecuteUpdateAsync()` & `ExecuteDeleteAsync()`
 
 Prior to EF Core 7+, updating or deleting 10,000 rows required:
+
 1. Loading all 10,000 rows into memory (`SELECT`).
 2. Mutating properties on each C# object.
 3. Calling `SaveChangesAsync()` to generate 10,000 individual `UPDATE` statements.
@@ -41,6 +42,7 @@ await context.Set<IdempotentRecord>()
 When complex analytics or database-specific functions are required:
 
 ### Querying Unmapped DTOs with `SqlQuery<T>`:
+
 ```csharp
 public record CategorySalesSummary(string Category, decimal TotalRevenue, int TotalItemsSold);
 
@@ -116,6 +118,7 @@ builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseSqlite(connectionString);
 }, poolSize: 1024);
 ```
+
 > [!TIP]
 > **Performance Gain**: DbContext Pooling can increase API throughput by **15% to 25%** under heavy concurrent load by eliminating GC allocation churn!
 

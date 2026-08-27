@@ -6,7 +6,7 @@ Rate limiting controls the consumption rate of API resources, protecting backend
 
 ## 1. Rate Limiting Algorithms Comparison
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Algorithm          │ How it Works                     │ Best Use Case                       │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤
@@ -31,6 +31,7 @@ Rate limiting controls the consumption rate of API resources, protecting backend
 ASP.NET Core provides high-performance, non-allocating rate limiters under `Microsoft.AspNetCore.RateLimiting`.
 
 ### A. Register Rate Limiter Policies in `Program.cs`
+
 ```csharp
 builder.Services.AddRateLimiter(options =>
 {
@@ -90,6 +91,7 @@ builder.Services.AddRateLimiter(options =>
 ```
 
 ### B. Applying Policies on Controllers
+
 ```csharp
 [ApiController]
 [Route("api/auth")]
@@ -117,6 +119,7 @@ public class ProductsController : ControllerBase
 Evaluating complex regular expressions against untrusted user input can cause exponential backtracking, locking the CPU core at 100%.
 
 ### C# 13 Source-Generated Regex with Strict Timeout
+
 ```csharp
 public static partial class InputValidationRegex
 {

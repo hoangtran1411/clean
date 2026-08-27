@@ -29,7 +29,7 @@ graph TD
 
 Our frontend code lives in [`client/src/`](file:///C:/Users/Hoang/Desktop/clean/client/src/):
 
-```
+```text
 client/src/
 ├── api/
 │   └── axiosClient.ts       # Axios instance with request/response interceptors
@@ -66,7 +66,9 @@ npm run dev
 ```
 
 Open your browser at:
-```
+
+```text
 http://localhost:3000
 ```
+
 *(Vite proxies all `/api/*` calls automatically to the .NET 10 backend at `http://localhost:5000`)*.

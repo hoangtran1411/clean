@@ -18,7 +18,9 @@ graph TD
 ```
 
 ### The Change Tracker:
+
 When an entity is tracked, EF Core creates a **snapshot** of its original values in memory. During `context.SaveChangesAsync()`:
+
 1. EF Core runs **DetectChanges()** comparing current properties against the original snapshot.
 2. It constructs an optimized SQL `UPDATE` statement containing **only modified columns**.
 3. It bundles multiple inserts/updates into a single batched database roundtrip.
@@ -70,6 +72,7 @@ graph TD
 | **Explicit Loading** | `context.Entry(order).Collection(o => o.Items).LoadAsync()` | On-demand query | Loading children conditionally after parent is loaded. |
 
 ### Code Example: Avoiding Cartesian Explosion with `AsSplitQuery()`
+
 ```csharp
 // Without AsSplitQuery: 1 Order with 10 Items and 5 Tags produces 50 rows in the DB result set!
 var orderDetails = await context.Orders
@@ -101,6 +104,7 @@ public async Task<List<ProductDto>> GetTopSellingProductsAsync(CancellationToken
         .ToListAsync(ct);
 }
 ```
+
 *SQL generated selects **only** `Id, Name, Category, Price, StockQuantity`—zero extra columns or tracking overhead!*
 
 ---
@@ -128,6 +132,7 @@ public class AppDbContext : DbContext
 ```
 
 ### Temporarily Bypassing Filters (e.g. Admin Restore / Super-Admin View):
+
 ```csharp
 // Ignores soft-delete filter to show all products including deleted ones
 var allProducts = await context.Products

@@ -5,6 +5,7 @@
 In a secured Single Page Application (SPA), manually attaching `Authorization: Bearer <token>` to every HTTP call and handling token expiration in every component causes massive code duplication, subtle bugs, and security risks.
 
 **Axios Interceptors** act as global middleware for outgoing HTTP requests and incoming HTTP responses:
+
 1. **Request Interceptor**: Injects `Authorization: Bearer <accessToken>` and `X-Correlation-ID: WEB-<UUID>` automatically before any request leaves the browser.
 2. **Response Interceptor**: Catches `401 Unauthorized` errors, pauses subsequent network traffic, calls the backend refresh endpoint (`/api/auth/refresh-token`), updates token storage, and retries all waiting requests seamlessly without user disruption!
 
@@ -13,6 +14,7 @@ In a secured Single Page Application (SPA), manually attaching `Authorization: B
 ## 2. The Core Challenge: The "Concurrent 401 Stampede" Race Condition
 
 When a user opens a dashboard with multiple widgets, the browser often fires **3 to 5 API calls in parallel**:
+
 1. `GET /api/users/me`
 2. `GET /api/products`
 3. `GET /api/payments/history`
@@ -32,6 +34,7 @@ graph TD
 ```
 
 ### Why does this fail without queueing?
+
 In **Single-Use Refresh Token Rotation** (which our .NET 10 backend enforces), a refresh token can only be used **once**. As soon as Request 1 refreshes the token, the backend invalidates it. When Request 2 arrives 2 milliseconds later with the old token, the backend treats it as a **replay attack / stolen token attempt** and revokes the user's entire session, logging them out!
 
 ---
@@ -39,6 +42,7 @@ In **Single-Use Refresh Token Rotation** (which our .NET 10 backend enforces), a
 ## 3. The Architecture: The Queueing & Pausing Pattern
 
 To solve this concurrency problem, we implement a **Promise-based Queue**:
+
 1. The **first** 401 request sets `isRefreshing = true` and fires the single `POST /api/auth/refresh-token` call.
 2. Any **subsequent** 401 requests that arrive while `isRefreshing === true` are **put on hold (paused)** by pushing their `resolve` / `reject` handles into a `failedQueue` array.
 3. Once the token refresh succeeds, we update `localStorage`, drain the queue by calling `resolve()` on all waiting promises, and automatically retry every request with the fresh Access Token.
@@ -224,21 +228,27 @@ if (isRefreshing) {
 ```
 
 ### 1. `return new Promise((resolve, reject) => { ... })`
+
 - When you construct `new Promise((resolve, reject) => {})` without immediately invoking `resolve()` or `reject()`, the Promise enters a **`pending` (paused) state**.
 - Returning this pending Promise halts the execution of that specific Axios request. Axios will not resolve or fail the component's `useQuery` call yet—it simply waits.
 
 ### 2. `failedQueue.push({ resolve, reject })`
+
 - JavaScript functions are first-class objects. We save the `resolve` and `reject` callbacks into our `failedQueue` array:
+
   ```typescript
   let failedQueue: Array<{
     resolve: (value?: unknown) => void
     reject: (reason?: unknown) => void
   }> = []
   ```
+
 - This gives us a reference to "wake up" this paused Promise whenever we want from outside the Promise constructor!
 
 ### 3. Waking Up via `processQueue(null)`
+
 - When the first request finishes refreshing the token, it invokes:
+
   ```typescript
   const processQueue = (error: Error | null) => {
     failedQueue.forEach((prom) => {
@@ -251,14 +261,17 @@ if (isRefreshing) {
     failedQueue = []
   }
   ```
+
 - Calling `prom.resolve()` transitions the Promise from `pending` to `fulfilled`.
 
 ### 4. `.then(() => api(originalRequest))`
+
 - As soon as the Promise fulfills, this `.then()` callback fires.
 - It calls `api(originalRequest)` to re-dispatch the exact same HTTP call.
 - Because `localStorage` now contains the **new Access Token**, our **Request Interceptor** automatically grabs the new token, injects it into `Authorization: Bearer <new_token>`, and the request succeeds with `200 OK`!
 
 ### 5. `.catch((err) => Promise.reject(err))`
+
 - If the token refresh fails (e.g. Refresh Token was revoked or expired past 7 days), `processQueue(refreshErr)` calls `prom.reject(error)`.
 - This ensures all waiting components receive the error cleanly without hanging indefinitely.
 

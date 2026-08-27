@@ -64,4 +64,5 @@ sequenceDiagram
 ---
 
 ## What's Next?
+
 Proceed to [02-database-and-identity-models.md](file:///C:/Users/Hoang/Desktop/clean/docs/02-database-and-identity-models.md) to learn how ASP.NET Core Identity models and Entity Framework Core work under the hood.

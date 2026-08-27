@@ -5,10 +5,11 @@
 At **2 years of experience**, you already know how to write C# syntax, build basic CRUD Web APIs, write EF Core queries, and configure Dependency Injection.
 
 To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about shifting focus:
+
 - **From**: *"Does my code work?"*
 - **To**: *"Is my code maintainable, testable, resilient, performant, and secure under high load?"*
 
-```
+```text
    Level 1 (0-1 Year): "Make it work"
          ↓
    Level 2 (1-3 Years): "Make it right" (Clean Architecture, DDD, Unit & Integration Tests, Robust Error Handling)
@@ -21,6 +22,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ## 2. The 6 Core Knowledge Pillars to Master
 
 ### Pillar 1: Advanced C# & CLR Internals (Under the Hood)
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **Garbage Collection (GC)** | Understand Generation 0, 1, 2, Large Object Heap (LOH), and Pinned Object Heap (POH). Learn how allocations cause GC pauses and latency spikes. |
@@ -31,6 +33,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ---
 
 ### Pillar 2: Clean Architecture & Domain-Driven Design (DDD)
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **Clean / Onion Architecture** | Inversion of Control, separating business logic from frameworks, databases, and UI (what we built in this project!). |
@@ -41,6 +44,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ---
 
 ### Pillar 3: High-Performance Data Access (EF Core + Dapper)
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **EF Core Query Optimization** | `AsNoTracking()`, `AsSplitQuery()` (avoid Cartesian explosion), projection queries (`Select`), avoiding the N+1 query trap. |
@@ -51,6 +55,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ---
 
 ### Pillar 4: Distributed Systems, Caching & Messaging
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **Caching Strategies** | Cache-Aside pattern, Distributed Caching (Redis), In-Memory Cache, Cache Invalidation, and `.NET 9/10 HybridCache`. |
@@ -62,6 +67,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ---
 
 ### Pillar 5: Enterprise Security & Identity
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **OAuth 2.0 & OpenID Connect** | Authorization Code Flow with PKCE, Client Credentials, Token introspection, IdentityServer / Duende / OpenIddict / Keycloak. |
@@ -71,6 +77,7 @@ To progress from **Junior/Mid to Strong Mid/Senior**, the transition is about sh
 ---
 
 ### Pillar 6: Observability, Cloud-Native & Testing
+
 | Topic | Why It Matters & What to Learn |
 | :--- | :--- |
 | **.NET Aspire & OpenTelemetry** | Distributed tracing, live metrics, structured logging with correlation IDs (`traceId`), and OpenTelemetry Exporters. |
@@ -103,6 +110,7 @@ To showcase senior-level expertise, build or practice these 3 key real-world sys
 ## 4. Top Recommended Books & Resources
 
 ### 📖 Essential Books
+
 1. **"C# in Depth" (4th Edition)** — Jon Skeet *(Mastering C# features)*
 2. **"Domain-Driven Design: Tackling Complexity in the Heart of Software"** — Eric Evans
 3. **"CLR via C#"** — Jeffrey Richter *(Deep-dive into .NET internals and memory)*
@@ -110,6 +118,7 @@ To showcase senior-level expertise, build or practice these 3 key real-world sys
 5. **"Enterprise Application Architecture Patterns"** — Martin Fowler
 
 ### 🌐 Key People & Repositories to Follow
+
 - **Nick Chapsas / Keep Coding** (YouTube / Dometrain)
 - **Milan Jovanović** (Clean Architecture & .NET newsletter)
 - **Stephen Cleary** (Async programming in C#)

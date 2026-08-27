@@ -44,6 +44,7 @@ graph TD
 ```
 
 > **The Golden Rule**: Dependencies point **INWARD**.  
+>
 > - `Domain` has **0 external references**.  
 > - `Application` depends only on `Domain`.  
 > - `Infrastructure` implements interfaces defined in `Application`.  
@@ -54,6 +55,7 @@ graph TD
 ## 3. Project Layer Responsibilities
 
 ### Layer 1: `CleanArch.Domain`
+
 - **Location**: `src/CleanArch.Domain/`
 - **Purpose**: Pure enterprise business models and rules.
 - **Components**:
@@ -64,6 +66,7 @@ graph TD
   - [`AppPermissions.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Constants/AppPermissions.cs)
 
 ### Layer 2: `CleanArch.Application`
+
 - **Location**: `src/CleanArch.Application/`
 - **Purpose**: Business use cases, CQRS commands/queries, validation, abstractions.
 - **Components**:
@@ -78,6 +81,7 @@ graph TD
     - `IAppDbContext`, `IAuthService`, `ITokenService`, `IIdempotencyService`, `ICurrentUserService`
 
 ### Layer 3: `CleanArch.Infrastructure`
+
 - **Location**: `src/CleanArch.Infrastructure/`
 - **Purpose**: Implements persistence, external identity frameworks, and token cryptographic services.
 - **Components**:
@@ -87,6 +91,7 @@ graph TD
   - [`IdempotencyService.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Persistence/IdempotencyService.cs): Implements `IIdempotencyService` saving requests to database.
 
 ### Layer 4: `CleanArch.WebApi`
+
 - **Location**: `src/CleanArch.WebApi/`
 - **Purpose**: Entry point, HTTP controller routing, security filters, middleware, and OpenAPI configuration.
 - **Components**:
@@ -136,4 +141,5 @@ dotnet run --project src/CleanArch.WebApi
 ```
 
 Navigate to:
+
 - **Scalar API UI**: `http://localhost:5000/scalar/v1`

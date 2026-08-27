@@ -6,7 +6,7 @@ Micro-interactions are subtle visual and tactile moments built around a single t
 
 ## 1. The 4 Stages of a Micro-Interaction (Dan Saffer Model)
 
-```
+```text
    ┌─────────────┐      ┌─────────────┐      ┌─────────────┐      ┌──────────────┐
    │ 1. TRIGGER  │ ───► │  2. RULES   │ ───► │ 3. FEEDBACK │ ───► │4. LOOPS/MODES│
    │ User clicks │      │ Backend     │      │ Button icon │      │ Card updates │
@@ -19,7 +19,7 @@ Micro-interactions are subtle visual and tactile moments built around a single t
 
 ## 2. Animation Easing & Duration Curves
 
-```
+```text
 ┌────────────────────┬──────────────┬────────────────────────────────────────────────────────┐
 │ Animation Type     │ Duration     │ Easing Function & Use Case                             │
 ├────────────────────┼──────────────┼────────────────────────────────────────────────────────┤
@@ -37,7 +37,7 @@ Micro-interactions are subtle visual and tactile moments built around a single t
 
 ## 3. Perceived Performance: Skeletons vs. Spinners vs. Optimistic UI
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ SKELETON SHIMMER (Predictive Spatial Layout)                │ OPTIMISTIC UI (Instant State Feedback)                      │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -76,4 +76,5 @@ Users with vestibular disorders or motion sensitivity can experience nausea or d
   }
 }
 ```
+
 In Tailwind CSS: use `motion-reduce:transition-none motion-reduce:transform-none`.

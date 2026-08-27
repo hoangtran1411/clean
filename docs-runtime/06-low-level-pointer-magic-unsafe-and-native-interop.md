@@ -63,6 +63,7 @@ public static void ReinterpretBytes()
 By default, the C# compiler and runtime reorder struct fields to optimize alignment. For binary protocol serialization or C union compatibility, you can force explicit layout:
 
 ### C-Style Union in C#:
+
 ```csharp
 [StructLayout(LayoutKind.Explicit)]
 public struct ColorUnion

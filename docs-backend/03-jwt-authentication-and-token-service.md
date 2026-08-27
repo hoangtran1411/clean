@@ -4,7 +4,8 @@
 
 A JWT is a compact, URL-safe means of representing claims between two parties. It is composed of three Base64Url-encoded parts separated by dots (`.`):
 
-```
+``` bash
+
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6WyJBZG1pbiJdfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
   └──────────────────┬──────────────────┘ └─────────────────────────┬────────────────────────┘ └──────────────────────┬──────────────────────┘
                    Header                                         Payload                                           Signature
@@ -29,6 +30,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJlbWFpbCI6ImFkbWluQGV
 In [TokenService.cs](file:///C:/Users/Hoang/Desktop/clean/Services/TokenService.cs), we implement the token generation and validation methods:
 
 ### A. Generating the Signed JWT
+
 ```csharp
 public Task<(string Token, DateTime ExpiresAtUtc)> GenerateAccessTokenAsync(
     ApplicationUser user,
@@ -79,6 +81,7 @@ public Task<(string Token, DateTime ExpiresAtUtc)> GenerateAccessTokenAsync(
 ```
 
 ### B. Generating Cryptographic Refresh Tokens
+
 ```csharp
 public string GenerateRefreshToken()
 {
@@ -121,6 +124,7 @@ builder.Services.AddAuthentication(options =>
 
 > [!IMPORTANT]
 > In ASP.NET Core, the middleware order is critical:
+>
 > ```csharp
 > app.UseAuthentication(); // 1. Reads & validates token, populates HttpContext.User
 > app.UseAuthorization();  // 2. Evaluates policies and roles on HttpContext.User
@@ -129,4 +133,5 @@ builder.Services.AddAuthentication(options =>
 ---
 
 ## What's Next?
+
 Proceed to [04-auth-controller-and-refresh-token-rotation.md](file:///C:/Users/Hoang/Desktop/clean/docs/04-auth-controller-and-refresh-token-rotation.md) to explore the registration, login, and refresh token rotation logic.

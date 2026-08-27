@@ -6,7 +6,7 @@ Protecting sensitive enterprise data requires appropriate encryption algorithms,
 
 ## 1. Cryptographic Algorithms Comparison
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │ SYMMETRIC ENCRYPTION (Same secret key for encrypt & decrypt)                            │
 │ - AES-256-GCM (Authenticated Encryption with Associated Data - Industry Standard)       │
@@ -24,7 +24,7 @@ Protecting sensitive enterprise data requires appropriate encryption algorithms,
 
 ---
 
-## 2. Authenticated Symmetric Encryption with AES-256-GCM in C#
+## 2. Authenticated Symmetric Encryption with AES-256-GCM in `C#`
 
 AES in Galois/Counter Mode (GCM) provides both **confidentiality** (encryption) and **integrity** (an authentication tag preventing tampering).
 
@@ -66,6 +66,7 @@ public static class AesGcmHelper
 ASP.NET Core includes a built-in Data Protection stack used for securing authentication cookies, CSRF tokens, and temporary URLs.
 
 ### Configuring Key Persistence and Encryption at Rest
+
 ```csharp
 public static IServiceCollection AddConfiguredDataProtection(
     this IServiceCollection services,
@@ -89,6 +90,7 @@ public static IServiceCollection AddConfiguredDataProtection(
 ```
 
 ### Encrypting / Decrypting Sensitive Strings in Services
+
 ```csharp
 public class SensitiveDataService
 {
@@ -110,7 +112,7 @@ public class SensitiveDataService
 
 ## 4. Enterprise Secrets Management
 
-```
+```text
 ┌───────────────────────────┐           ┌────────────────────────────┐
 │ Local Development         │           │ Production CI/CD & Cloud   │
 ├───────────────────────────┤           ├────────────────────────────┤
@@ -122,6 +124,7 @@ public class SensitiveDataService
 ```
 
 ### Best Practices for Secrets Security:
+
 1. **Never Commit Secrets to Git**: Use `.gitignore` for `.env`, `appsettings.Production.json`, and private keys.
 2. **Scan Repositories with Gitleaks**: Run pre-commit hooks or GitHub Actions to detect accidental API key leaks.
 3. **Use Managed Identities**: In cloud environments (Azure Managed Identity / AWS IAM Roles), authenticate services to databases and key vaults without static passwords.

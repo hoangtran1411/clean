@@ -6,7 +6,7 @@ Microservices decompose applications into independently deployable, loosely coup
 
 ## 1. Monolith vs. Modular Monolith vs. Microservices
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ MODULAR MONOLITH                                            │ MICROSERVICES ARCHITECTURE                                  │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -23,7 +23,7 @@ Microservices decompose applications into independently deployable, loosely coup
 
 In distributed architectures, transient network failures and service outages are inevitable. Never make unbounded synchronous network calls without resilience wrappers:
 
-```
+```text
                                   DISTRIBUTED RESILIENCE PIPELINE
                                   
   Request ──► [1. Timeout Policy] ──► [2. Circuit Breaker] ──► [3. Retry + Exponential Backoff & Jitter]
@@ -33,11 +33,13 @@ In distributed architectures, transient network failures and service outages are
 ```
 
 ### The Circuit Breaker States:
+
 1. **Closed (Normal)**: Requests pass through. Counts failures.
 2. **Open (Tripped)**: If failure rate exceeds threshold (e.g. 50% errors in 10s), breaker opens immediately. Fails fast without overloading the downstream service.
 3. **Half-Open (Testing)**: After a sleep duration (e.g. 30s), lets a trial request pass. If successful, resets to Closed; if it fails, trips back to Open.
 
 ### Polly Resilience in .NET 10:
+
 ```csharp
 builder.Services.AddHttpClient("PaymentGateway")
     .AddStandardResilienceHandler(options =>
@@ -57,7 +59,7 @@ builder.Services.AddHttpClient("PaymentGateway")
 
 When a single user request spans 10 distinct microservices, distributed tracing propagates a unique **`traceparent`** HTTP header (`W3C TraceContext` standard) across all network boundaries:
 
-```
+```text
 Client ──► [API Gateway (TraceId: 4bf92f3577b34da6)]
                  │
                  ├──► [Order Service (SpanId: 00f067aa0ba902b7)]
@@ -66,4 +68,5 @@ Client ──► [API Gateway (TraceId: 4bf92f3577b34da6)]
                  │
                  └──► [Notification Service (SpanId: 8a3b5c7d2e1f4098)]
 ```
+
 All logs, metrics, and traces across all services are unified by the single `TraceId` in Jaeger / Datadog / OpenTelemetry Collector!

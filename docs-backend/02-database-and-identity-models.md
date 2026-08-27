@@ -76,6 +76,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
 ## 4. Password Security & Hashing
 
 When you call `userManager.CreateAsync(user, password)`:
+
 1. ASP.NET Core Identity uses **PBKDF2 with HMAC-SHA512** (100,000 iterations by default).
 2. A unique cryptographically random 128-bit salt is generated for every user.
 3. The password hash is stored in `AspNetUsers.PasswordHash`.
@@ -111,4 +112,5 @@ if (await userManager.FindByEmailAsync("admin@example.com") == null)
 ---
 
 ## What's Next?
+
 Proceed to [03-jwt-authentication-and-token-service.md](file:///C:/Users/Hoang/Desktop/clean/docs/03-jwt-authentication-and-token-service.md) to understand JWT token generation, claims structure, and cryptographic signing.

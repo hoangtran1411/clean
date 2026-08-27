@@ -39,6 +39,7 @@ graph TD
 ## 3. The 4 Essential Caching Patterns
 
 ### 1. Cache-Aside Pattern (Standard Web API Pattern)
+
 ```mermaid
 sequenceDiagram
     autonumber
@@ -59,6 +60,7 @@ sequenceDiagram
 ```
 
 ### 2. Write-Through & Write-Behind (Write-Back)
+
 - **Write-Through**: Application writes to Cache, and Cache synchronously writes to Database.
 - **Write-Behind**: Application writes to Cache immediately, and a background worker batches updates asynchronously to the Database (blazing speed, risk of data loss if cache dies before sync).
 
@@ -73,6 +75,7 @@ sequenceDiagram
 | **Cache Breakdown** | A single hot key (e.g. Flash sale item) expires during peak traffic. | Background task refreshes key proactively before expiration (*Refresh-Ahead*). |
 
 ### Implementing Cache-Aside with Distributed Lock in .NET:
+
 ```csharp
 public async Task<ProductDto?> GetProductAsync(int id, CancellationToken ct)
 {

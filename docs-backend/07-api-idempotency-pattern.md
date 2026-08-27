@@ -5,7 +5,9 @@
 An API operation is **idempotent** if making multiple identical requests has the same effect as making a single request.
 
 ### The Double-Charge Problem
+
 Imagine an e-commerce checkout or payment endpoint `POST /api/payments/charge`:
+
 1. Client submits payment of **$100**.
 2. Server charges the credit card and saves the transaction.
 3. Before the response reaches the client, the client's cellular/WiFi connection drops (network timeout).
@@ -67,9 +69,11 @@ sequenceDiagram
 ## 4. Implementation in .NET 10
 
 ### 1. The Database Entity ([IdempotentRequestRecord.cs](file:///C:/Users/Hoang/Desktop/clean/Idempotency/IdempotentRequestRecord.cs))
+
 Stores the `IdempotencyKey`, `UserId`, `RequestPath`, `RequestHash` (SHA-256), `StatusCode`, `ResponseBody`, `ContentType`, and `ExpiresAt`.
 
 ### 2. The Filter Factory Attribute ([IdempotentAttribute.cs](file:///C:/Users/Hoang/Desktop/clean/Idempotency/IdempotentAttribute.cs))
+
 ```csharp
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
 public class IdempotentAttribute : Attribute, IFilterFactory
@@ -86,6 +90,7 @@ public class IdempotentAttribute : Attribute, IFilterFactory
 ```
 
 ### 3. Protecting the Endpoint ([PaymentsController.cs](file:///C:/Users/Hoang/Desktop/clean/Controllers/PaymentsController.cs))
+
 ```csharp
 [ApiController]
 [Route("api/[controller]")]

@@ -3,6 +3,7 @@
 ## 1. Downloading Binary Excel Spreadsheets (`.xlsx`) with Axios
 
 When downloading generated binary files from ASP.NET Core:
+
 1. Configure Axios with `responseType: 'blob'`.
 2. Convert the byte stream into an Object URL with `window.URL.createObjectURL`.
 3. Create a temporary `<a>` element to trigger the browser's native file download.
@@ -31,6 +32,7 @@ const handleExportExcel = async () => {
 ## 2. Multipart/Form-Data File Upload with Axios
 
 To upload Excel files for bulk parsing:
+
 ```typescript
 const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0]
@@ -53,6 +55,7 @@ const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 ## 3. Handling Idempotent Payments in the Frontend
 
 To prevent double billing:
+
 1. Generate an `Idempotency-Key` (UUID).
 2. Pass the key in the request header.
 3. If network fails or user double clicks, retry with the **same** key. The backend returns the cached response without double charging!

@@ -22,6 +22,7 @@ graph TD
 In enterprise applications, **90% to 95% of database traffic consists of read queries (`SELECT`)**.
 
 ### Primary / Replica Architecture:
+
 - **Primary Node**: Handles all write operations (`INSERT`, `UPDATE`, `DELETE`, Transactions).
 - **Read Replicas**: Multiple read-only nodes synchronized via **WAL streaming replication**.
 - **Replication Lag**: Writes to Primary are replicated asynchronously to replicas with slight delay (typically 5ms – 50ms). Read queries must be designed to tolerate **Eventual Consistency**.
@@ -53,6 +54,7 @@ graph TD
 ```
 
 ### Preventing Connection Pool Starvation:
+
 1. **Always wrap connections in `using` statements or let EF Core manage scope** so connections return to the pool immediately upon completion.
 2. **Keep transactions as short as possible**. Never perform HTTP calls or heavy CPU computations inside an open database transaction!
 3. Avoid setting `Max Pool Size` excessively high; a well-tuned pool of 50 to 100 connections can comfortably handle 10,000 requests/second.
@@ -85,6 +87,7 @@ graph TD
 - **RPO (Recovery Point Objective)**: The maximum acceptable period of data loss (e.g. "We cannot lose more than 5 minutes of transaction data").
 
 ### Standard Backup Strategy:
+
 1. **Full Backup**: Weekly complete snapshot of entire database.
 2. **Differential Backup**: Daily snapshot of all pages changed since the last Full backup.
 3. **Transaction Log / WAL Backup**: Continuous backup every 5 to 15 minutes, enabling **Point-in-Time Recovery (PITR)** to any second in history!

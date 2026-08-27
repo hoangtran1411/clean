@@ -4,7 +4,7 @@
 
 Building enterprise software demands a security-first mindset across architecture, development, and operations.
 
-```
+```text
                    ┌──────────────────────────────────────┐
                    │           CONFIDENTIALITY            │
                    │  - Encryption (AES-256, TLS 1.3)     │
@@ -27,12 +27,15 @@ Building enterprise software demands a security-first mindset across architectur
 ```
 
 ### A. The CIA Triad
+
 1. **Confidentiality**: Ensuring data is accessible only to authorized entities (e.g., JWT token verification, RBAC permissions, encrypted secrets).
 2. **Integrity**: Safeguarding the accuracy and completeness of information (e.g., cryptographic signatures, request hashing, non-repudiation audit trails).
 3. **Availability**: Ensuring authorized users have reliable and timely access to resources (e.g., DDoS defenses, Redis caching, rate limiting).
 
 ### B. Defense in Depth (Layered Defense)
+
 Never rely on a single defensive barrier. If an attacker breaches the perimeter WAF, application-level authorization, validation pipelines, and database row-level security must still stop them:
+
 - **Perimeter Layer**: Cloudflare / AWS CloudFront WAF, TLS termination, IP rate limiting.
 - **Network Layer**: Private subnets, VPC peering, isolated database endpoints.
 - **Application Layer**: ASP.NET Core `CorrelationIdMiddleware`, Rate Limiting, CORS origin whitelisting, ProblemDetails error masking.
@@ -50,7 +53,7 @@ Traditional security models relied on a **"castle-and-moat"** approach: anything
 2. **Use Least Privilege Access**: Limit user and service access with Just-In-Time (JIT) and Just-Enough-Access (JEA), dynamic policies, and data protection.
 3. **Assume Breach**: Minimize blast radius by segmenting access by network, user, devices, and application awareness. Encrypt all sessions end-to-end.
 
-```
+```text
     Traditional Perimeter Model:
     [Untrusted Internet] ─── WAF/Firewall ───► [Trusted Internal Network (All Services Trust Each Other)]
 

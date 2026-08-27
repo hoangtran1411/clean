@@ -12,6 +12,7 @@
 ## 2. Refresh Token Rotation Flow
 
 To protect against stolen refresh tokens, modern security standards mandate **Refresh Token Rotation**:
+
 1. When a client presents an old refresh token, that token is **invalidated immediately**.
 2. A **brand new** refresh token is issued along with the new access token.
 3. If an attacker tries to use an already-used refresh token, the server rejects the request.
@@ -42,6 +43,7 @@ sequenceDiagram
 In [AuthService.cs](file:///C:/Users/Hoang/Desktop/clean/Services/AuthService.cs):
 
 ### A. Login & Issuance
+
 ```csharp
 public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
 {
@@ -73,6 +75,7 @@ public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
 ```
 
 ### B. Token Refresh Logic
+
 ```csharp
 public async Task<AuthResponseDto> RefreshTokenAsync(RefreshTokenRequestDto dto)
 {
@@ -110,6 +113,7 @@ public async Task<AuthResponseDto> RefreshTokenAsync(RefreshTokenRequestDto dto)
 ```
 
 ### C. Revoking Tokens (Logout)
+
 ```csharp
 public async Task<bool> RevokeTokenAsync(string email)
 {
@@ -126,4 +130,5 @@ public async Task<bool> RevokeTokenAsync(string email)
 ---
 
 ## What's Next?
+
 Proceed to [05-dynamic-policies-with-iauthorizationpolicyprovider.md](file:///C:/Users/Hoang/Desktop/clean/docs/05-dynamic-policies-with-iauthorizationpolicyprovider.md) to learn how to build scalable, dynamic authorization policies.

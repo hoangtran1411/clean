@@ -6,7 +6,7 @@ Caching stores copies of frequently accessed data in high-speed, volatile memory
 
 ## 1. Caching Access Patterns
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Pattern            │ Data Flow                        │ Pros & Cons                         │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤
@@ -27,7 +27,7 @@ Caching stores copies of frequently accessed data in high-speed, volatile memory
 
 ## 2. The 3 Major Caching Hazards & Mitigations
 
-```
+```text
  ┌─────────────────────────────────────────────────────────────────────────────────────────┐
  │ 1. CACHE AVALANCHE (Simultaneous Expiration)                                            │
  │ • Problem: Thousands of cached keys have the exact same TTL (e.g. 1 hour). When the     │
@@ -48,7 +48,9 @@ Caching stores copies of frequently accessed data in high-speed, volatile memory
 ```
 
 ### Bloom Filter Concept
+
 A space-efficient probabilistic data structure that can test whether an element is a member of a set:
+
 - If Bloom Filter says **"No"**: The key definitely does NOT exist in the database (reject request immediately, 0 DB queries!).
 - If Bloom Filter says **"Yes"**: The key *probably* exists (query cache/DB).
 
@@ -58,7 +60,7 @@ A space-efficient probabilistic data structure that can test whether an element 
 
 In high-throughput .NET 10 microservices, combine fast in-process L1 cache with shared L2 Redis:
 
-```
+```text
     Request ──► [L1: In-Process IMemoryCache (RAM ~ 50ns)]
                       │
                       ├──► [Hit] Return immediately (0 Network calls!)

@@ -5,6 +5,7 @@
 In traditional database management, performance diagnostic dynamic management views (DMVs like `sys.dm_exec_query_stats`) live **only in volatile RAM**. When the database server restarts, fails over, or clears its plan cache due to memory pressure, all historical execution performance data is lost forever.
 
 **Query Store** is a persistent performance monitoring feature built directly into the database engine (available in **Microsoft SQL Server, Azure SQL**, and conceptually matching PostgreSQL's `pg_stat_statements` / `pg_store_plans`).
+
 - It captures a **complete historical record** of all executed queries, their compiled execution plans, runtime statistics (CPU, duration, logical reads), and wait statistics.
 - It stores this telemetry **inside the database on disk**, surviving restarts and failovers with **less than 1–2% CPU overhead**!
 
@@ -58,7 +59,9 @@ ALTER DATABASE [CleanArchDb] SET QUERY_STORE = ON (
 ## 4. The 4 Killer Use Cases of Query Store
 
 ### 🚀 Use Case 1: Detecting "Regressed Queries"
+
 A query that executed in **10ms yesterday** suddenly takes **8,000ms today** because:
+
 - Database statistics changed.
 - An index was dropped or modified.
 - **Parameter Sniffing** compiled a bad plan.
@@ -73,6 +76,7 @@ graph LR
 ---
 
 ### 🛡️ Use Case 2: Instant Plan Forcing (`sp_query_store_force_plan`)
+
 When a production query regresses at 2:00 AM, you do not have time to rewrite C# code, redeploy services, or wait for testing.
 
 **Plan Forcing** allows an engineer to force the database engine to **always use the known good execution plan** with a single T-SQL command!
@@ -83,9 +87,11 @@ EXEC sp_query_store_force_plan
     @query_id = 88,
     @plan_id = 12;
 ```
+
 *The database engine immediately overrides the optimizer and executes Plan 12 on all subsequent requests without code changes or downtime!*
 
 To remove the forced plan later:
+
 ```sql
 EXEC sp_query_store_unforce_plan
     @query_id = 88,
@@ -95,6 +101,7 @@ EXEC sp_query_store_unforce_plan
 ---
 
 ### 🤖 Use Case 3: Automatic Plan Correction (Self-Healing Database)
+
 In modern SQL Server and Azure SQL, you can configure the database to **heal itself automatically**. When the engine detects that an execution plan regressed and is performing significantly worse than the previous plan, it **automatically forces the last good plan** without human intervention!
 
 ```sql
@@ -106,6 +113,7 @@ SET AUTOMATIC_TUNING (FORCE_LAST_GOOD_PLAN = ON);
 ---
 
 ### 📊 Use Case 4: Identifying Top Resource-Consuming Queries
+
 Find exactly which queries consume 80% of your database server's CPU or disk I/O over the last 24 hours.
 
 ---
@@ -113,6 +121,7 @@ Find exactly which queries consume 80% of your database server's CPU or disk I/O
 ## 5. Essential Diagnostic T-SQL Queries for Query Store
 
 ### 🔍 Query 1: Find Top 10 Queries by Total CPU Consumption
+
 ```sql
 SELECT TOP 10
     q.query_id,
@@ -135,6 +144,7 @@ ORDER BY rs.avg_cpu_time DESC;
 ---
 
 ### 🔍 Query 2: Find Regressed Queries (Multiple Plans with Performance Drop)
+
 ```sql
 SELECT
     q.query_id,
@@ -161,6 +171,7 @@ ORDER BY q.query_id, rs.avg_duration DESC;
 ---
 
 ### 🔍 Query 3: Identify What Queries Are Waiting On (Wait Categories)
+
 ```sql
 SELECT
     ws.wait_category_desc,
@@ -174,4 +185,5 @@ WHERE rsi.start_time >= DATEADD(HOUR, -24, GETUTCDATE())
 GROUP BY ws.wait_category_desc
 ORDER BY TotalWaitTimeMs DESC;
 ```
+
 *Common wait categories: `Lock` (concurrency contention), `Buffer IO` (disk reads/missing index), `CPU` (scheduling starvation).*

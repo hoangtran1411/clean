@@ -5,6 +5,7 @@
 In production, searching through gigabytes of plaintext logs is slow and error-prone. **Structured Logging** treats logs as rich data objects with named properties instead of flat text strings.
 
 ### The Contrast:
+
 ```csharp
 // ❌ UNSTRUCTURED (String Concatenation / Interpolation)
 // Hard to query or filter in Seq / Elasticsearch / Datadog
@@ -50,6 +51,7 @@ sequenceDiagram
 ## 3. The Key Logging Components
 
 ### 1. Correlation ID Middleware ([CorrelationIdMiddleware.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Middleware/CorrelationIdMiddleware.cs))
+
 Extracts an incoming `X-Correlation-ID` header from the client or generates a new `Guid`. It pushes the correlation ID into `Serilog.Context.LogContext` so that **every log entry** emitted during the request automatically includes the correlation ID:
 
 ```csharp
@@ -69,6 +71,7 @@ public async Task InvokeAsync(HttpContext context)
 ```
 
 ### 2. MediatR Request Logging Behavior ([LoggingBehavior.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Common/Behaviors/LoggingBehavior.cs))
+
 Logs the start and completion of every Command and Query automatically without writing repetitive logging code in every controller or handler:
 
 ```csharp
@@ -86,6 +89,7 @@ public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TRe
 ```
 
 ### 3. MediatR Performance Behavior ([PerformanceBehavior.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Common/Behaviors/PerformanceBehavior.cs))
+
 Measures execution time with `Stopwatch`. If a query or command exceeds 500ms, it automatically logs a structured warning:
 
 ```csharp

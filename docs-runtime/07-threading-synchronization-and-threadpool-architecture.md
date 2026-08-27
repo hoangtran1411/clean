@@ -8,7 +8,7 @@ Concurrency in .NET is built upon OS kernel threads, the managed runtime ThreadP
 
 The .NET ThreadPool manages a pool of worker threads, automatically scaling them based on workload demand using the **Hill Climbing Algorithm**.
 
-```
+```text
                         ┌──────────────────────────────────────────────┐
                         │        GLOBAL FIFO TASK QUEUE                │
                         │ (Tasks queued from non-ThreadPool threads)   │
@@ -35,7 +35,7 @@ The .NET ThreadPool manages a pool of worker threads, automatically scaling them
 
 ## 2. Hierarchy of Synchronization Primitives
 
-```
+```text
 ┌────────────────────┬────────────────────┬────────────────────────────────────────────────────────┐
 │ Primitive Type     │ Examples           │ Mechanism & Performance Characteristics                │
 ├────────────────────┼────────────────────┼────────────────────────────────────────────────────────┤
@@ -93,7 +93,7 @@ public class HighSpeedMetrics
 
 Modern multi-core CPUs and JIT compilers aggressively reorder read/write instructions to optimize pipeline execution. When multiple threads access shared variables without barriers, CPU caches may read stale values.
 
-```
+```text
        CPU Core 0 (L1 Cache)                         CPU Core 1 (L1 Cache)
                  │                                             │
       _flag = true (Cached in Core 0)               Reads _flag (Reads 0 from stale L1)
@@ -104,6 +104,7 @@ Modern multi-core CPUs and JIT compilers aggressively reorder read/write instruc
 ```
 
 ### In C#:
+
 ```csharp
 private int _flag;
 

@@ -6,7 +6,7 @@ Modern frontend engineering favors **Headless UI Primitives** (unstyled componen
 
 ## 1. Why shadcn/ui & Headless Primitives?
 
-```
+```text
  Traditional Component Library (MUI / AntD):
  ❌ Ships monolithic JS/CSS bundles.
  ❌ Overriding styles requires heavy CSS specificity hacks (`!important`).
@@ -96,6 +96,7 @@ export const ButtonExtended = React.forwardRef<HTMLButtonElement, ButtonExtended
 ```
 
 ### Usage with Anchor / React Router Link:
+
 ```tsx
 <ButtonExtended asChild variant="secondary">
   <a href="/dashboard">Go to Dashboard</a>

@@ -50,12 +50,14 @@ WHERE o.Id IS NULL; -- Highly efficient anti-join pattern!
 Window functions perform calculations across a set of table rows that are related to the current row **without collapsing rows like `GROUP BY` does**.
 
 ### Key Window Functions:
+
 - **`ROW_NUMBER()`**: Assigns a unique sequential integer (1, 2, 3...) to each row within a partition.
 - **`RANK()`**: Assigns ranks with gaps on ties (1, 2, 2, 4...).
 - **`DENSE_RANK()`**: Assigns ranks without gaps on ties (1, 2, 2, 3...).
 - **`LAG()` / `LEAD()`**: Accesses data from a previous or subsequent row in the same result set without self-joins.
 
 ### Practical Example 1: Finding Top 3 Highest Paid Employees per Department
+
 ```sql
 WITH RankedEmployees AS (
     SELECT
@@ -74,6 +76,7 @@ WHERE SalaryRank <= 3;
 ```
 
 ### Practical Example 2: Month-over-Month Revenue Growth Analysis with `LAG()`
+
 ```sql
 SELECT
     OrderMonth,
@@ -92,6 +95,7 @@ FROM MonthlySalesSummary;
 ## 4. Common Table Expressions (CTEs) & Recursive CTEs
 
 ### Standard CTE (Improving Readability & Query Structure)
+
 ```sql
 WITH ActiveCustomerOrders AS (
     SELECT CustomerId, SUM(TotalAmount) AS TotalSpent
@@ -106,6 +110,7 @@ WHERE aco.TotalSpent > 5000;
 ```
 
 ### Recursive CTE: Hierarchical Organization Chart (Parent-Child Trees)
+
 ```sql
 -- Traversing an Employee management tree from CEO down to staff
 WITH RECURSIVE OrgHierarchy AS (

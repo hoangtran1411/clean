@@ -73,7 +73,7 @@ Welcome to the comprehensive **.NET Runtime & Low-Level Internals Curriculum** c
 
 ## 🔬 .NET Runtime Architecture Overview
 
-```
+```text
                                       C# SOURCE CODE (.cs)
                                                 │
                                                 ▼ (Roslyn Compiler: csc)

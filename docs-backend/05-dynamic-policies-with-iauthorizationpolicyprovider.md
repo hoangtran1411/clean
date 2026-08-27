@@ -3,6 +3,7 @@
 ## 1. Problem with Static Policies
 
 In standard ASP.NET Core, policies are hardcoded inside `Program.cs`:
+
 ```csharp
 // ❌ Static Approach: Not scalable
 builder.Services.AddAuthorization(options => {
@@ -20,7 +21,7 @@ Whenever you introduce a new feature or permission, you must modify `Program.cs`
 
 With `IAuthorizationPolicyProvider`, ASP.NET Core resolves policies **dynamically on demand**:
 
-```
+```text
 [HasPermission("Users.Delete")]
   ↓
 Policy Name: "Permission:Users.Delete"
@@ -37,7 +38,9 @@ PermissionAuthorizationHandler.HandleRequirementAsync(...)
 ## 3. Step-by-Step Implementation
 
 ### Step 1: Create the Requirement
+
 In [PermissionRequirement.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/PermissionRequirement.cs):
+
 ```csharp
 public class PermissionRequirement : IAuthorizationRequirement
 {
@@ -47,7 +50,9 @@ public class PermissionRequirement : IAuthorizationRequirement
 ```
 
 ### Step 2: Implement the Policy Provider
+
 In [DynamicPermissionPolicyProvider.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/DynamicPermissionPolicyProvider.cs):
+
 ```csharp
 public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvider
 {
@@ -71,7 +76,9 @@ public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvide
 ```
 
 ### Step 3: Implement the Authorization Handler
+
 In [PermissionAuthorizationHandler.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/PermissionAuthorizationHandler.cs):
+
 ```csharp
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
@@ -102,7 +109,9 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 ```
 
 ### Step 4: Create the Clean Attribute
+
 In [HasPermissionAttribute.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/HasPermissionAttribute.cs):
+
 ```csharp
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
 public class HasPermissionAttribute : AuthorizeAttribute
@@ -132,4 +141,5 @@ public IActionResult DeleteUserRecord(string id)
 ---
 
 ## What's Next?
+
 Proceed to [06-testing-and-debugging-guide.md](file:///C:/Users/Hoang/Desktop/clean/docs/06-testing-and-debugging-guide.md) for how to run and test all authentication, refresh, and permission flows.

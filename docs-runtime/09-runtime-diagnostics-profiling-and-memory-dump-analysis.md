@@ -7,6 +7,7 @@ Diagnosing high CPU usage, memory leaks, thread starvation, and GC latency in pr
 ## 1. The .NET Diagnostic CLI Tool Suite
 
 Install global diagnostic tools using the .NET CLI:
+
 ```powershell
 dotnet tool install -g dotnet-dump
 dotnet tool install -g dotnet-trace
@@ -27,6 +28,7 @@ dotnet tool install -g dotnet-stack
 ## 2. Real-Time Performance Monitoring with `dotnet-counters`
 
 Monitor live performance metrics of a running .NET process:
+
 ```powershell
 # List running .NET process IDs
 dotnet-counters ps
@@ -36,6 +38,7 @@ dotnet-counters monitor --process-id 14520 System.Runtime Microsoft.AspNetCore.H
 ```
 
 ### Key Metrics to Watch:
+
 - `cpu-usage`: CPU utilization %.
 - `gc-heap-size`: Total managed memory on GC heaps.
 - `gen-0-gc-count` / `gen-2-gc-count`: Rapid increases in Gen 2 indicate high memory churn or large object allocations.
@@ -46,11 +49,13 @@ dotnet-counters monitor --process-id 14520 System.Runtime Microsoft.AspNetCore.H
 ## 3. Investigating Memory Leaks with `dotnet-dump` & SOS
 
 ### Step 1: Capture Full Process Dump
+
 ```powershell
 dotnet-dump collect --process-id 14520 --type Full --output memory_leak.dmp
 ```
 
 ### Step 2: Analyze Dump Interactively
+
 ```powershell
 dotnet-dump analyze memory_leak.dmp
 ```

@@ -21,7 +21,7 @@ graph TD
 | :--- | :--- | :--- |
 | **Execution** | Generated **without running** the query. | Generated **after running** the query. |
 | **Row Counts** | Shows only **Estimated Number of Rows** based on statistics. | Shows **Estimated vs. Actual Number of Rows** (detects estimation errors!). |
-| **Runtime Metrics**| No actual CPU time, memory grant, or elapsed duration. | Contains exact **Actual Elapsed Time, Actual Memory Used, and I/O Reads**. |
+| **Runtime Metrics** | No actual CPU time, memory grant, or elapsed duration. | Contains exact **Actual Elapsed Time, Actual Memory Used, and I/O Reads**. |
 | **When to Use** | Safe for analyzing dangerous/long queries in production. | Essential for deep performance diagnostics. |
 
 ---
@@ -30,6 +30,7 @@ graph TD
 
 > [!IMPORTANT]
 > **Read Direction**: Execution plans are read **From Right to Left, and From Top to Bottom**.
+>
 > - **Leaf Operators (Far Right)**: Data retrieval starts here (Index Seeks, Scans).
 > - **Middle Operators**: Joins, Filters, Aggregations, and Sorts.
 > - **Root Operator (Far Left - `SELECT`)**: Returns final rows to client.
@@ -59,10 +60,12 @@ graph TD
 ```
 
 #### 1. Index Seek (🟢 The Gold Standard)
+
 - Uses the B+Tree root and branch pages to jump directly to matching rows in $O(\log N)$ operations.
 - Typical cost: **2 to 4 logical reads**, regardless of table size (100 rows or 100 million rows).
 
 #### 2. Clustered Index Scan / Table Scan (🔴 High Cost)
+
 - Occurs when:
   - No matching index exists.
   - The query is non-sargable (e.g. `WHERE YEAR(OrderDate) = 2026`).
@@ -70,6 +73,7 @@ graph TD
 - Scans **100% of data pages on disk**. On a 50GB table, this causes massive disk I/O bottlenecks.
 
 #### 3. Key Lookup / RID Lookup (⚠️ The Performance Killer)
+
 - Occurs when a Non-Clustered Index satisfies the `WHERE` clause, but the `SELECT` list asks for columns **not included in the index**.
 - For every matching row found, the engine must perform a separate lookup back into the Clustered Index table.
 - If the query matches 50,000 rows, it performs **50,000 individual random disk/memory jumps**!
@@ -112,6 +116,7 @@ graph TD
 ## 5. Cardinality Estimation & Outdated Statistics
 
 ### What is Cardinality Estimation?
+
 Before compiling a query, the optimizer consults **Statistics (Histograms)** on indexed columns to predict:
 *"How many rows will match `WHERE Status = 'Pending'`?"*
 
@@ -123,13 +128,16 @@ graph LR
 ```
 
 ### How to spot Statistics Discrepancies in Execution Plans:
+
 Hover over an operator in the plan and compare:
+
 - **Estimated Number of Rows**: `1`
 - **Actual Number of Rows**: `250,000`
 
 If the actual count differs from estimated count by **10x or 100x**, your database statistics are stale!
 
 ### How to fix:
+
 ```sql
 -- SQL Server:
 UPDATE STATISTICS Products WITH FULLSCAN;
@@ -143,9 +151,11 @@ ANALYZE VERBOSE Products;
 ## 6. Parameter Sniffing
 
 ### What is Parameter Sniffing?
+
 When a parameterized query or Stored Procedure executes for the first time, SQL Server **"sniffs" the initial parameter value** and compiles an execution plan optimized specifically for that value.
 
 ### The Trap:
+
 1. User 1 runs `GetOrdersByCountry('Iceland')` (matches 10 rows) ➔ Engine compiles a **Nested Loops + Index Seek** plan.
 2. User 2 runs `GetOrdersByCountry('USA')` (matches 2,000,000 rows) ➔ Engine reuses the cached plan! It attempts to run 2 million Nested Loops, crashing server CPU!
 
@@ -157,6 +167,7 @@ graph TD
 ```
 
 ### Solutions for Parameter Sniffing:
+
 ```sql
 -- Solution 1: Optimize for an average representative value
 SELECT * FROM Orders
@@ -174,6 +185,7 @@ OPTION (RECOMPILE);
 ## 7. Real-World Case Study: Optimizing a Slow Query
 
 ### ❌ Before Optimization (High Latency)
+
 ```sql
 SELECT CustomerId, OrderDate, TotalAmount
 FROM Orders
@@ -182,6 +194,7 @@ ORDER BY OrderDate DESC;
 ```
 
 **Execution Plan Analysis**:
+
 - Index Seek on `IX_Orders_CustomerId` (5% cost).
 - **Key Lookup** to Clustered Index for `TotalAmount` (70% cost).
 - **Sort Operator** for `OrderDate DESC` (25% cost).
@@ -190,6 +203,7 @@ ORDER BY OrderDate DESC;
 ---
 
 ### ✅ After Optimization: Creating a Perfect Covering Index
+
 ```sql
 CREATE NONCLUSTERED INDEX IX_Orders_CustomerId_Date_Covering
 ON Orders (CustomerId ASC, OrderDate DESC)
@@ -197,6 +211,7 @@ INCLUDE (TotalAmount);
 ```
 
 **New Execution Plan Analysis**:
+
 - **100% Index Seek** directly on `IX_Orders_CustomerId_Date_Covering`.
 - **0 Key Lookups** (all required columns covered).
 - **0 Sort Operators** (B+Tree is already sorted by `OrderDate DESC`).
@@ -207,12 +222,14 @@ INCLUDE (TotalAmount);
 ## 8. Diagnostic Commands to View Execution Plans
 
 ### PostgreSQL
+
 ```sql
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE, FORMAT JSON)
 SELECT * FROM Products WHERE Price > 500;
 ```
 
 ### SQL Server (T-SQL)
+
 ```sql
 SET STATISTICS IO ON;
 SET STATISTICS TIME ON;
@@ -224,6 +241,7 @@ SET SHOWPLAN_XML OFF;
 ```
 
 ### SQLite
+
 ```sql
 EXPLAIN QUERY PLAN
 SELECT * FROM Products WHERE Price > 500;

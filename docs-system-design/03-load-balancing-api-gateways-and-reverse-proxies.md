@@ -6,7 +6,7 @@ Load Balancers and API Gateways distribute network traffic across server instanc
 
 ## 1. Layer 4 (L4) vs. Layer 7 (L7) Load Balancing
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ LAYER 4 (Transport Layer - TCP / UDP)                       │ LAYER 7 (Application Layer - HTTP / HTTPS / gRPC)           │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -20,7 +20,7 @@ Load Balancers and API Gateways distribute network traffic across server instanc
 
 ## 2. Load Balancing Algorithms
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Algorithm          │ Mechanism                        │ Best Use Case                       │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤
@@ -37,9 +37,10 @@ Load Balancers and API Gateways distribute network traffic across server instanc
 ```
 
 ### Consistent Hashing Ring Concept
+
 When adding or removing a node in a regular `hash(key) % N` cluster, almost 100% of cached keys must be remapped. With **Consistent Hashing**, only $K/N$ keys move on average:
 
-```
+```text
                           Server A (Node 1)
                                ○ [0°]
                            .       .
@@ -56,6 +57,7 @@ When adding or removing a node in a regular `hash(key) % N` cluster, almost 100%
 ## 3. The API Gateway Pattern & BFF (Backend-for-Frontend)
 
 An API Gateway sits between client devices and internal microservices:
+
 - **Reverse Proxying & Routing**: Decouples external API contract from internal service topology.
 - **Cross-Cutting Concerns**: Authentication (JWT validation), Global Rate Limiting, SSL Termination, Correlation ID injection (`X-Correlation-ID`).
 - **BFF (Backend-For-Frontend)**: Specialized API Gateways tailored for specific client formats (e.g. Mobile BFF with compacted payloads vs. Desktop Web BFF).
@@ -78,6 +80,7 @@ app.Run();
 ```
 
 ### `appsettings.json` Configuration:
+
 ```json
 {
   "ReverseProxy": {

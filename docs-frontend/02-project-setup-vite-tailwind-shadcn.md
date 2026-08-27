@@ -22,7 +22,9 @@ npm install clsx tailwind-merge class-variance-authority lucide-react
 ```
 
 ### Configuring `vite.config.ts`
+
 In [vite.config.ts](file:///C:/Users/Hoang/Desktop/clean/client/vite.config.ts):
+
 ```typescript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -68,5 +70,6 @@ export function cn(...inputs: ClassValue[]) {
 ```
 
 ### Why `clsx` + `tailwind-merge`?
+
 - `clsx`: Allows conditional classes like `cn('btn', isActive && 'btn-active')`.
 - `tailwind-merge`: Resolves conflicting utility classes intelligently (e.g. `cn('p-4', 'p-2')` correctly outputs `'p-2'`).

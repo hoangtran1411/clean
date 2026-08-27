@@ -6,7 +6,7 @@ Asynchronous messaging decouples microservices, absorbs traffic spikes, guarante
 
 ## 1. Message Brokers vs. Distributed Event Logs
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────┐
 │ MESSAGE BROKERS (RabbitMQ / Amazon SQS)                     │ DISTRIBUTED EVENT LOGS (Apache Kafka / AWS Kinesis)         │
 ├─────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
@@ -21,7 +21,7 @@ Asynchronous messaging decouples microservices, absorbs traffic spikes, guarante
 
 ## 2. Delivery Guarantees & Idempotency
 
-```
+```text
 ┌────────────────────┬──────────────────────────────────┬─────────────────────────────────────┐
 │ Guarantee Level    │ Mechanism                        │ Reality                             │
 ├────────────────────┼──────────────────────────────────┼─────────────────────────────────────┤
@@ -40,7 +40,7 @@ Asynchronous messaging decouples microservices, absorbs traffic spikes, guarante
 
 When a business operation updates a database AND sends a message to Kafka/RabbitMQ, a network failure between the two operations can cause data inconsistency (DB committed, but message never sent).
 
-```
+```text
    [Application Service]
              │
              ├──► 1. Begin Database Transaction
@@ -55,6 +55,7 @@ When a business operation updates a database AND sends a message to Kafka/Rabbit
 ```
 
 ### Outbox Table Schema in EF Core:
+
 ```sql
 CREATE TABLE OutboxMessages (
     Id UNIQUEIDENTIFIER PRIMARY KEY,
