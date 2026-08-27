@@ -194,6 +194,16 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 9. [**09 - Real-World System Design Case Studies**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/09-real-world-system-design-case-studies.md)
 10. [**10 - Top 30 System Design Interview Questions & Step-by-Step Framework (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-system-design/10-top-30-system-design-interview-questions.md)
 
+### 🚀 Deployment, Docker, Nginx & DevOps Modules (`docs-deploy/`)
+
+1. [**01 - Docker & Containerization for .NET 10 & React 19**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/01-docker-and-containerization.md)
+2. [**02 - Reverse Proxy with Nginx & SSL/TLS Configuration**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/02-reverse-proxy-nginx-and-ssl.md)
+3. [**03 - CI/CD Pipelines with GitHub Actions**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/03-ci-cd-github-actions-pipelines.md)
+4. [**04 - Cloud Hosting & VPS Production Deployment**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/04-cloud-hosting-and-vps-deployment.md)
+5. [**05 - .NET Aspire & Azure Container Apps (Cloud-Native Deployment)**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/05-dotnet-aspire-and-azure-container-apps.md)
+6. [**06 - Production Database Migrations & Pre-Flight Readiness**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/06-database-migrations-and-production-readiness.md)
+7. [**07 - Top 30 DevOps, Docker & Cloud Deployment Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/07-top-30-devops-and-deployment-interview-questions.md)
+
 ---
 
 ## 🤝 Contributing & Community
