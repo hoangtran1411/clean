@@ -204,6 +204,19 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 6. [**06 - Production Database Migrations & Pre-Flight Readiness**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/06-database-migrations-and-production-readiness.md)
 7. [**07 - Top 30 DevOps, Docker & Cloud Deployment Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-deploy/07-top-30-devops-and-deployment-interview-questions.md)
 
+### 🌐 Network Architecture & Protocols Modules (`docs-network/`)
+
+1. [**01 - The OSI Model and TCP/IP Suite**](file:///C:/Users/Hoang/Desktop/clean/docs-network/01-osi-model-and-tcp-ip-suite.md)
+2. [**02 - DNS Resolution and Record Types**](file:///C:/Users/Hoang/Desktop/clean/docs-network/02-dns-resolution-and-record-types.md)
+3. [**03 - TCP vs UDP and the Transport Layer**](file:///C:/Users/Hoang/Desktop/clean/docs-network/03-tcp-udp-and-transport-layer.md)
+4. [**04 - HTTP, HTTPS, and the TLS Handshake**](file:///C:/Users/Hoang/Desktop/clean/docs-network/04-http-https-and-tls-handshake.md)
+5. [**05 - IP Addressing, Subnets, and CIDR**](file:///C:/Users/Hoang/Desktop/clean/docs-network/05-ip-addressing-subnets-and-cidr.md)
+6. [**06 - Load Balancing and Reverse Proxies**](file:///C:/Users/Hoang/Desktop/clean/docs-network/06-load-balancing-and-reverse-proxies.md)
+7. [**07 - Cloud Networking, VPCs, and Firewalls**](file:///C:/Users/Hoang/Desktop/clean/docs-network/07-cloud-networking-vpcs-and-firewalls.md)
+8. [**08 - Content Delivery Networks (CDNs)**](file:///C:/Users/Hoang/Desktop/clean/docs-network/08-content-delivery-networks-cdns.md)
+9. [**09 - Network Troubleshooting Tools**](file:///C:/Users/Hoang/Desktop/clean/docs-network/09-network-troubleshooting-tools.md)
+10. [**10 - Top 30 Networking Interview Questions (Easy, Medium, Advanced)**](file:///C:/Users/Hoang/Desktop/clean/docs-network/10-top-30-networking-interview-questions.md)
+
 ---
 
 ## 🤝 Contributing & Community
