@@ -59,11 +59,11 @@ graph TD
 - **Location**: `src/CleanArch.Domain/`
 - **Purpose**: Pure enterprise business models and rules.
 - **Components**:
-  - [`BaseEntity.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Common/BaseEntity.cs)
-  - [`PaymentRecord.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Entities/PaymentRecord.cs)
-  - [`IdempotentRecord.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Entities/IdempotentRecord.cs)
-  - [`UserRoles.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Constants/UserRoles.cs)
-  - [`AppPermissions.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Constants/AppPermissions.cs)
+  - [`BaseEntity.cs`](../src/CleanArch.Domain/Common/BaseEntity.cs)
+  - [`PaymentRecord.cs`](../src/CleanArch.Domain/Entities/PaymentRecord.cs)
+  - [`IdempotentRecord.cs`](../src/CleanArch.Domain/Entities/IdempotentRecord.cs)
+  - [`UserRoles.cs`](../src/CleanArch.Domain/Constants/UserRoles.cs)
+  - [`AppPermissions.cs`](../src/CleanArch.Domain/Constants/AppPermissions.cs)
 
 ### Layer 2: `CleanArch.Application`
 
@@ -76,7 +76,7 @@ graph TD
     - `ChargePaymentCommand` + `ChargePaymentCommandHandler` + `ChargePaymentCommandValidator`
     - `GetUserProfileQuery` + `GetUserProfileQueryHandler`
   - **Pipeline Behaviors**:
-    - [`ValidationBehavior.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Common/Behaviors/ValidationBehavior.cs): Automatically validates incoming requests using FluentValidation before handlers run.
+    - [`ValidationBehavior.cs`](../src/CleanArch.Application/Common/Behaviors/ValidationBehavior.cs): Automatically validates incoming requests using FluentValidation before handlers run.
   - **Interfaces (Ports)**:
     - `IAppDbContext`, `IAuthService`, `ITokenService`, `IIdempotencyService`, `ICurrentUserService`
 
@@ -85,20 +85,20 @@ graph TD
 - **Location**: `src/CleanArch.Infrastructure/`
 - **Purpose**: Implements persistence, external identity frameworks, and token cryptographic services.
 - **Components**:
-  - [`AppDbContext.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Persistence/AppDbContext.cs): Implements `IAppDbContext` and inherits `IdentityDbContext<ApplicationUser>`.
-  - [`AuthService.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Identity/AuthService.cs): Implements `IAuthService` using ASP.NET Core Identity's `UserManager`.
-  - [`TokenService.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Identity/TokenService.cs): Generates signed JWTs and refresh tokens.
-  - [`IdempotencyService.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Persistence/IdempotencyService.cs): Implements `IIdempotencyService` saving requests to database.
+  - [`AppDbContext.cs`](../src/CleanArch.Infrastructure/Persistence/AppDbContext.cs): Implements `IAppDbContext` and inherits `IdentityDbContext<ApplicationUser>`.
+  - [`AuthService.cs`](../src/CleanArch.Infrastructure/Identity/AuthService.cs): Implements `IAuthService` using ASP.NET Core Identity's `UserManager`.
+  - [`TokenService.cs`](../src/CleanArch.Infrastructure/Identity/TokenService.cs): Generates signed JWTs and refresh tokens.
+  - [`IdempotencyService.cs`](../src/CleanArch.Infrastructure/Persistence/IdempotencyService.cs): Implements `IIdempotencyService` saving requests to database.
 
 ### Layer 4: `CleanArch.WebApi`
 
 - **Location**: `src/CleanArch.WebApi/`
 - **Purpose**: Entry point, HTTP controller routing, security filters, middleware, and OpenAPI configuration.
 - **Components**:
-  - [`ApiControllerBase.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/ApiControllerBase.cs): Dispatches MediatR commands/queries.
-  - [`AuthController.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/AuthController.cs), [`PaymentsController.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/PaymentsController.cs)
-  - [`DynamicPermissionPolicyProvider.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Authorization/DynamicPermissionPolicyProvider.cs)
-  - [`IdempotentActionFilter.cs`](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Idempotency/IdempotentActionFilter.cs)
+  - [`ApiControllerBase.cs`](../src/CleanArch.WebApi/Controllers/ApiControllerBase.cs): Dispatches MediatR commands/queries.
+  - [`AuthController.cs`](../src/CleanArch.WebApi/Controllers/AuthController.cs), [`PaymentsController.cs`](../src/CleanArch.WebApi/Controllers/PaymentsController.cs)
+  - [`DynamicPermissionPolicyProvider.cs`](../src/CleanArch.WebApi/Authorization/DynamicPermissionPolicyProvider.cs)
+  - [`IdempotentActionFilter.cs`](../src/CleanArch.WebApi/Idempotency/IdempotentActionFilter.cs)
 
 ---
 

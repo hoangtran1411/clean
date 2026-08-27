@@ -64,7 +64,7 @@ IdentityCleanArch/
 
 ## 4. How `CleanArch.ServiceDefaults` Works
 
-In [Extensions.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.ServiceDefaults/Extensions.cs):
+In [Extensions.cs](../src/CleanArch.ServiceDefaults/Extensions.cs):
 
 ### A. OpenTelemetry & Structured Logging
 
@@ -129,7 +129,7 @@ builder.Services.ConfigureHttpClientDefaults(http =>
 
 ## 5. How `CleanArch.AppHost` Orchestrates the System
 
-In [Program.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.AppHost/Program.cs):
+In [Program.cs](../src/CleanArch.AppHost/Program.cs):
 
 ```csharp
 var builder = DistributedApplication.CreateBuilder(args);

@@ -26,7 +26,7 @@ You can test all endpoints interactively directly from the browser UI.
 
 ## 3. Pre-Seeded Accounts for Testing
 
-The application automatically seeds the following credentials via [DbInitializer.cs](file:///C:/Users/Hoang/Desktop/clean/Data/DbInitializer.cs):
+The application automatically seeds the following credentials via [DbInitializer.cs](../Data/DbInitializer.cs):
 
 | Account | Email | Password | Roles | Permissions |
 | :--- | :--- | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ The application automatically seeds the following credentials via [DbInitializer
 
 ## 4. Testing with `IdentityJwtDemo.http`
 
-You can use the built-in [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) file in VS Code or Visual Studio:
+You can use the built-in [IdentityJwtDemo.http](../IdentityJwtDemo.http) file in VS Code or Visual Studio:
 
 ### Test Case 1: Login and Get Token
 
@@ -96,5 +96,5 @@ Authorization: Bearer <user_access_token>
 | :--- | :--- | :--- |
 | **`401 Unauthorized`** | Missing or invalid `Authorization: Bearer <token>` header, or token signature is invalid, or token is expired. | Verify header format, check token expiration, verify `SecretKey` and `Issuer`. |
 | **`403 Forbidden`** | User is authenticated, but does not possess the required `Role` or `Permission` claim. | Grant the necessary role or claim to the user. |
-| **`400 Bad Request`** | Password validation failed (e.g. missing uppercase/digit) or invalid model state. | Check password rules in [Program.cs](file:///C:/Users/Hoang/Desktop/clean/Program.cs#L20-L26). |
+| **`400 Bad Request`** | Password validation failed (e.g. missing uppercase/digit) or invalid model state. | Check password rules in [Program.cs](../Program.cs#L20-L26). |
 | **Token Expired Error** | Token lifetime exceeded. | Call `/api/auth/refresh-token` with the refresh token to get a new access token. |

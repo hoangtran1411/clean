@@ -20,7 +20,7 @@ graph TD
 
 ---
 
-## 2. Our Root [`Directory.Build.props`](file:///C:/Users/Hoang/Desktop/clean/Directory.Build.props)
+## 2. Our Root [`Directory.Build.props`](../Directory.Build.props)
 
 ```xml
 <Project>
@@ -68,14 +68,14 @@ graph TD
 
 ### ✅ After: Ultra-Clean Project Files
 
-In [CleanArch.Domain.csproj](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/CleanArch.Domain.csproj):
+In [CleanArch.Domain.csproj](../src/CleanArch.Domain/CleanArch.Domain.csproj):
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 </Project>
 ```
 
-In [CleanArch.Application.csproj](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/CleanArch.Application.csproj):
+In [CleanArch.Application.csproj](../src/CleanArch.Application/CleanArch.Application.csproj):
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">

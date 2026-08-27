@@ -2,7 +2,7 @@
 
 ## 1. What is `.editorconfig`?
 
-An **`.editorconfig` file** (such as [.editorconfig](file:///C:/Users/Hoang/Desktop/clean/.editorconfig) in our root directory) is a standardized configuration file that defines and enforces consistent **code style, formatting rules, naming conventions, and Roslyn static analyzer warnings** across an entire engineering team and across different IDEs (Visual Studio, VS Code, JetBrains Rider, Vim).
+An **`.editorconfig` file** (such as [.editorconfig](../.editorconfig) in our root directory) is a standardized configuration file that defines and enforces consistent **code style, formatting rules, naming conventions, and Roslyn static analyzer warnings** across an entire engineering team and across different IDEs (Visual Studio, VS Code, JetBrains Rider, Vim).
 
 ```mermaid
 graph TD
@@ -113,7 +113,7 @@ dotnet_diagnostic.CA1822.severity = suggestion
 
 ### 1. Auto-Format Codebase via CLI
 
-Automatically formats every file in the solution according to [.editorconfig](file:///C:/Users/Hoang/Desktop/clean/.editorconfig):
+Automatically formats every file in the solution according to [.editorconfig](../.editorconfig):
 
 ```powershell
 dotnet format

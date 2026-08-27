@@ -54,7 +54,7 @@ sequenceDiagram
 
 ### Implementation in Application Layer:
 
-In [GetCachedProductsQuery.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Features/Products/Queries/GetCachedProducts/GetCachedProductsQuery.cs):
+In [GetCachedProductsQuery.cs](../src/CleanArch.Application/Features/Products/Queries/GetCachedProducts/GetCachedProductsQuery.cs):
 
 ```csharp
 var products = await _memoryCache.GetOrCreateAsync(cacheKey, async entry =>
@@ -134,7 +134,7 @@ If 1,000 concurrent requests hit an expired endpoint simultaneously, OutputCache
 
 ## 4. Configuration in `Program.cs`
 
-In [Program.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Program.cs):
+In [Program.cs](../src/CleanArch.WebApi/Program.cs):
 
 ```csharp
 // 1. Register Services
@@ -156,7 +156,7 @@ app.MapControllers();
 
 ## 5. How to Test Caching
 
-Open [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) and execute Section **6. IN-MEMORY CACHE & OUTPUT CACHE TESTING**:
+Open [IdentityJwtDemo.http](../IdentityJwtDemo.http) and execute Section **6. IN-MEMORY CACHE & OUTPUT CACHE TESTING**:
 
 1. **Test `IMemoryCache`**:
    - Send `GET /api/products/in-memory-cached`.

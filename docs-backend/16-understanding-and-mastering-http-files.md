@@ -2,7 +2,7 @@
 
 ## 1. What is an `.http` File?
 
-An **`.http` file** (such as [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http)) is an executable, text-based HTTP request file format based on the RFC 7230 standard.
+An **`.http` file** (such as [IdentityJwtDemo.http](../IdentityJwtDemo.http)) is an executable, text-based HTTP request file format based on the RFC 7230 standard.
 
 It is natively supported in **Visual Studio 2022/2025**, **VS Code** (via the *REST Client* extension), and **JetBrains Rider**.
 
@@ -100,7 +100,7 @@ Content-Type: application/json
 
 ## 3. Deep-Dive: How `IdentityJwtDemo.http` is Structured
 
-Here is what each section of [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) accomplishes:
+Here is what each section of [IdentityJwtDemo.http](../IdentityJwtDemo.http) accomplishes:
 
 ```text
 IdentityJwtDemo.http
@@ -146,7 +146,7 @@ IdentityJwtDemo.http
 
 ### In Visual Studio 2022 / 2025:
 
-1. Open [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http).
+1. Open [IdentityJwtDemo.http](../IdentityJwtDemo.http).
 2. Ensure the API is running (`dotnet run --project src/CleanArch.WebApi` or `src/CleanArch.AppHost`).
 3. Click the green **`Send request`** play button directly above any request.
 4. The response headers and formatted JSON body appear in the right-hand panel.

@@ -50,7 +50,7 @@ sequenceDiagram
 
 ## 3. The Key Logging Components
 
-### 1. Correlation ID Middleware ([CorrelationIdMiddleware.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Middleware/CorrelationIdMiddleware.cs))
+### 1. Correlation ID Middleware ([CorrelationIdMiddleware.cs](../src/CleanArch.WebApi/Middleware/CorrelationIdMiddleware.cs))
 
 Extracts an incoming `X-Correlation-ID` header from the client or generates a new `Guid`. It pushes the correlation ID into `Serilog.Context.LogContext` so that **every log entry** emitted during the request automatically includes the correlation ID:
 
@@ -70,7 +70,7 @@ public async Task InvokeAsync(HttpContext context)
 }
 ```
 
-### 2. MediatR Request Logging Behavior ([LoggingBehavior.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Common/Behaviors/LoggingBehavior.cs))
+### 2. MediatR Request Logging Behavior ([LoggingBehavior.cs](../src/CleanArch.Application/Common/Behaviors/LoggingBehavior.cs))
 
 Logs the start and completion of every Command and Query automatically without writing repetitive logging code in every controller or handler:
 
@@ -88,7 +88,7 @@ public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TRe
 }
 ```
 
-### 3. MediatR Performance Behavior ([PerformanceBehavior.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Application/Common/Behaviors/PerformanceBehavior.cs))
+### 3. MediatR Performance Behavior ([PerformanceBehavior.cs](../src/CleanArch.Application/Common/Behaviors/PerformanceBehavior.cs))
 
 Measures execution time with `Stopwatch`. If a query or command exceeds 500ms, it automatically logs a structured warning:
 
@@ -104,7 +104,7 @@ if (elapsedMilliseconds > 500)
 
 ## 4. Serilog Configuration in `appsettings.json`
 
-In [appsettings.json](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/appsettings.json):
+In [appsettings.json](../src/CleanArch.WebApi/appsettings.json):
 
 ```json
 {

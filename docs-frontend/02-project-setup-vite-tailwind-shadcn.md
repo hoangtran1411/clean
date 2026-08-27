@@ -23,7 +23,7 @@ npm install clsx tailwind-merge class-variance-authority lucide-react
 
 ### Configuring `vite.config.ts`
 
-In [vite.config.ts](file:///C:/Users/Hoang/Desktop/clean/client/vite.config.ts):
+In [vite.config.ts](../client/vite.config.ts):
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -55,7 +55,7 @@ export default defineConfig({
 
 ## 3. Configuring the `cn()` Utility (The Heart of shadcn/ui)
 
-In [utils.ts](file:///C:/Users/Hoang/Desktop/clean/client/src/lib/utils.ts):
+In [utils.ts](../client/src/lib/utils.ts):
 
 ```typescript
 import { type ClassValue, clsx } from 'clsx'

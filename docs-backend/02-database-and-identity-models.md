@@ -22,7 +22,7 @@ When you inherit your `DbContext` from `IdentityDbContext<ApplicationUser>`, EF 
 
 The base `IdentityUser` provides standard properties like `Id`, `UserName`, `Email`, `PasswordHash`, `PhoneNumber`, `EmailConfirmed`, `TwoFactorEnabled`, and `LockoutEnd`.
 
-To add domain-specific fields or refresh token storage, we create [ApplicationUser.cs](file:///C:/Users/Hoang/Desktop/clean/Models/ApplicationUser.cs):
+To add domain-specific fields or refresh token storage, we create [ApplicationUser.cs](../Models/ApplicationUser.cs):
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -47,7 +47,7 @@ public class ApplicationUser : IdentityUser
 
 ## 3. Configuring `AppDbContext`
 
-In [AppDbContext.cs](file:///C:/Users/Hoang/Desktop/clean/Data/AppDbContext.cs):
+In [AppDbContext.cs](../Data/AppDbContext.cs):
 
 ```csharp
 using IdentityJwtDemo.Models;
@@ -86,7 +86,7 @@ When you call `userManager.CreateAsync(user, password)`:
 
 ## 5. Automatic Database Seeding on Startup
 
-In [DbInitializer.cs](file:///C:/Users/Hoang/Desktop/clean/Data/DbInitializer.cs), we seed default roles and users when the application starts:
+In [DbInitializer.cs](../Data/DbInitializer.cs), we seed default roles and users when the application starts:
 
 ```csharp
 // Ensure the SQLite database file and tables exist
@@ -113,4 +113,4 @@ if (await userManager.FindByEmailAsync("admin@example.com") == null)
 
 ## What's Next?
 
-Proceed to [03-jwt-authentication-and-token-service.md](file:///C:/Users/Hoang/Desktop/clean/docs/03-jwt-authentication-and-token-service.md) to understand JWT token generation, claims structure, and cryptographic signing.
+Proceed to [03-jwt-authentication-and-token-service.md](../docs/03-jwt-authentication-and-token-service.md) to understand JWT token generation, claims structure, and cryptographic signing.

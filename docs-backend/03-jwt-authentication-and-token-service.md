@@ -27,7 +27,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJlbWFpbCI6ImFkbWluQGV
 
 ## 2. Implementing `ITokenService`
 
-In [TokenService.cs](file:///C:/Users/Hoang/Desktop/clean/Services/TokenService.cs), we implement the token generation and validation methods:
+In [TokenService.cs](../Services/TokenService.cs), we implement the token generation and validation methods:
 
 ### A. Generating the Signed JWT
 
@@ -96,7 +96,7 @@ public string GenerateRefreshToken()
 
 ## 3. Configuring JWT Middleware in `Program.cs`
 
-In [Program.cs](file:///C:/Users/Hoang/Desktop/clean/Program.cs), we register the `JwtBearer` authentication handler:
+In [Program.cs](../Program.cs), we register the `JwtBearer` authentication handler:
 
 ```csharp
 builder.Services.AddAuthentication(options =>
@@ -134,4 +134,4 @@ builder.Services.AddAuthentication(options =>
 
 ## What's Next?
 
-Proceed to [04-auth-controller-and-refresh-token-rotation.md](file:///C:/Users/Hoang/Desktop/clean/docs/04-auth-controller-and-refresh-token-rotation.md) to explore the registration, login, and refresh token rotation logic.
+Proceed to [04-auth-controller-and-refresh-token-rotation.md](../docs/04-auth-controller-and-refresh-token-rotation.md) to explore the registration, login, and refresh token rotation logic.

@@ -68,11 +68,11 @@ sequenceDiagram
 
 ## 4. Implementation in .NET 10
 
-### 1. The Database Entity ([IdempotentRequestRecord.cs](file:///C:/Users/Hoang/Desktop/clean/Idempotency/IdempotentRequestRecord.cs))
+### 1. The Database Entity ([IdempotentRequestRecord.cs](../Idempotency/IdempotentRequestRecord.cs))
 
 Stores the `IdempotencyKey`, `UserId`, `RequestPath`, `RequestHash` (SHA-256), `StatusCode`, `ResponseBody`, `ContentType`, and `ExpiresAt`.
 
-### 2. The Filter Factory Attribute ([IdempotentAttribute.cs](file:///C:/Users/Hoang/Desktop/clean/Idempotency/IdempotentAttribute.cs))
+### 2. The Filter Factory Attribute ([IdempotentAttribute.cs](../Idempotency/IdempotentAttribute.cs))
 
 ```csharp
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
@@ -89,7 +89,7 @@ public class IdempotentAttribute : Attribute, IFilterFactory
 }
 ```
 
-### 3. Protecting the Endpoint ([PaymentsController.cs](file:///C:/Users/Hoang/Desktop/clean/Controllers/PaymentsController.cs))
+### 3. Protecting the Endpoint ([PaymentsController.cs](../Controllers/PaymentsController.cs))
 
 ```csharp
 [ApiController]
@@ -121,7 +121,7 @@ public class PaymentsController : ControllerBase
 
 ## 5. How to Test Idempotency
 
-Open [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) and execute the tests in section **4. IDEMPOTENCY TESTING**:
+Open [IdentityJwtDemo.http](../IdentityJwtDemo.http) and execute the tests in section **4. IDEMPOTENCY TESTING**:
 
 1. **Step 1: First Charge Request**:
    - Send `POST /api/payments/charge` with `Idempotency-Key: pay-key-001`.

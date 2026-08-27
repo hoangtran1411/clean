@@ -8,7 +8,7 @@ When downloading generated binary files from ASP.NET Core:
 2. Convert the byte stream into an Object URL with `window.URL.createObjectURL`.
 3. Create a temporary `<a>` element to trigger the browser's native file download.
 
-In [ProductsSection.tsx](file:///C:/Users/Hoang/Desktop/clean/client/src/features/products/ProductsSection.tsx):
+In [ProductsSection.tsx](../client/src/features/products/ProductsSection.tsx):
 
 ```typescript
 const handleExportExcel = async () => {
@@ -60,7 +60,7 @@ To prevent double billing:
 2. Pass the key in the request header.
 3. If network fails or user double clicks, retry with the **same** key. The backend returns the cached response without double charging!
 
-In [IdempotencySection.tsx](file:///C:/Users/Hoang/Desktop/clean/client/src/features/payments/IdempotencySection.tsx):
+In [IdempotencySection.tsx](../client/src/features/payments/IdempotencySection.tsx):
 
 ```typescript
 const response = await api.post(

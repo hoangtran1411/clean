@@ -39,7 +39,7 @@ PermissionAuthorizationHandler.HandleRequirementAsync(...)
 
 ### Step 1: Create the Requirement
 
-In [PermissionRequirement.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/PermissionRequirement.cs):
+In [PermissionRequirement.cs](../Authorization/PermissionRequirement.cs):
 
 ```csharp
 public class PermissionRequirement : IAuthorizationRequirement
@@ -51,7 +51,7 @@ public class PermissionRequirement : IAuthorizationRequirement
 
 ### Step 2: Implement the Policy Provider
 
-In [DynamicPermissionPolicyProvider.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/DynamicPermissionPolicyProvider.cs):
+In [DynamicPermissionPolicyProvider.cs](../Authorization/DynamicPermissionPolicyProvider.cs):
 
 ```csharp
 public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvider
@@ -77,7 +77,7 @@ public class DynamicPermissionPolicyProvider : DefaultAuthorizationPolicyProvide
 
 ### Step 3: Implement the Authorization Handler
 
-In [PermissionAuthorizationHandler.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/PermissionAuthorizationHandler.cs):
+In [PermissionAuthorizationHandler.cs](../Authorization/PermissionAuthorizationHandler.cs):
 
 ```csharp
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
@@ -110,7 +110,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 
 ### Step 4: Create the Clean Attribute
 
-In [HasPermissionAttribute.cs](file:///C:/Users/Hoang/Desktop/clean/Authorization/HasPermissionAttribute.cs):
+In [HasPermissionAttribute.cs](../Authorization/HasPermissionAttribute.cs):
 
 ```csharp
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
@@ -127,7 +127,7 @@ public class HasPermissionAttribute : AuthorizeAttribute
 
 ## 4. Protecting Endpoints Declaratively
 
-In [ResourcesController.cs](file:///C:/Users/Hoang/Desktop/clean/Controllers/ResourcesController.cs):
+In [ResourcesController.cs](../Controllers/ResourcesController.cs):
 
 ```csharp
 [HttpDelete("delete-user-record/{id}")]
@@ -142,4 +142,4 @@ public IActionResult DeleteUserRecord(string id)
 
 ## What's Next?
 
-Proceed to [06-testing-and-debugging-guide.md](file:///C:/Users/Hoang/Desktop/clean/docs/06-testing-and-debugging-guide.md) for how to run and test all authentication, refresh, and permission flows.
+Proceed to [06-testing-and-debugging-guide.md](../docs/06-testing-and-debugging-guide.md) for how to run and test all authentication, refresh, and permission flows.

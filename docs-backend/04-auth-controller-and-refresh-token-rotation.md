@@ -40,7 +40,7 @@ sequenceDiagram
 
 ## 3. Implementation in `AuthService.cs`
 
-In [AuthService.cs](file:///C:/Users/Hoang/Desktop/clean/Services/AuthService.cs):
+In [AuthService.cs](../Services/AuthService.cs):
 
 ### A. Login & Issuance
 
@@ -131,4 +131,4 @@ public async Task<bool> RevokeTokenAsync(string email)
 
 ## What's Next?
 
-Proceed to [05-dynamic-policies-with-iauthorizationpolicyprovider.md](file:///C:/Users/Hoang/Desktop/clean/docs/05-dynamic-policies-with-iauthorizationpolicyprovider.md) to learn how to build scalable, dynamic authorization policies.
+Proceed to [05-dynamic-policies-with-iauthorizationpolicyprovider.md](../docs/05-dynamic-policies-with-iauthorizationpolicyprovider.md) to learn how to build scalable, dynamic authorization policies.

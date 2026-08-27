@@ -72,7 +72,7 @@ Exception (System)
 
 ### Step 1: Create Domain & Application Exceptions
 
-In [NotFoundException.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Domain/Exceptions/NotFoundException.cs):
+In [NotFoundException.cs](../src/CleanArch.Domain/Exceptions/NotFoundException.cs):
 
 ```csharp
 public class NotFoundException : Exception
@@ -84,7 +84,7 @@ public class NotFoundException : Exception
 
 ### Step 2: Implement `IExceptionHandler`
 
-In [GlobalExceptionHandler.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Middleware/GlobalExceptionHandler.cs):
+In [GlobalExceptionHandler.cs](../src/CleanArch.WebApi/Middleware/GlobalExceptionHandler.cs):
 
 ```csharp
 public class GlobalExceptionHandler : IExceptionHandler
@@ -141,7 +141,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
 ### Step 3: Register in `Program.cs`
 
-In [Program.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Program.cs):
+In [Program.cs](../src/CleanArch.WebApi/Program.cs):
 
 ```csharp
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -156,7 +156,7 @@ app.UseExceptionHandler(); // Activates registered IExceptionHandler services
 
 ## 5. How to Test Global Exception Handling
 
-Use the [ErrorsTestController.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/ErrorsTestController.cs) endpoints in [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http):
+Use the [ErrorsTestController.cs](../src/CleanArch.WebApi/Controllers/ErrorsTestController.cs) endpoints in [IdentityJwtDemo.http](../IdentityJwtDemo.http):
 
 1. **404 Not Found**: `GET /api/errors/not-found`
 2. **409 Conflict**: `GET /api/errors/conflict`

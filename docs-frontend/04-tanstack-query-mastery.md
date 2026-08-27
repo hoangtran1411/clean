@@ -17,7 +17,7 @@ In traditional React, developers used `useEffect` + `useState` to fetch data. Th
 
 ### A. The Query Client Configuration
 
-In [App.tsx](file:///C:/Users/Hoang/Desktop/clean/client/src/App.tsx):
+In [App.tsx](../client/src/App.tsx):
 
 ```typescript
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -43,7 +43,7 @@ export function App() {
 
 ### B. Fetching Data with `useQuery`
 
-In [ProductsSection.tsx](file:///C:/Users/Hoang/Desktop/clean/client/src/features/products/ProductsSection.tsx):
+In [ProductsSection.tsx](../client/src/features/products/ProductsSection.tsx):
 
 ```typescript
 const { data, isLoading, isFetching, error, refetch } = useQuery({

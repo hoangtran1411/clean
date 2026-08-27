@@ -13,7 +13,7 @@ Unlike traditional component libraries (Material UI, Ant Design, Bootstrap) whic
 
 ## 2. The Anatomy of a shadcn Component (`Button.tsx`)
 
-In [button.tsx](file:///C:/Users/Hoang/Desktop/clean/client/src/components/ui/button.tsx):
+In [button.tsx](../client/src/components/ui/button.tsx):
 
 ```typescript
 import * as React from 'react'

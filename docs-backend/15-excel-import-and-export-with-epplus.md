@@ -20,7 +20,7 @@ graph LR
 
 ### Step 1: Set License Context (Mandatory in EPPlus)
 
-In [ExcelService.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.Infrastructure/Services/ExcelService.cs):
+In [ExcelService.cs](../src/CleanArch.Infrastructure/Services/ExcelService.cs):
 
 ```csharp
 // Set Non-Commercial License in constructor or Program.cs
@@ -81,7 +81,7 @@ table.TableStyle = TableStyles.Medium9;
 
 ### D. Returning Files from ASP.NET Core Web API
 
-In [ExcelController.cs](file:///C:/Users/Hoang/Desktop/clean/src/CleanArch.WebApi/Controllers/ExcelController.cs):
+In [ExcelController.cs](../src/CleanArch.WebApi/Controllers/ExcelController.cs):
 
 ```csharp
 [HttpGet("export-products")]
@@ -181,7 +181,7 @@ public async Task<(List<ProductItem> ValidProducts, List<string> Errors)> Import
 
 ## 5. How to Test Excel Export, Templates & Import
 
-Open [IdentityJwtDemo.http](file:///C:/Users/Hoang/Desktop/clean/IdentityJwtDemo.http) and execute Section **8. EXCEL IMPORT & EXPORT TESTING**:
+Open [IdentityJwtDemo.http](../IdentityJwtDemo.http) and execute Section **8. EXCEL IMPORT & EXPORT TESTING**:
 
 1. **Export Styled Catalog**: `GET /api/excel/export-products` (Downloads styled `.xlsx` file).
 2. **Download Template**: `GET /api/excel/template` (Downloads template with category dropdowns).

@@ -27,7 +27,7 @@ graph TD
 
 ## 3. Frontend Architecture
 
-Our frontend code lives in [`client/src/`](file:///C:/Users/Hoang/Desktop/clean/client/src/):
+Our frontend code lives in [`client/src/`](../client/src/):
 
 ```text
 client/src/
