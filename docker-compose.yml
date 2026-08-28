@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: src/CleanArch.WebApi/Dockerfile
+    container_name: cleanarch-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/clean_identity.db
+      - Jwt__SecretKey=Your_Production_Super_Secret_Key_At_Least_64_Characters_Long_For_HmacSha512!
+      - Jwt__Issuer=CleanArchAPI
+      - Jwt__Audience=CleanArchClient
+    ports:
+      - "8080:8080"
+    volumes:
+      - db_data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: cleanarch-client
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  db_data:
