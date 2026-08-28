@@ -7,4 +7,8 @@
     <Project Path="src/CleanArch.ServiceDefaults/CleanArch.ServiceDefaults.csproj" />
     <Project Path="src/CleanArch.WebApi/CleanArch.WebApi.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CleanArch.UnitTests/CleanArch.UnitTests.csproj" />
+  </Folder>
 </Solution>
+

@@ -34,7 +34,7 @@ Content-Type: application/json
   "password": "User@123456"
 }
 
-### Set active token for requests below (switch between admin, manager, user)
+### Active tokens for requests below
 @adminToken = {{adminLogin.response.body.accessToken}}
 @managerToken = {{managerLogin.response.body.accessToken}}
 @userToken = {{userLogin.response.body.accessToken}}
@@ -57,15 +57,26 @@ Authorization: Bearer {{managerToken}}
 Accept: application/json
 
 ### 2c. Dynamic Permission: 'Users.Create'
-### SUCCESS for Admin, 403 FORBIDDEN for Manager and Standard User
+### SUCCESS for Admin, 403 FORBIDDEN for Standard User
 POST {{HostAddress}}/api/resources/create-user-record
-Authorization: Bearer {{userToken}}
+Authorization: Bearer {{adminToken}}
 Accept: application/json
 
 ### 2d. Dynamic Permission: 'Users.Delete'
 ### SUCCESS for Admin, 403 FORBIDDEN for Standard User
 DELETE {{HostAddress}}/api/resources/delete-user-record/123
 Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+### 2e. Unauthenticated Access Test (No Bearer Token)
+### Expect: 401 Unauthorized
+GET {{HostAddress}}/api/resources/users-list
+Accept: application/json
+
+### 2f. Forbidden Access Test (Insufficient Permission)
+### Expect: 403 Forbidden (Standard user trying to access admin create-user endpoint)
+POST {{HostAddress}}/api/resources/create-user-record
+Authorization: Bearer {{userToken}}
 Accept: application/json
 
 
@@ -166,24 +177,36 @@ Accept: application/json
 
 
 ### -------------------------------------------------------------
-### 6. IN-MEMORY CACHE & OUTPUT CACHE TESTING
+### 6. PRODUCT MANAGEMENT & CACHING (In-Memory & Output Cache)
 ### -------------------------------------------------------------
 
-### 6a. Test In-Memory Cache (IMemoryCache in Application Layer)
+### 6a. Get In-Memory Cached Products (IMemoryCache in Application Layer)
+### Fetches all products or specific category from memory cache
 GET {{HostAddress}}/api/products/in-memory-cached
 Accept: application/json
 
-### 6b. Test Output Cache ([OutputCache] Middleware Layer)
-### Notice 'generatedAtUtc' timestamp stays identical for 60 seconds (Controller skipped!)
+### 6b. Get In-Memory Cached Products by Category
+GET {{HostAddress}}/api/products/in-memory-cached?category=Laptops
+Accept: application/json
+
+### 6c. Get Output Cached Products ([OutputCache] Middleware Layer)
+### Notice 'generatedAtUtc' timestamp remains identical for 60 seconds (Controller skipped!)
 GET {{HostAddress}}/api/products/output-cached
 Accept: application/json
 
-### 6c. Test Output Cache with VaryByRoute (category: Laptops vs Audio)
+### 6d. Get Output Cached Products by Route Value (VaryByRoute: Laptops)
 GET {{HostAddress}}/api/products/category/Laptops
 Accept: application/json
 
-### 6d. Create Product & Invalidate Cache (EvictByTagAsync)
+### 6e. Get Output Cached Products by Route Value (VaryByRoute: Audio)
+GET {{HostAddress}}/api/products/category/Audio
+Accept: application/json
+
+### 6f. Create Product (Authenticated as Admin / Product Creator)
+### Creates product and INVALIDATES both In-Memory Cache and OutputCache ('products-tag')
+# @name createProduct
 POST {{HostAddress}}/api/products
+Authorization: Bearer {{adminToken}}
 Content-Type: application/json
 
 {
@@ -192,6 +215,55 @@ Content-Type: application/json
   "price": 1299.00,
   "stockQuantity": 30
 }
+
+### 6g. Create Product Validation Error (Negative / Zero Price)
+### Expect: 400 Bad Request with FluentValidation error message for 'Price'
+POST {{HostAddress}}/api/products
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Invalid Price Item",
+  "category": "Accessories",
+  "price": -19.99,
+  "stockQuantity": 10
+}
+
+### 6h. Create Product Validation Error (Empty Name & Negative Stock Quantity)
+### Expect: 400 Bad Request with validation errors for 'Name' and 'StockQuantity'
+POST {{HostAddress}}/api/products
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "",
+  "category": "Accessories",
+  "price": 49.99,
+  "stockQuantity": -5
+}
+
+### 6i. Create Product Validation Error (Missing Category)
+### Expect: 400 Bad Request with validation error for 'Category'
+POST {{HostAddress}}/api/products
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Category Missing Gadget",
+  "category": "",
+  "price": 99.00,
+  "stockQuantity": 15
+}
+
+### 6j. Verification of Output Cache Invalidation
+### Notice 'generatedAtUtc' timestamp has updated immediately after Create Product evicted 'products-tag'
+GET {{HostAddress}}/api/products/output-cached
+Accept: application/json
+
+### 6k. Verification of In-Memory Cache Invalidation
+### Verify newly created product appears immediately in fresh query results
+GET {{HostAddress}}/api/products/in-memory-cached?category=Tablets
+Accept: application/json
 
 
 ### -------------------------------------------------------------
@@ -214,12 +286,48 @@ Content-Type: application/json
 
 
 ### -------------------------------------------------------------
-### 8. EXCEL IMPORT & EXPORT (EPPlus Level: Beginner -> Mid -> Expert)
+### 8. EXCEL IMPORT & EXPORT WORKFLOWS (EPPlus Level: Expert)
 ### -------------------------------------------------------------
 
-### 8a. Expert Export: Download Styled Excel File
+### 8a. Expert Template: Download Pre-Formatted Import Template (.xlsx)
+### Contains instructions and Data Validation Category Dropdown list (Rows 2 to 1000)
+GET {{HostAddress}}/api/excel/template
+
+### 8b. Expert Export: Download Complete Styled Product Catalog (.xlsx)
 ### Downloads .xlsx with Table Styles, Freeze Panes, Currency formatting, Formulas, and Conditional Formatting
 GET {{HostAddress}}/api/excel/export-products
 
-### 8b. Expert Template: Download Import Template with Category Dropdown Validation
-GET {{HostAddress}}/api/excel/template
+### 8c. Expert Export: Download Filtered Product Catalog (.xlsx by Category)
+GET {{HostAddress}}/api/excel/export-products?category=Laptops
+
+### 8d. Expert Import: Upload Excel File (.xlsx)
+### Parses rows, validates fields, batch inserts valid entities, and purges Output Cache tags
+POST {{HostAddress}}/api/excel/import-products
+Authorization: Bearer {{adminToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="Product_Import_Template.xlsx"
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+< ./Product_Import_Template.xlsx
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 8e. Expert Import Validation Error: Unsupported File Extension
+### Expect: 400 Bad Request ("Only .xlsx Excel files are supported.")
+POST {{HostAddress}}/api/excel/import-products
+Authorization: Bearer {{adminToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="invalid_data.csv"
+Content-Type: text/csv
+
+Product Name,Category,Price,Stock Quantity
+Test,Laptops,100,5
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 8f. Verification After Excel Import
+### Query in-memory cache to verify newly imported items are immediately available
+GET {{HostAddress}}/api/products/in-memory-cached
+Accept: application/json
