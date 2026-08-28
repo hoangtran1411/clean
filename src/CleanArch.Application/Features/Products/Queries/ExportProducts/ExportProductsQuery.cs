@@ -25,7 +25,8 @@ public class ExportProductsQueryHandler : IRequestHandler<ExportProductsQuery, b
 
         if (!string.IsNullOrWhiteSpace(request.Category))
         {
-            query = query.Where(p => p.Category.ToLower() == request.Category.ToLower());
+            var targetCategory = request.Category.Trim();
+            query = query.Where(p => p.Category == targetCategory);
         }
 
         var products = await query

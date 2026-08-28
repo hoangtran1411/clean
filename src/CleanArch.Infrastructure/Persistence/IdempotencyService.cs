@@ -28,13 +28,50 @@ public class IdempotencyService : IIdempotencyService
 
         if (record == null)
         {
-            return new IdempotencyCheckResult { Status = IdempotencyStatus.New };
+            // Atomically create an in-flight pending record (StatusCode = 0) with a 2-minute lock timeout
+            var pendingRecord = new IdempotentRecord
+            {
+                IdempotencyKey = key,
+                UserId = userId,
+                RequestPath = requestPath,
+                RequestHash = requestHash,
+                StatusCode = 0,
+                ResponseBody = string.Empty,
+                ContentType = "application/json",
+                ExpiresAtUtc = DateTime.UtcNow.AddMinutes(2)
+            };
+
+            try
+            {
+                await _dbContext.IdempotentRequests.AddAsync(pendingRecord);
+                await _dbContext.SaveChangesAsync();
+                return new IdempotencyCheckResult { Status = IdempotencyStatus.New };
+            }
+            catch (DbUpdateException)
+            {
+                _dbContext.Entry(pendingRecord).State = EntityState.Detached;
+                record = await _dbContext.IdempotentRequests
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(r => r.IdempotencyKey == key && r.UserId == userId);
+
+                if (record == null)
+                {
+                    return new IdempotencyCheckResult { Status = IdempotencyStatus.New };
+                }
+            }
         }
 
         if (record.ExpiresAtUtc <= DateTime.UtcNow)
         {
-            _dbContext.IdempotentRequests.Remove(record);
+            // Record expired: reset to pending for this new request
+            record.RequestPath = requestPath;
+            record.RequestHash = requestHash;
+            record.StatusCode = 0;
+            record.ResponseBody = string.Empty;
+            record.ContentType = "application/json";
+            record.ExpiresAtUtc = DateTime.UtcNow.AddMinutes(2);
             await _dbContext.SaveChangesAsync();
+
             return new IdempotencyCheckResult { Status = IdempotencyStatus.New };
         }
 
@@ -42,6 +79,12 @@ public class IdempotencyService : IIdempotencyService
         {
             _logger.LogWarning("Idempotency key {Key} was previously used with a different request payload!", key);
             return new IdempotencyCheckResult { Status = IdempotencyStatus.PayloadMismatch };
+        }
+
+        if (record.StatusCode == 0)
+        {
+            _logger.LogInformation("Idempotency key {Key} is currently in-flight", key);
+            return new IdempotencyCheckResult { Status = IdempotencyStatus.InProgress };
         }
 
         _logger.LogInformation("Idempotency cache hit for key: {Key}", key);
@@ -93,5 +136,17 @@ public class IdempotencyService : IIdempotencyService
         }
 
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task ReleasePendingAsync(string key, string? userId)
+    {
+        var record = await _dbContext.IdempotentRequests
+            .FirstOrDefaultAsync(r => r.IdempotencyKey == key && r.UserId == userId && r.StatusCode == 0);
+
+        if (record != null)
+        {
+            _dbContext.IdempotentRequests.Remove(record);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

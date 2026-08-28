@@ -41,6 +41,10 @@ public class ImportProductsCommandHandler : IRequestHandler<ImportProductsComman
 
             // Invalidate In-Memory caches so fresh products are visible
             _memoryCache.Remove("products_list_all");
+            foreach (var category in validProducts.Select(p => p.Category.ToLowerInvariant()).Distinct())
+            {
+                _memoryCache.Remove($"products_list_{category}");
+            }
         }
 
         var result = new ImportProductsResult

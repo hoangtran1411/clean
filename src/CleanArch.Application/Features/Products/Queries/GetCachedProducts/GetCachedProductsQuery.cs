@@ -46,7 +46,8 @@ public class GetCachedProductsQueryHandler : IRequestHandler<GetCachedProductsQu
 
             if (!string.IsNullOrWhiteSpace(request.Category))
             {
-                query = query.Where(p => p.Category.ToLower() == request.Category.ToLower());
+                var targetCategory = request.Category.Trim();
+                query = query.Where(p => p.Category == targetCategory);
             }
 
             return await query

@@ -32,8 +32,8 @@ public static class DependencyInjection
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
             options.Password.RequireDigit = true;
-            options.Password.RequiredLength = 6;
-            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 8;
+            options.Password.RequireNonAlphanumeric = true;
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
 
@@ -48,8 +48,12 @@ public static class DependencyInjection
 
         // 3. Configure JWT Authentication
         var jwtSettings = configuration.GetSection("Jwt");
-        var secretKey = jwtSettings["SecretKey"]
-            ?? "A_Super_Secret_Key_For_Identity_Clean_Arch_2026_DotNet10_Must_Be_Long_Enough!";
+        var secretKey = jwtSettings["SecretKey"];
+
+        if (string.IsNullOrWhiteSpace(secretKey))
+        {
+            throw new InvalidOperationException("FATAL: 'Jwt:SecretKey' configuration is missing or empty. A secure secret key must be provided.");
+        }
 
         services.AddAuthentication(options =>
         {

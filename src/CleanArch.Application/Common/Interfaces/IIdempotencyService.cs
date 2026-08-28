@@ -15,4 +15,6 @@ public interface IIdempotencyService
         string responseBody,
         string? contentType,
         TimeSpan ttl);
+
+    Task ReleasePendingAsync(string key, string? userId);
 }

@@ -73,6 +73,19 @@ public class IdempotentActionFilter : IAsyncActionFilter
                 return;
             }
 
+            if (checkResult.Status == IdempotencyStatus.InProgress)
+            {
+                context.Result = new ObjectResult(new
+                {
+                    error = "ConcurrentIdempotentRequest",
+                    message = $"A request with the '{_headerName}' is currently being processed. Please retry after a few moments."
+                })
+                {
+                    StatusCode = StatusCodes.Status409Conflict
+                };
+                return;
+            }
+
             if (checkResult.Status == IdempotencyStatus.PayloadMismatch)
             {
                 context.Result = new ObjectResult(new
@@ -86,26 +99,45 @@ public class IdempotentActionFilter : IAsyncActionFilter
                 return;
             }
 
-            var executedContext = await next();
-
-            if (executedContext.Result is ObjectResult objectResult &&
-                (objectResult.StatusCode == null || objectResult.StatusCode < 400))
+            try
             {
-                var statusCode = objectResult.StatusCode ?? StatusCodes.Status200OK;
-                var responseJson = JsonSerializer.Serialize(objectResult.Value);
+                var executedContext = await next();
 
-                await _idempotencyService.SaveResponseAsync(
-                    idempotencyKey,
-                    userId,
-                    requestPath,
-                    requestHash,
-                    statusCode,
-                    responseJson,
-                    "application/json",
-                    TimeSpan.FromHours(_expiresInHours));
+                if (executedContext.Exception != null && !executedContext.ExceptionHandled)
+                {
+                    await _idempotencyService.ReleasePendingAsync(idempotencyKey, userId);
+                    return;
+                }
 
-                httpContext.Response.Headers["X-Cache"] = "IDEMPOTENT-MISS";
-                httpContext.Response.Headers[_headerName] = idempotencyKey;
+                if (executedContext.Result is ObjectResult objectResult &&
+                    (objectResult.StatusCode == null || objectResult.StatusCode < 400))
+                {
+                    var statusCode = objectResult.StatusCode ?? StatusCodes.Status200OK;
+                    var responseJson = JsonSerializer.Serialize(objectResult.Value);
+
+                    await _idempotencyService.SaveResponseAsync(
+                        idempotencyKey,
+                        userId,
+                        requestPath,
+                        requestHash,
+                        statusCode,
+                        responseJson,
+                        "application/json",
+                        TimeSpan.FromHours(_expiresInHours));
+
+                    httpContext.Response.Headers["X-Cache"] = "IDEMPOTENT-MISS";
+                    httpContext.Response.Headers[_headerName] = idempotencyKey;
+                }
+                else
+                {
+                    // If result was not 2xx/3xx (e.g. 400 bad request), release the pending lock
+                    await _idempotencyService.ReleasePendingAsync(idempotencyKey, userId);
+                }
+            }
+            catch
+            {
+                await _idempotencyService.ReleasePendingAsync(idempotencyKey, userId);
+                throw;
             }
         }
     }

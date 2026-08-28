@@ -3,6 +3,7 @@ namespace CleanArch.Application.Common.Models;
 public enum IdempotencyStatus
 {
     New,
+    InProgress,
     CachedHit,
     PayloadMismatch
 }

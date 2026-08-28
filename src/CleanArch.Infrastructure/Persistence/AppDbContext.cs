@@ -23,8 +23,9 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>, IAppDbContext
         builder.Entity<ProductItem>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.Category);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Category).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Category).IsRequired().HasMaxLength(100).UseCollation("NOCASE");
             entity.Property(e => e.Price).HasPrecision(18, 2);
         });
 
