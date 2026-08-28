@@ -217,6 +217,20 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 9. [**09 - Network Troubleshooting Tools**](./docs-network/09-network-troubleshooting-tools.md)
 10. [**10 - Top 30 Networking Interview Questions (Easy, Medium, Advanced)**](./docs-network/10-top-30-networking-interview-questions.md)
 
+### 💻 Computer Science (CS) Fundamentals Modules (`docs-cs-fundamentals/`)
+
+1. [**01 - Big-O Notation & Complexity Analysis**](./docs-cs-fundamentals/01-big-o-notation-and-complexity-analysis.md)
+2. [**02 - Arrays, Strings & Hash Tables**](./docs-cs-fundamentals/02-arrays-strings-and-hash-tables.md)
+3. [**03 - Linked Lists, Stacks & Queues**](./docs-cs-fundamentals/03-linked-lists-stacks-and-queues.md)
+4. [**04 - Trees & Binary Search Trees (BST)**](./docs-cs-fundamentals/04-trees-and-binary-search-trees.md)
+5. [**05 - Heaps & Priority Queues**](./docs-cs-fundamentals/05-heaps-and-priority-queues.md)
+6. [**06 - Graphs & Graph Algorithms**](./docs-cs-fundamentals/06-graphs-and-graph-algorithms.md)
+7. [**07 - Sorting & Searching Algorithms**](./docs-cs-fundamentals/07-sorting-and-searching-algorithms.md)
+8. [**08 - Recursion & Dynamic Programming (DP)**](./docs-cs-fundamentals/08-recursion-and-dynamic-programming.md)
+9. [**09 - Object-Oriented Programming (OOP) & SOLID Principles**](./docs-cs-fundamentals/09-oop-and-solid-principles.md)
+10. [**10 - Operating Systems (OS) Fundamentals**](./docs-cs-fundamentals/10-operating-systems-fundamentals.md)
+11. [**11 - Top 30 CS Fundamentals Interview Questions (Easy, Medium, Advanced)**](./docs-cs-fundamentals/11-top-30-cs-fundamentals-interview-questions.md)
+
 ---
 
 ## 🤝 Contributing & Community
