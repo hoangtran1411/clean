@@ -118,7 +118,6 @@ docker compose up --build
 
 Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) in synchronized containers.
 
-
 ---
 
 ## 📚 Complete Learning Curriculum
