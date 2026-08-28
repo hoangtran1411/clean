@@ -20,9 +20,9 @@ A full-stack, cloud-native enterprise reference application built with **.NET 10
 - 🚀 **.NET Aspire Cloud-Native Orchestration**: `CleanArch.AppHost` & `CleanArch.ServiceDefaults` with OpenTelemetry, Health Checks (`/health`, `/alive`), and Aspire Dashboard.
 - 🏛️ **Clean Architecture (4 Layers)**: Domain (pure C#), Application (CQRS with MediatR & FluentValidation), Infrastructure (EF Core 10 SQLite, EPPlus 8, Identity), WebApi (Controllers, ProblemDetails, Scalar OpenAPI).
 - 🔐 **Identity & Security**: PBKDF2 HMAC-SHA512 password hashing, JWT Bearer tokens, dynamic policies with `IAuthorizationPolicyProvider`, and `[HasPermission("...")]`.
-- ⚡ **API Idempotency Pattern**: Stripe-standard `Idempotency-Key` header validation and replay caching.
-- 💾 **Caching**: In-Memory Cache (`IMemoryCache`) and HTTP Output Cache (`[OutputCache]`) with tag-based invalidation (`EvictByTagAsync`).
-- 📝 **Observability**: Serilog daily rolling files, `CorrelationIdMiddleware`, and MediatR `LoggingBehavior` / `PerformanceBehavior`.
+- ⚡ **API Idempotency Pattern**: Stripe-standard `Idempotency-Key` header validation, atomic in-flight locking, and replay caching.
+- 💾 **Caching & Distributed Locks**: In-Memory Cache (`IMemoryCache`), HTTP Output Cache (`[OutputCache]`), and Distributed Locking with Redis.
+- 🧪 **Automated Testing & CI/CD**: 42 xUnit tests (Moq, FluentAssertions, EF Core InMemory) and automated GitHub Actions CI/CD workflows.
 
 ---
 
@@ -30,6 +30,11 @@ A full-stack, cloud-native enterprise reference application built with **.NET 10
 
 ```text
 clean/
+├── .github/                              # 🔄 Automated CI/CD Pipelines
+│   └── workflows/
+│       ├── ci.yml                        # Build, Markdownlint & xUnit Test CI
+│       └── cd.yml                        # Multi-stage Docker Build & GHCR Publish
+│
 ├── client/                               # 🌟 Frontend Single Page Application (React 19)
 │   ├── src/
 │   │   ├── api/                          # Axios instance + JWT Refresh Token Interceptors
@@ -38,6 +43,8 @@ clean/
 │   │   ├── lib/utils.ts                  # cn() class merging utility
 │   │   ├── App.tsx                       # Root component with TanStack QueryClientProvider
 │   │   └── main.tsx
+│   ├── Dockerfile                        # Multi-stage client container build
+│   ├── nginx.conf                        # SPA routing & API reverse proxy configuration
 │   ├── package.json
 │   └── vite.config.ts
 │
@@ -47,7 +54,10 @@ clean/
 │   ├── CleanArch.Domain/                 # Entities, Domain Exceptions, Constants
 │   ├── CleanArch.Application/            # CQRS Commands/Queries, MediatR, FluentValidation
 │   ├── CleanArch.Infrastructure/         # EF Core, Identity, TokenService, ExcelService (EPPlus)
-│   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler
+│   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler, Dockerfile
+│
+├── tests/                                # 🧪 Automated Test Suites
+│   └── CleanArch.UnitTests/              # 42 xUnit, Moq, FluentAssertions & EF Core Tests
 │
 ├── docs-backend/                         # 📚 20 In-Depth Backend Learning Modules
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
@@ -56,6 +66,10 @@ clean/
 ├── docs-runtime/                         # ⚙️ 10 In-Depth .NET Runtime & Low-Level Internals Modules
 ├── docs-uiux/                            # 🎨 10 In-Depth UI/UX & Design System Modules
 ├── docs-system-design/                   # 🏛️ 10 In-Depth Distributed System Design Modules
+├── docs-deploy/                          # 🚀 7 In-Depth DevOps, Docker & CI/CD Modules
+├── docs-network/                         # 🌐 10 In-Depth Network Protocols Modules
+├── docs-cs-fundamentals/                 # 💻 11 In-Depth CS Fundamentals Modules
+├── docker-compose.yml                    # Unified local multi-container orchestration
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
 ├── .editorconfig                         # Cross-IDE code style & Roslyn analyzer rules
@@ -87,6 +101,23 @@ npm run dev
 ```
 
 Frontend runs at `http://localhost:3000` (automatically proxies API requests to `http://localhost:5000`).
+
+### 3. Run Automated Unit & Integration Tests
+
+```powershell
+dotnet test IdentityCleanArch.slnx
+```
+
+Runs all 42 xUnit tests across Domain, Application, CQRS commands, and Infrastructure services.
+
+### 4. Run Multi-Container Docker Stack
+
+```powershell
+docker compose up --build
+```
+
+Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) in synchronized containers.
+
 
 ---
 
