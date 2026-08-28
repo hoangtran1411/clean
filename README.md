@@ -49,7 +49,7 @@ clean/
 │   ├── CleanArch.Infrastructure/         # EF Core, Identity, TokenService, ExcelService (EPPlus)
 │   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler
 │
-├── docs-backend/                         # 📚 19 In-Depth Backend Learning Modules
+├── docs-backend/                         # 📚 20 In-Depth Backend Learning Modules
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
 ├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
 ├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
@@ -124,6 +124,7 @@ Frontend runs at `http://localhost:3000` (automatically proxies API requests to 
 17. [**17 - .NET CLI Mastery & Essential Commands Cheat Sheet**](./docs-backend/17-dotnet-cli-mastery-and-cheat-sheet.md)
 18. [**18 - Understanding and Configuring `.editorconfig`**](./docs-backend/18-understanding-and-configuring-editorconfig.md)
 19. [**19 - Centralized Solution Management with `Directory.Build.props`**](./docs-backend/19-centralized-solution-management-with-directory-build-props.md)
+20. [**20 - Distributed Locking with Redis & .NET Aspire**](./docs-backend/20-distributed-locking-with-redis-and-aspire.md)
 
 ### 🗄️ Database Modules (`docs-database/`)
 

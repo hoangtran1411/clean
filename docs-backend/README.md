@@ -1,6 +1,6 @@
 # .NET 10 Identity, JWT, Clean Architecture, Aspire & Enterprise Stack - Backend Path
 
-Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, **.editorconfig Governance**, **Directory.Build.props Centralization**, and **Interview Preparation** in **.NET 10**.
+Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authentication, dynamic authorization, API idempotency, **Clean Architecture with CQRS**, **Global Exception Handling**, **.NET Aspire Orchestration**, **Distributed Locking with Redis**, **Caching**, **Structured Logging**, **Excel Import/Export with EPPlus**, **.http File Mastery**, **.NET CLI Mastery**, **.editorconfig Governance**, **Directory.Build.props Centralization**, and **Interview Preparation** in **.NET 10**.
 
 ---
 
@@ -110,3 +110,11 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - How MSBuild automatically imports `Directory.Build.props` across all `.csproj` files
     - Centralizing `TargetFramework`, `LangVersion`, `Nullable`, `ImplicitUsings`, and assembly metadata
     - Comparison: `Directory.Build.props` vs `Directory.Build.targets` vs `Directory.Packages.props`
+
+20. [**20 - Distributed Locking with Redis & .NET Aspire**](../docs-backend/20-distributed-locking-with-redis-and-aspire.md)
+    - In-process locks (`lock`, `SemaphoreSlim`) vs Centralized Distributed Lock Managers (DLM)
+    - Single-instance Redis locking (`SET NX PX`) & safe atomic Lua script release
+    - The Redlock algorithm, GC pause vulnerabilities, and monotonic fencing tokens
+    - .NET Aspire Redis container orchestration & Aspire Dashboard telemetry
+    - Clean Architecture MediatR pipeline behavior (`DistributedLockBehavior`) with `[DistributedLock]` attribute
+    - Top 5 Senior Engineering Distributed Systems Interview Questions & Answers

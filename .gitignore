@@ -394,7 +394,8 @@ FodyWeavers.xsd
 
 # Local History for Visual Studio Code
 .history/
-
+.agents/
+AGENTS.md
 # Windows Installer files from build outputs
 *.cab
 *.msi
