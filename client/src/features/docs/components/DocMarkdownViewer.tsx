@@ -15,6 +15,7 @@ import {
   Hash,
 } from 'lucide-react'
 import { Highlight, themes } from 'prism-react-renderer'
+import { Prism } from '../utils/prismLanguages'
 import { useTheme } from '@/components/theme/ThemeProvider'
 import { MermaidViewer } from './MermaidViewer'
 
@@ -225,28 +226,40 @@ function slugify(text: string): string {
 
 // Language normalization map
 function normalizeLanguage(lang: string): string {
-  const l = lang.toLowerCase()
-  if (['cs', 'csharp', 'dotnet'].includes(l)) return 'csharp'
-  if (['ts', 'typescript'].includes(l)) return 'tsx'
-  if (['js', 'javascript'].includes(l)) return 'jsx'
-  if (['sh', 'bash', 'shell', 'powershell', 'ps1', 'zsh'].includes(l)) return 'bash'
+  const l = (lang || '').toLowerCase()
+  if (['cs', 'csharp', 'dotnet', 'c#'].includes(l)) return 'csharp'
+  if (['ts', 'typescript'].includes(l)) return 'typescript'
+  if (['tsx'].includes(l)) return 'tsx'
+  if (['js', 'javascript'].includes(l)) return 'javascript'
+  if (['jsx'].includes(l)) return 'jsx'
+  if (['sh', 'bash', 'shell', 'zsh'].includes(l)) return 'bash'
+  if (['powershell', 'ps1', 'pwsh'].includes(l)) return 'powershell'
   if (['yml', 'yaml'].includes(l)) return 'yaml'
   if (['dockerfile', 'docker'].includes(l)) return 'docker'
-  if (['sql', 'mysql', 'pgsql', 'tsql'].includes(l)) return 'sql'
+  if (['sql', 'mysql', 'pgsql', 'tsql', 'plsql'].includes(l)) return 'sql'
   if (['html', 'xml', 'svg'].includes(l)) return 'markup'
   if (['json'].includes(l)) return 'json'
-  if (['css'].includes(l)) return 'css'
+  if (['css', 'scss', 'sass'].includes(l)) return 'css'
   if (['markdown', 'md'].includes(l)) return 'markdown'
-  if (['http'].includes(l)) return 'http'
+  if (['http', 'rest'].includes(l)) return 'http'
+  if (['bicep'].includes(l)) return 'bicep'
+  if (['hcl', 'terraform', 'tf'].includes(l)) return 'hcl'
+  if (['kql', 'kusto'].includes(l)) return 'kusto'
+  if (['nginx', 'conf'].includes(l)) return 'nginx'
+  if (['graphql', 'gql'].includes(l)) return 'graphql'
+  if (['diff', 'patch'].includes(l)) return 'diff'
+  if (['python', 'py'].includes(l)) return 'python'
+  if (['go', 'golang'].includes(l)) return 'go'
+  if (['rust', 'rs'].includes(l)) return 'rust'
   return l || 'text'
 }
 
 function getLanguageIcon(lang: string) {
-  const l = lang.toLowerCase()
-  if (['cs', 'csharp', 'dotnet'].includes(l)) return <Hash className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-  if (['ts', 'tsx', 'js', 'jsx'].includes(l)) return <FileCode className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-  if (['sql', 'mysql', 'pgsql'].includes(l)) return <Database className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-  if (['sh', 'bash', 'powershell', 'shell'].includes(l)) return <Terminal className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+  const l = (lang || '').toLowerCase()
+  if (['cs', 'csharp', 'dotnet', 'c#'].includes(l)) return <Hash className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+  if (['ts', 'tsx', 'js', 'jsx', 'typescript', 'javascript'].includes(l)) return <FileCode className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+  if (['sql', 'mysql', 'pgsql', 'tsql'].includes(l)) return <Database className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+  if (['sh', 'bash', 'powershell', 'pwsh', 'shell', 'terminal'].includes(l)) return <Terminal className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
   return <Layers className="h-4 w-4 text-slate-500 dark:text-slate-400" />
 }
 
@@ -267,7 +280,7 @@ const HighlightedCodeBlock: React.FC<{ language: string; code: string; sizeClass
   }
 
   const prismLang = normalizeLanguage(language)
-  const theme = isDark ? themes.vsDark : themes.github
+  const theme = isDark ? themes.vsDark : themes.vsLight
 
   return (
     <div className="my-6 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-50/50 dark:bg-slate-950 transition-colors">
@@ -303,7 +316,7 @@ const HighlightedCodeBlock: React.FC<{ language: string; code: string; sizeClass
       </div>
 
       {/* Syntax Highlighted Code Content */}
-      <Highlight theme={theme} code={code} language={prismLang}>
+      <Highlight prism={Prism} theme={theme} code={code} language={prismLang}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
             className={`overflow-x-auto font-mono leading-relaxed m-0 ${className} ${sizeClass}`}
@@ -322,7 +335,7 @@ const HighlightedCodeBlock: React.FC<{ language: string; code: string; sizeClass
                       {i + 1}
                     </span>
                     {/* Code Line Tokens */}
-                    <span className="table-cell pl-4 text-slate-900 dark:text-slate-100">
+                    <span className="table-cell pl-4 whitespace-pre">
                       {line.map((token, key) => {
                         const { key: _tokenKey, ...tokenProps } = getTokenProps({ token })
                         return <span key={key} {...tokenProps} />
