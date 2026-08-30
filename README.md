@@ -63,16 +63,16 @@ clean/
 ├── tests/                                # 🧪 Automated Test Suites
 │   └── CleanArch.UnitTests/              # 55 xUnit, Moq, FluentAssertions & EF Core Tests
 │
-├── docs-backend/                         # 📚 22 In-Depth Backend Learning Modules
-├── docs-frontend/                        # 📚 14 Step-by-Step Frontend Learning Modules
-├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
-├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
-├── docs-runtime/                         # ⚙️ 10 In-Depth .NET Runtime & Low-Level Internals Modules
-├── docs-uiux/                            # 🎨 10 In-Depth UI/UX & Design System Modules
-├── docs-system-design/                   # 🏛️ 10 In-Depth Distributed System Design Modules
-├── docs-deploy/                          # 🚀 7 In-Depth DevOps, Docker & CI/CD Modules
-├── docs-network/                         # 🌐 10 In-Depth Network Protocols Modules
-├── docs-cs-fundamentals/                 # 💻 11 In-Depth CS Fundamentals Modules
+├── docs-backend/                         # 📚 22 Backend Modules & Helper Map (docs-backend/README.md)
+├── docs-frontend/                        # 📚 14 Frontend Modules & Helper Map (docs-frontend/README.md)
+├── docs-database/                        # 📚 14 Database & SQL Modules & Helper Map (docs-database/README.md)
+├── docs-security/                        # 🛡️ 10 Security & Zero Trust Modules & Helper Map (docs-security/README.md)
+├── docs-runtime/                         # ⚙️ 10 CoreCLR & Runtime Internals Modules & Helper Map (docs-runtime/README.md)
+├── docs-uiux/                            # 🎨 10 UI/UX & Design System Modules & Helper Map (docs-uiux/README.md)
+├── docs-system-design/                   # 🏛️ 10 Distributed Systems Modules & Helper Map (docs-system-design/README.md)
+├── docs-deploy/                          # 🚀 7 DevOps & Deployment Modules & Helper Map (docs-deploy/README.md)
+├── docs-network/                         # 🌐 10 Networking & Protocols Modules & Helper Map (docs-network/README.md)
+├── docs-cs-fundamentals/                 # 💻 11 CS Fundamentals Modules & Helper Map (docs-cs-fundamentals/README.md)
 ├── docker-compose.yml                    # Unified local multi-container orchestration
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
@@ -126,7 +126,27 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 
 ## 📚 Complete Learning Curriculum
 
-### 🖥️ Frontend Modules (`docs-frontend/`)
+### 🗺️ Master Learning Roadmaps & Helper Maps Directory
+
+Each documentation domain features a dedicated **Curriculum Helper Map (`README.md`)** that provides an end-to-end syllabus, architectural diagrams, topic breakdowns, and interview preparation checklists:
+
+| Domain Track | Helper Map | Modules | Key Topics & Competencies |
+| :--- | :--- | :---: | :--- |
+| **🖥️ Frontend** | [**`docs-frontend/README.md`**](./docs-frontend/README.md) | 14 | React 19, Tailwind v4, shadcn/ui, TanStack Query v5, Axios Refresh Token Rotation, RBAC |
+| **🏛️ Backend** | [**`docs-backend/README.md`**](./docs-backend/README.md) | 22 | Clean Architecture, CQRS, MediatR, Identity, Aspire, Redis Locks, ProblemDetails, EPPlus |
+| **🗄️ Database** | [**`docs-database/README.md`**](./docs-database/README.md) | 14 | Relational Modeling, EF Core 10, Indexing, Execution Plans, Deadlocks, Query Store, Redis |
+| **🛡️ Security** | [**`docs-security/README.md`**](./docs-security/README.md) | 10 | Zero Trust, OWASP Top 10, JWT Hardening, Dynamic PBAC, Rate Limiting, Threat Modeling |
+| **⚙️ .NET Runtime** | [**`docs-runtime/README.md`**](./docs-runtime/README.md) | 10 | CoreCLR, GC Internals, RyuJIT, Dynamic PGO, `Span<T>`, Memory Layout, ThreadPool |
+| **🎨 UI/UX Design** | [**`docs-uiux/README.md`**](./docs-uiux/README.md) | 10 | Design Tokens (OKLCH), 8pt Spatial Grids, Radix UI, WCAG 2.2 a11y, Micro-Interactions |
+| **🏛️ System Design** | [**`docs-system-design/README.md`**](./docs-system-design/README.md) | 10 | CAP/PACELC, Distributed Caching, Kafka, Sharding, Microservices Resilience, Sagas |
+| **🚀 DevOps & Deploy** | [**`docs-deploy/README.md`**](./docs-deploy/README.md) | 7 | Docker Multi-Stage, Nginx Reverse Proxy, Let's Encrypt SSL, GitHub Actions CI/CD, Aspire |
+| **🌐 Networking** | [**`docs-network/README.md`**](./docs-network/README.md) | 10 | OSI & TCP/IP, DNS, TCP vs UDP, TLS 1.3 Handshake, Subnets/CIDR, CDNs, Network Tools |
+| **💻 CS Fundamentals** | [**`docs-cs-fundamentals/README.md`**](./docs-cs-fundamentals/README.md) | 11 | Big-O Complexity, Data Structures, Graph Algorithms, Dynamic Programming, OS & Memory |
+| **Total Curriculum** | **10 Helper Maps** | **108 Modules** | **Full-Stack Enterprise Cloud-Native Engineering** |
+
+---
+
+### 🖥️ Frontend Modules ([Helper Map](./docs-frontend/README.md))
 
 1. [**01 - React 19 & Modern Frontend Tech Stack Overview**](./docs-frontend/01-react19-and-techstack-overview.md)
 2. [**02 - Project Setup with Vite, Tailwind CSS v4 & shadcn/ui**](./docs-frontend/02-project-setup-vite-tailwind-shadcn.md)
@@ -143,7 +163,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 13. [**13 - Enterprise Dark/Light Theming, HiDPI 2K/4K Scaling & Flagship Mobile Optimization**](./docs-frontend/13-responsive-enterprise-theming-dark-mode-and-hidpi-device-optimization.md)
 14. [**14 - Enterprise ERP Dashboard, Dynamic Drag-and-Drop Grid & Real-Time Telemetry**](./docs-frontend/14-enterprise-erp-dashboard-dynamic-dnd-grid-and-telemetry.md)
 
-### 🏛️ Backend Modules (`docs-backend/`)
+### 🏛️ Backend Modules ([Helper Map](./docs-backend/README.md))
 
 1. [**01 - Introduction & Tech Stack**](./docs-backend/01-introduction-and-techstack.md)
 2. [**02 - Database & Identity Models**](./docs-backend/02-database-and-identity-models.md)
@@ -168,7 +188,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 21. [**21 - Extensible N-Level Workflow Engine & Dynamic Authorization**](./docs-backend/21-extensible-workflow-engine-and-authorization.md)
 22. [**22 - Executive Dashboard Metrics & Real-Time Telemetry Aggregation**](./docs-backend/22-executive-dashboard-metrics-and-realtime-telemetry-aggregation.md)
 
-### 🗄️ Database Modules (`docs-database/`)
+### 🗄️ Database Modules ([Helper Map](./docs-database/README.md))
 
 1. [**01 - Database Fundamentals & Relational Data Modeling**](./docs-database/01-database-fundamentals-and-relational-modeling.md)
 2. [**02 - SQL Mastery & Advanced Querying**](./docs-database/02-sql-mastery-and-advanced-querying.md)
@@ -185,7 +205,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 13. [**13 - Database Lock Exhaustion, Memory Pressure & Lock Escalation (Deep Dive)**](./docs-database/13-database-lock-exhaustion-and-escalation-deep-dive.md)
 14. [**14 - Database Query Store & Performance Diagnostics (Deep Dive)**](./docs-database/14-database-query-store-and-performance-diagnostics.md)
 
-### 🛡️ Security & Zero Trust Modules (`docs-security/`)
+### 🛡️ Security & Zero Trust Modules ([Helper Map](./docs-security/README.md))
 
 1. [**01 - Security Fundamentals, Zero Trust & Threat Modeling**](./docs-security/01-security-fundamentals-and-threat-modeling.md)
 2. [**02 - OWASP Top 10 & API Security Best Practices**](./docs-security/02-owasp-top-10-and-api-security-best-practices.md)
@@ -198,7 +218,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 9. [**09 - Security Logging, Audit Trails & Incident Response**](./docs-security/09-security-logging-auditing-and-incident-response.md)
 10. [**10 - Top 30 Application & Web Security Interview Questions (Easy, Medium, Advanced)**](./docs-security/10-top-30-application-and-web-security-interview-questions.md)
 
-### ⚙️ .NET Runtime (CoreCLR) & Low-Level Modules (`docs-runtime/`)
+### ⚙️ .NET Runtime (CoreCLR) & Low-Level Modules ([Helper Map](./docs-runtime/README.md))
 
 1. [**01 - CLR Architecture, Execution Engine & App Bootstrapping**](./docs-runtime/01-clr-architecture-and-execution-engine.md)
 2. [**02 - Memory Management: Stack vs. Heap & Object Layout**](./docs-runtime/02-memory-management-stack-heap-and-object-layout.md)
@@ -211,7 +231,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 9. [**09 - Runtime Diagnostics, Profiling & Memory Dump Analysis**](./docs-runtime/09-runtime-diagnostics-profiling-and-memory-dump-analysis.md)
 10. [**10 - Top 30 .NET Runtime & Low-Level Internals Interview Questions (Easy, Medium, Advanced)**](./docs-runtime/10-top-30-dotnet-runtime-interview-questions.md)
 
-### 🎨 UI/UX Design Systems & Frontend Design Modules (`docs-uiux/`)
+### 🎨 UI/UX Design Systems & Frontend Design Modules ([Helper Map](./docs-uiux/README.md))
 
 1. [**01 - UI/UX Design Fundamentals & Core Usability Heuristics**](./docs-uiux/01-uiux-design-fundamentals-and-heuristics.md)
 2. [**02 - Design Systems & Token Architecture (Tailwind CSS & CSS Variables)**](./docs-uiux/02-design-systems-and-token-architecture.md)
@@ -224,7 +244,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 9. [**09 - Usability Testing, User Research & Design Metrics**](./docs-uiux/09-usability-testing-user-research-and-metrics.md)
 10. [**10 - Top 30 UI/UX & Frontend Design System Interview Questions (Easy, Medium, Advanced)**](./docs-uiux/10-top-30-uiux-and-design-system-interview-questions.md)
 
-### 🏛️ Large-Scale System Design & Distributed Systems Modules (`docs-system-design/`)
+### 🏛️ Large-Scale System Design & Distributed Systems Modules ([Helper Map](./docs-system-design/README.md))
 
 1. [**01 - System Design Fundamentals, Scalability & Availability**](./docs-system-design/01-system-design-fundamentals-scalability-and-availability.md)
 2. [**02 - Distributed System Theorems: CAP, PACELC & Consistency Models**](./docs-system-design/02-cap-pacelc-theorems-and-consistency-models.md)
@@ -237,7 +257,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 9. [**09 - Real-World System Design Case Studies**](./docs-system-design/09-real-world-system-design-case-studies.md)
 10. [**10 - Top 30 System Design Interview Questions & Step-by-Step Framework (Easy, Medium, Advanced)**](./docs-system-design/10-top-30-system-design-interview-questions.md)
 
-### 🚀 Deployment, Docker, Nginx & DevOps Modules (`docs-deploy/`)
+### 🚀 Deployment, Docker, Nginx & DevOps Modules ([Helper Map](./docs-deploy/README.md))
 
 1. [**01 - Docker & Containerization for .NET 10 & React 19**](./docs-deploy/01-docker-and-containerization.md)
 2. [**02 - Reverse Proxy with Nginx & SSL/TLS Configuration**](./docs-deploy/02-reverse-proxy-nginx-and-ssl.md)
@@ -247,7 +267,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 6. [**06 - Production Database Migrations & Pre-Flight Readiness**](./docs-deploy/06-database-migrations-and-production-readiness.md)
 7. [**07 - Top 30 DevOps, Docker & Cloud Deployment Interview Questions (Easy, Medium, Advanced)**](./docs-deploy/07-top-30-devops-and-deployment-interview-questions.md)
 
-### 🌐 Network Architecture & Protocols Modules (`docs-network/`)
+### 🌐 Network Architecture & Protocols Modules ([Helper Map](./docs-network/README.md))
 
 1. [**01 - The OSI Model and TCP/IP Suite**](./docs-network/01-osi-model-and-tcp-ip-suite.md)
 2. [**02 - DNS Resolution and Record Types**](./docs-network/02-dns-resolution-and-record-types.md)
@@ -260,7 +280,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 9. [**09 - Network Troubleshooting Tools**](./docs-network/09-network-troubleshooting-tools.md)
 10. [**10 - Top 30 Networking Interview Questions (Easy, Medium, Advanced)**](./docs-network/10-top-30-networking-interview-questions.md)
 
-### 💻 Computer Science (CS) Fundamentals Modules (`docs-cs-fundamentals/`)
+### 💻 Computer Science (CS) Fundamentals Modules ([Helper Map](./docs-cs-fundamentals/README.md))
 
 1. [**01 - Big-O Notation & Complexity Analysis**](./docs-cs-fundamentals/01-big-o-notation-and-complexity-analysis.md)
 2. [**02 - Arrays, Strings & Hash Tables**](./docs-cs-fundamentals/02-arrays-strings-and-hash-tables.md)
