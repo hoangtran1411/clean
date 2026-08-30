@@ -118,3 +118,12 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - .NET Aspire Redis container orchestration & Aspire Dashboard telemetry
     - Clean Architecture MediatR pipeline behavior (`DistributedLockBehavior`) with `[DistributedLock]` attribute
     - Top 5 Senior Engineering Distributed Systems Interview Questions & Answers
+
+21. [**21 - Extensible N-Level Workflow Engine & Dynamic Authorization**](../docs-backend/21-extensible-workflow-engine-and-authorization.md)
+    - The anti-pattern of hardcoded approval levels vs data-driven template engine
+    - State machine lifecycle (`Draft` ➔ `Submitted` ➔ `InApproval [1..N]` ➔ `Approved` ➔ `Completed` / `Rejected`)
+    - Domain aggregate modeling (`WorkflowTemplate`, `WorkflowApprovalLevel`, `WorkflowRequest`, `WorkflowApprovalAction`)
+    - Dynamic runtime permission claims evaluation with `ICurrentUserService`
+    - Real-world case study: Version 1 (3 levels) vs Version 2 (4 levels) with zero code changes
+    - React 19 visual $N$-step progress bar, timeline audit log, and interactive template builder
+    - Top 5 Senior Engineering Workflow & State Machine Interview Questions & Answers

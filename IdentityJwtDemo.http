@@ -331,3 +331,92 @@ Test,Laptops,100,5
 ### Query in-memory cache to verify newly imported items are immediately available
 GET {{HostAddress}}/api/products/in-memory-cached
 Accept: application/json
+
+
+### -------------------------------------------------------------
+### 9. EXTENSIBLE N-LEVEL WORKFLOW ENGINE & AUTHORIZATION
+### -------------------------------------------------------------
+
+### 9a. List Workflow Templates (Seeded v1: 3-levels, v2: 4-levels)
+GET {{HostAddress}}/api/workflow-templates
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+### 9b. Create a Dynamic 5-Level Template (Data-Driven, Zero Code Change)
+POST {{HostAddress}}/api/workflow-templates
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "name": "Enterprise Budget Approval (5 Levels)",
+  "description": "TeamLeader -> DeptHead -> DeputyDirector -> TechDirector -> CFO",
+  "approvalLevels": [
+    { "levelOrder": 1, "levelName": "Team Leader", "requiredPermission": "Workflows.Approve.TeamLeader" },
+    { "levelOrder": 2, "levelName": "Department Head", "requiredPermission": "Workflows.Approve.DepartmentHead" },
+    { "levelOrder": 3, "levelName": "Deputy Director", "requiredPermission": "Workflows.Approve.DeputyDirector" },
+    { "levelOrder": 4, "levelName": "Technical Director", "requiredPermission": "Workflows.Approve.TechnicalDirector" },
+    { "levelOrder": 5, "levelName": "CFO", "requiredPermission": "Workflows.Approve.CFO" }
+  ]
+}
+
+### 9c. Create a Workflow Request (Draft) using Template 1 (3-Level Standard)
+# @name createWorkflowReq
+POST {{HostAddress}}/api/workflows
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "workflowTemplateId": 1,
+  "title": "Upgrade Production Database Server",
+  "description": "Requesting budget approval to migrate DB to high-memory instance."
+}
+
+@workflowId = {{createWorkflowReq.response.body.data.id}}
+
+### 9d. Submit the Workflow Request (Draft -> InApproval Level 1)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/submit
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+### 9e. Get Workflow Request by ID (Inspect current state, level, and timeline)
+GET {{HostAddress}}/api/workflows/{{workflowId}}
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+### 9f. Approve Level 1 (Team Leader)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "comment": "Approved by Team Leader - architectural specs look good."
+}
+
+### 9g. Approve Level 2 (Department Head)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "comment": "Approved by Department Head - budget is available."
+}
+
+### 9h. Approve Level 3 (Technical Director -> Transition to Approved status)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "comment": "Final technical approval granted by Technical Director."
+}
+
+### 9i. Complete the Workflow (Approved -> Completed)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/complete
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+
+### 9j. List All Workflows with Optional Filter
+GET {{HostAddress}}/api/workflows?status=Completed
+Authorization: Bearer {{adminToken}}
+Accept: application/json
+

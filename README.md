@@ -57,9 +57,9 @@ clean/
 │   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler, Dockerfile
 │
 ├── tests/                                # 🧪 Automated Test Suites
-│   └── CleanArch.UnitTests/              # 42 xUnit, Moq, FluentAssertions & EF Core Tests
+│   └── CleanArch.UnitTests/              # 48 xUnit, Moq, FluentAssertions & EF Core Tests
 │
-├── docs-backend/                         # 📚 20 In-Depth Backend Learning Modules
+├── docs-backend/                         # 📚 21 In-Depth Backend Learning Modules
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
 ├── docs-database/                        # 📚 14 In-Depth Database & SQL Learning Modules
 ├── docs-security/                        # 🛡️ 10 In-Depth Security & Zero Trust Learning Modules
@@ -155,6 +155,7 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 18. [**18 - Understanding and Configuring `.editorconfig`**](./docs-backend/18-understanding-and-configuring-editorconfig.md)
 19. [**19 - Centralized Solution Management with `Directory.Build.props`**](./docs-backend/19-centralized-solution-management-with-directory-build-props.md)
 20. [**20 - Distributed Locking with Redis & .NET Aspire**](./docs-backend/20-distributed-locking-with-redis-and-aspire.md)
+21. [**21 - Extensible N-Level Workflow Engine & Dynamic Authorization**](./docs-backend/21-extensible-workflow-engine-and-authorization.md)
 
 ### 🗄️ Database Modules (`docs-database/`)
 

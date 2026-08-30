@@ -6,4 +6,5 @@ public interface ICurrentUserService
     string? Email { get; }
     string? UserName { get; }
     bool IsAuthenticated { get; }
+    bool HasPermission(string permission);
 }
