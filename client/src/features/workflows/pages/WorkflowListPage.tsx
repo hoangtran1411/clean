@@ -20,7 +20,8 @@ export function WorkflowListPage() {
     { label: 'In Approval', value: WorkflowStatus.InApproval },
     { label: 'Approved', value: WorkflowStatus.Approved },
     { label: 'Rejected', value: WorkflowStatus.Rejected },
-    { label: 'Completed', value: WorkflowStatus.Completed }
+    { label: 'Completed', value: WorkflowStatus.Completed },
+    { label: 'Obsolete', value: WorkflowStatus.Obsolescence }
   ]
 
   return (

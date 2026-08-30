@@ -52,5 +52,15 @@ export const workflowApi = {
   completeWorkflow: async (id: number): Promise<ApiResponse<WorkflowRequestDto>> => {
     const response = await axiosInstance.post(`/api/workflows/${id}/complete`);
     return response.data;
+  },
+
+  obsoleteWorkflow: async (id: number, reason: string): Promise<ApiResponse<WorkflowRequestDto>> => {
+    const response = await axiosInstance.post(`/api/workflows/${id}/obsolete`, { obsolescenceReason: reason });
+    return response.data;
+  },
+
+  resetToDraft: async (id: number, reason: string): Promise<ApiResponse<WorkflowRequestDto>> => {
+    const response = await axiosInstance.post(`/api/workflows/${id}/reset-to-draft`, { reason });
+    return response.data;
   }
 };

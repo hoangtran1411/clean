@@ -9,6 +9,7 @@ interface WorkflowApprovalProgressProps {
 export function WorkflowApprovalProgress({ currentApprovalLevel, totalApprovalLevels, status }: WorkflowApprovalProgressProps) {
   const steps = Array.from({ length: totalApprovalLevels }, (_, i) => i + 1)
   const isRejected = status === 'Rejected'
+  const isObsolete = status === 'Obsolescence'
   const isApprovedOrCompleted = status === 'Approved' || status === 'Completed'
 
   return (
@@ -20,6 +21,8 @@ export function WorkflowApprovalProgress({ currentApprovalLevel, totalApprovalLe
         if (isApprovedOrCompleted) {
           isCompleted = true
         } else if (isRejected) {
+          if (step < currentApprovalLevel) isCompleted = true
+        } else if (isObsolete) {
           if (step < currentApprovalLevel) isCompleted = true
         } else {
           if (step < currentApprovalLevel) isCompleted = true

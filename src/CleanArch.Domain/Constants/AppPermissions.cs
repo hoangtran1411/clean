@@ -18,6 +18,8 @@ public static class AppPermissions
     public const string WorkflowsManageTemplates = "Workflows.ManageTemplates";
     public const string WorkflowsReject = "Workflows.Reject";
     public const string WorkflowsComplete = "Workflows.Complete";
+    public const string WorkflowsObsolete = "Workflows.Obsolete";
+    public const string WorkflowsResetToDraft = "Workflows.ResetToDraft";
 
     public const string WorkflowsApproveTeamLeader = "Workflows.Approve.TeamLeader";
     public const string WorkflowsApproveDepartmentHead = "Workflows.Approve.DepartmentHead";
@@ -38,6 +40,8 @@ public static class AppPermissions
         WorkflowsManageTemplates,
         WorkflowsReject,
         WorkflowsComplete,
+        WorkflowsObsolete,
+        WorkflowsResetToDraft,
         WorkflowsApproveTeamLeader,
         WorkflowsApproveDepartmentHead,
         WorkflowsApproveDeputyDirector,

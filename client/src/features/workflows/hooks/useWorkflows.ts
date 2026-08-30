@@ -86,3 +86,27 @@ export function useCompleteWorkflow() {
     },
   });
 }
+
+export function useObsoleteWorkflow() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, reason }: { id: number; reason: string }) => workflowApi.obsoleteWorkflow(id, reason),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: workflowKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: workflowKeys.detail(variables.id) });
+    },
+  });
+}
+
+export function useResetWorkflowToDraft() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, reason }: { id: number; reason: string }) => workflowApi.resetToDraft(id, reason),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: workflowKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: workflowKeys.detail(variables.id) });
+    },
+  });
+}
+
+

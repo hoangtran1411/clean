@@ -7,5 +7,6 @@ public enum WorkflowStatus
     InApproval = 2,
     Rejected = 3,
     Approved = 4,
-    Completed = 5
+    Completed = 5,
+    Obsolescence = 6
 }

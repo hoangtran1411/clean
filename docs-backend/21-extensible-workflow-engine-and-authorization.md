@@ -42,8 +42,8 @@ In a data-driven engine, approval levels are **database entities (`WorkflowAppro
 
 ```text
 Draft ➔ Submitted ➔ InApproval (CurrentLevel = 1..N) ➔ Approved ➔ Completed
-                          ↓ (At any level)
-                      Rejected
+                          ↓ (At any level)                      ↓ (Active or Approved)
+                      Rejected                             Obsolescence
 ```
 
 ```mermaid
@@ -64,6 +64,18 @@ flowchart TD
         Step1 -.->|Reject| Rejected(["Status: Rejected"])
         Step2 -.->|Reject| Rejected
         Step3 -.->|Reject| Rejected
+
+        Draft -.->|Mark Obsolete| Obsolete(["Status: Obsolescence"])
+        Step1 -.->|Mark Obsolete| Obsolete
+        Step2 -.->|Mark Obsolete| Obsolete
+        Step3 -.->|Mark Obsolete| Obsolete
+        Approved -.->|Mark Obsolete| Obsolete
+
+        Step1 ==>|Super Admin Reset / Revoke Signatures| Draft
+        Step2 ==>|Super Admin Reset / Revoke Signatures| Draft
+        Step3 ==>|Super Admin Reset / Revoke Signatures| Draft
+        Approved ==>|Super Admin Reset / Revoke Signatures| Draft
+        Rejected ==>|Super Admin Reset / Revoke Signatures| Draft
     end
 ```
 
@@ -85,7 +97,8 @@ public enum WorkflowStatus
     InApproval = 2,
     Rejected = 3,
     Approved = 4,
-    Completed = 5
+    Completed = 5,
+    Obsolescence = 6
 }
 
 public enum WorkflowAction
@@ -93,7 +106,9 @@ public enum WorkflowAction
     Submitted = 0,
     Approved = 1,
     Rejected = 2,
-    Completed = 3
+    Completed = 3,
+    MarkedObsolete = 4,
+    ResetToDraft = 5
 }
 ```
 

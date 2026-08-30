@@ -71,7 +71,25 @@ public class WorkflowsController : ApiControllerBase
         var result = await Mediator.Send(new CompleteWorkflowCommand(id));
         return result.Succeeded ? Ok(result) : BadRequest(result);
     }
+
+    [HttpPost("{id}/obsolete")]
+    [HasPermission(AppPermissions.WorkflowsObsolete)]
+    public async Task<IActionResult> Obsolete(int id, [FromBody] ObsoleteRequest request)
+    {
+        var result = await Mediator.Send(new CleanArch.Application.Features.Workflows.Commands.ObsoleteWorkflow.ObsoleteWorkflowCommand(id, request.ObsolescenceReason));
+        return result.Succeeded ? Ok(result) : BadRequest(result);
+    }
+
+    [HttpPost("{id}/reset-to-draft")]
+    [HasPermission(AppPermissions.WorkflowsResetToDraft)]
+    public async Task<IActionResult> ResetToDraft(int id, [FromBody] ResetToDraftRequest request)
+    {
+        var result = await Mediator.Send(new CleanArch.Application.Features.Workflows.Commands.ResetWorkflowToDraft.ResetWorkflowToDraftCommand(id, request.Reason));
+        return result.Succeeded ? Ok(result) : BadRequest(result);
+    }
 }
 
 public record ApproveRequest(string? Comment);
 public record RejectRequest(string RejectionReason);
+public record ObsoleteRequest(string ObsolescenceReason);
+public record ResetToDraftRequest(string Reason);

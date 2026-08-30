@@ -23,6 +23,9 @@ export function WorkflowStatusBadge({ status }: { status: WorkflowStatus | strin
     case 'Completed':
     case '5':
       return <Badge variant="outline" className="border-emerald-500 text-emerald-600">Completed</Badge>
+    case 'Obsolescence':
+    case '6':
+      return <Badge variant="outline" className="border-slate-400 text-slate-500 bg-slate-100 dark:bg-slate-800 line-through">Obsolete</Badge>
     default:
       return <Badge variant="outline">{statusStr}</Badge>
   }

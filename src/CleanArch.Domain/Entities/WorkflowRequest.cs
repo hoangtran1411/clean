@@ -29,6 +29,11 @@ public class WorkflowRequest : BaseEntity
     
     public DateTime? CompletedAtUtc { get; set; }
     
+    public string? ObsolescenceReason { get; set; }
+    public string? ObsoletedByUserId { get; set; }
+    public string? ObsoletedByUserName { get; set; }
+    public DateTime? ObsoletedAtUtc { get; set; }
+    
     public IList<WorkflowApprovalAction> ApprovalActions { get; private set; } = [];
 
     public void Submit(string userId, string userName)
@@ -40,6 +45,7 @@ public class WorkflowRequest : BaseEntity
 
         Status = WorkflowStatus.InApproval;
         CurrentApprovalLevel = 1;
+        LastModifiedAtUtc = DateTime.UtcNow;
 
         ApprovalActions.Add(new WorkflowApprovalAction
         {
@@ -75,18 +81,21 @@ public class WorkflowRequest : BaseEntity
         {
             CurrentApprovalLevel++;
         }
+
+        LastModifiedAtUtc = DateTime.UtcNow;
     }
 
     public void Reject(string userId, string userName, string reason)
     {
-        if (Status == WorkflowStatus.Completed || Status == WorkflowStatus.Rejected)
-            throw new DomainException("Cannot reject a completed or already rejected request.");
+        if (Status == WorkflowStatus.Completed || Status == WorkflowStatus.Rejected || Status == WorkflowStatus.Obsolescence)
+            throw new DomainException("Cannot reject a completed, rejected, or obsolete request.");
 
         Status = WorkflowStatus.Rejected;
         RejectionReason = reason;
         RejectedByUserId = userId;
         RejectedByUserName = userName;
         RejectedAtUtc = DateTime.UtcNow;
+        LastModifiedAtUtc = DateTime.UtcNow;
 
         ApprovalActions.Add(new WorkflowApprovalAction
         {
@@ -105,6 +114,7 @@ public class WorkflowRequest : BaseEntity
 
         Status = WorkflowStatus.Completed;
         CompletedAtUtc = DateTime.UtcNow;
+        LastModifiedAtUtc = DateTime.UtcNow;
 
         ApprovalActions.Add(new WorkflowApprovalAction
         {
@@ -112,6 +122,62 @@ public class WorkflowRequest : BaseEntity
             Action = WorkflowAction.Completed,
             ActedByUserId = userId,
             ActedByUserName = userName
+        });
+    }
+
+    public void MarkObsolete(string userId, string userName, string reason)
+    {
+        if (Status == WorkflowStatus.Completed || Status == WorkflowStatus.Rejected || Status == WorkflowStatus.Obsolescence)
+            throw new DomainException("Cannot mark a completed, rejected, or already obsolete request as obsolete.");
+
+        Status = WorkflowStatus.Obsolescence;
+        ObsolescenceReason = reason;
+        ObsoletedByUserId = userId;
+        ObsoletedByUserName = userName;
+        ObsoletedAtUtc = DateTime.UtcNow;
+        LastModifiedAtUtc = DateTime.UtcNow;
+
+        ApprovalActions.Add(new WorkflowApprovalAction
+        {
+            ApprovalLevel = CurrentApprovalLevel,
+            Action = WorkflowAction.MarkedObsolete,
+            ActedByUserId = userId,
+            ActedByUserName = userName,
+            Comment = reason
+        });
+    }
+
+    public void ResetToDraft(string userId, string userName, string reason)
+    {
+        if (Status == WorkflowStatus.Draft)
+            throw new DomainException("Workflow request is already in Draft status.");
+        if (Status == WorkflowStatus.Completed)
+            throw new DomainException("Cannot reset a finalized and Completed workflow to Draft.");
+
+        Status = WorkflowStatus.Draft;
+        CurrentApprovalLevel = 0;
+        
+        // Remove signatures / clear decision states
+        ApprovedAtUtc = null;
+        ApprovedByUserId = null;
+        ApprovedByUserName = null;
+        RejectionReason = null;
+        RejectedByUserId = null;
+        RejectedByUserName = null;
+        RejectedAtUtc = null;
+        ObsolescenceReason = null;
+        ObsoletedByUserId = null;
+        ObsoletedByUserName = null;
+        ObsoletedAtUtc = null;
+        LastModifiedAtUtc = DateTime.UtcNow;
+
+        ApprovalActions.Add(new WorkflowApprovalAction
+        {
+            ApprovalLevel = 0,
+            Action = WorkflowAction.ResetToDraft,
+            ActedByUserId = userId,
+            ActedByUserName = userName,
+            Comment = reason
         });
     }
 }

@@ -11,6 +11,9 @@ public class WorkflowRequestDto
     public int TotalApprovalLevels { get; set; }
     public string? CurrentLevelName { get; set; }
     public string? RejectionReason { get; set; }
+    public string? ObsolescenceReason { get; set; }
+    public string? ObsoletedByUserName { get; set; }
+    public DateTime? ObsoletedAtUtc { get; set; }
     public DateTime? ApprovedAtUtc { get; set; }
     public DateTime? CompletedAtUtc { get; set; }
     public DateTime CreatedAtUtc { get; set; }

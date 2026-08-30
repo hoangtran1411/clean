@@ -420,3 +420,24 @@ GET {{HostAddress}}/api/workflows?status=Completed
 Authorization: Bearer {{adminToken}}
 Accept: application/json
 
+### 9k. Mark a Workflow Request as Obsolete (Deprecating Active Request)
+POST {{HostAddress}}/api/workflows/{{workflowId}}/obsolete
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "obsolescenceReason": "Superseded by Cloud Migration Project v2."
+}
+
+### 9l. Super Admin Revokes Signatures & Resets Workflow to Draft (Wrong Product / Error Correction)
+### Requires highest administrative permission ('Workflows.ResetToDraft')
+POST {{HostAddress}}/api/workflows/{{workflowId}}/reset-to-draft
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "reason": "Product specifications and catalog items incorrect. All approvals revoked for creator re-submission."
+}
+
+
+

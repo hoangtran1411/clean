@@ -249,4 +249,185 @@ public class WorkflowEngineTests
         await act.Should().ThrowAsync<ForbiddenException>()
             .WithMessage("*Workflows.Approve.TeamLeader*");
     }
+
+    [Fact]
+    public void Domain_WorkflowRequest_MarkObsolete_TransitionsToObsolescenceAndRecordsAudit()
+    {
+        var request = new WorkflowRequest
+        {
+            Id = 50,
+            RequestedByUserId = "user-123",
+            RequestedByUserName = "test_user",
+            Status = WorkflowStatus.InApproval,
+            CurrentApprovalLevel = 1,
+            TotalApprovalLevels = 3
+        };
+
+        request.MarkObsolete("admin-1", "admin_user", "Project cancelled by leadership");
+
+        request.Status.Should().Be(WorkflowStatus.Obsolescence);
+        request.ObsolescenceReason.Should().Be("Project cancelled by leadership");
+        request.ObsoletedByUserId.Should().Be("admin-1");
+        request.ObsoletedByUserName.Should().Be("admin_user");
+        request.ObsoletedAtUtc.Should().NotBeNull();
+        request.ApprovalActions.Should().ContainSingle(a => a.Action == WorkflowAction.MarkedObsolete);
+    }
+
+    [Fact]
+    public void Domain_WorkflowRequest_WhenObsolete_ActionsThrowDomainException()
+    {
+        var request = new WorkflowRequest
+        {
+            Id = 60,
+            Status = WorkflowStatus.Obsolescence
+        };
+
+        var approveAct = () => request.ApproveCurrentLevel("user-1", "user", "ok");
+        approveAct.Should().Throw<DomainException>()
+            .WithMessage("*Request is not currently in approval*");
+
+        var rejectAct = () => request.Reject("user-1", "user", "reject");
+        rejectAct.Should().Throw<DomainException>()
+            .WithMessage("*Cannot reject a completed, rejected, or obsolete request*");
+
+        var completeAct = () => request.Complete("user-1", "user");
+        completeAct.Should().Throw<DomainException>()
+            .WithMessage("*Only approved requests can be completed*");
+
+        var obsoleteAct = () => request.MarkObsolete("user-1", "user", "already obsolete");
+        obsoleteAct.Should().Throw<DomainException>()
+            .WithMessage("*Cannot mark a completed, rejected, or already obsolete request as obsolete*");
+    }
+
+    [Fact]
+    public async Task Handler_ObsoleteWorkflow_SetsObsolescenceAndPersists()
+    {
+        using var context = TestDbContextFactory.Create();
+        var template = new WorkflowTemplate { Id = 300, Name = "Template" };
+        var request = new WorkflowRequest
+        {
+            Id = 400,
+            WorkflowTemplateId = 300,
+            Title = "Obsolescence Test",
+            RequestedByUserId = "user-123",
+            RequestedByUserName = "user",
+            Status = WorkflowStatus.InApproval,
+            CurrentApprovalLevel = 1,
+            TotalApprovalLevels = 2
+        };
+        context.WorkflowTemplates.Add(template);
+        context.WorkflowRequests.Add(request);
+        await context.SaveChangesAsync();
+
+        var handler = new CleanArch.Application.Features.Workflows.Commands.ObsoleteWorkflow.ObsoleteWorkflowCommandHandler(context, _currentUserServiceMock.Object);
+        var command = new CleanArch.Application.Features.Workflows.Commands.ObsoleteWorkflow.ObsoleteWorkflowCommand(400, "Deprecating budget line item");
+
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        result.Succeeded.Should().BeTrue();
+        result.Data.Should().NotBeNull();
+        result.Data!.Status.Should().Be(WorkflowStatus.Obsolescence.ToString());
+        result.Data.ObsolescenceReason.Should().Be("Deprecating budget line item");
+
+        var persisted = await context.WorkflowRequests.FindAsync(400);
+        persisted!.Status.Should().Be(WorkflowStatus.Obsolescence);
+    }
+
+    [Fact]
+    public void Domain_WorkflowRequest_ResetToDraft_ClearsSignaturesAndSetsDraftStatus()
+    {
+        var request = new WorkflowRequest
+        {
+            Id = 500,
+            Title = "Product Pricing Request",
+            RequestedByUserId = "user-123",
+            RequestedByUserName = "test_user",
+            Status = WorkflowStatus.Approved,
+            ApprovedByUserId = "tech-dir-1",
+            ApprovedByUserName = "tech_director",
+            ApprovedAtUtc = DateTime.UtcNow,
+            CurrentApprovalLevel = 3,
+            TotalApprovalLevels = 3
+        };
+
+        // Act: Super Admin removes signatures and resets to Draft due to incorrect product pricing
+        request.ResetToDraft("superadmin-1", "superadmin", "Product pricing was calculated incorrectly; reset for amendment");
+
+        request.Status.Should().Be(WorkflowStatus.Draft);
+        request.CurrentApprovalLevel.Should().Be(0);
+        request.ApprovedByUserId.Should().BeNull();
+        request.ApprovedByUserName.Should().BeNull();
+        request.ApprovedAtUtc.Should().BeNull();
+        request.ApprovalActions.Should().ContainSingle(a => a.Action == WorkflowAction.ResetToDraft && a.Comment!.Contains("Product pricing was calculated incorrectly"));
+    }
+
+    [Fact]
+    public async Task Handler_ResetWorkflowToDraft_WithoutHighestPermission_ThrowsForbiddenException()
+    {
+        using var context = TestDbContextFactory.Create();
+        var unauthorizedUserMock = new Mock<ICurrentUserService>();
+        unauthorizedUserMock.Setup(s => s.UserId).Returns("regular-manager");
+        unauthorizedUserMock.Setup(s => s.UserName).Returns("manager");
+        unauthorizedUserMock.Setup(s => s.HasPermission(AppPermissions.WorkflowsResetToDraft)).Returns(false);
+
+        var template = new WorkflowTemplate { Id = 550, Name = "Test Template" };
+        var request = new WorkflowRequest
+        {
+            Id = 550,
+            WorkflowTemplateId = 550,
+            Title = "Reset Perm Test",
+            RequestedByUserId = "user-123",
+            Status = WorkflowStatus.InApproval,
+            CurrentApprovalLevel = 2,
+            TotalApprovalLevels = 3
+        };
+        context.WorkflowTemplates.Add(template);
+        context.WorkflowRequests.Add(request);
+        await context.SaveChangesAsync();
+
+        var handler = new CleanArch.Application.Features.Workflows.Commands.ResetWorkflowToDraft.ResetWorkflowToDraftCommandHandler(context, unauthorizedUserMock.Object);
+        var command = new CleanArch.Application.Features.Workflows.Commands.ResetWorkflowToDraft.ResetWorkflowToDraftCommand(550, "Attempt reset");
+
+        var act = async () => await handler.Handle(command, CancellationToken.None);
+        await act.Should().ThrowAsync<ForbiddenException>()
+            .WithMessage("*Workflows.ResetToDraft*");
+    }
+
+    [Fact]
+    public async Task Handler_ResetWorkflowToDraft_WithHighestPermission_SuccessfullyResets()
+    {
+        using var context = TestDbContextFactory.Create();
+        var superAdminMock = new Mock<ICurrentUserService>();
+        superAdminMock.Setup(s => s.UserId).Returns("superadmin-id");
+        superAdminMock.Setup(s => s.UserName).Returns("superadmin");
+        superAdminMock.Setup(s => s.HasPermission(AppPermissions.WorkflowsResetToDraft)).Returns(true);
+
+        var template = new WorkflowTemplate { Id = 600, Name = "Test Template" };
+        var request = new WorkflowRequest
+        {
+            Id = 600,
+            WorkflowTemplateId = 600,
+            Title = "Wrong Product Spec",
+            RequestedByUserId = "user-123",
+            RequestedByUserName = "user",
+            Status = WorkflowStatus.InApproval,
+            CurrentApprovalLevel = 2,
+            TotalApprovalLevels = 3
+        };
+        context.WorkflowTemplates.Add(template);
+        context.WorkflowRequests.Add(request);
+        await context.SaveChangesAsync();
+
+        var handler = new CleanArch.Application.Features.Workflows.Commands.ResetWorkflowToDraft.ResetWorkflowToDraftCommandHandler(context, superAdminMock.Object);
+        var command = new CleanArch.Application.Features.Workflows.Commands.ResetWorkflowToDraft.ResetWorkflowToDraftCommand(600, "Wrong product catalog items attached - reset to draft");
+
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        result.Succeeded.Should().BeTrue();
+        result.Data!.Status.Should().Be(WorkflowStatus.Draft.ToString());
+        result.Data.CurrentApprovalLevel.Should().Be(0);
+
+        var persisted = await context.WorkflowRequests.FindAsync(600);
+        persisted!.Status.Should().Be(WorkflowStatus.Draft);
+    }
 }

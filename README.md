@@ -57,7 +57,7 @@ clean/
 │   └── CleanArch.WebApi/                 # Controllers, Scalar OpenAPI, Exception Handler, Dockerfile
 │
 ├── tests/                                # 🧪 Automated Test Suites
-│   └── CleanArch.UnitTests/              # 48 xUnit, Moq, FluentAssertions & EF Core Tests
+│   └── CleanArch.UnitTests/              # 54 xUnit, Moq, FluentAssertions & EF Core Tests
 │
 ├── docs-backend/                         # 📚 21 In-Depth Backend Learning Modules
 ├── docs-frontend/                        # 📚 8 Step-by-Step Frontend Learning Modules
