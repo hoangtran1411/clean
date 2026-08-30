@@ -44,7 +44,13 @@ client/src/
 ├── features/                # Feature-based modular structure
 │   ├── auth/                # Identity login, role inspection & token refresh UI
 │   ├── products/            # Catalog, TanStack caching, and EPPlus Excel export/import
-│   └── payments/            # Payments with Idempotency-Key testing
+│   ├── payments/            # Payments with Idempotency-Key testing
+│   └── workflows/           # N-level approval workflow engine, state machine & audit timeline
+│       ├── api/             # Workflow API endpoints
+│       ├── components/      # Multi-tier stepper & timeline components
+│       ├── hooks/           # TanStack Query hooks & query key factories
+│       ├── pages/           # List, Create, Detail, and Template builder pages
+│       └── types/           # Strict TypeScript contracts & status enums
 │
 ├── lib/
 │   └── utils.ts             # cn() utility helper (clsx + tailwind-merge)

@@ -45,3 +45,16 @@ Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwi
    - 10 Foundational / Junior questions (Closures, Keys, Flexbox vs Grid, Event Bubbling, Promises)
    - 10 Intermediate / Mid-level questions (React 19 Actions, TanStack staleTime vs gcTime, Fiber reconciliation, Token refresh race conditions, TypeScript discriminated unions)
    - 10 Advanced / Senior questions (INP optimization, RSC wire format vs SSR, useTransition non-blocking scheduler, memory leak profiling, list virtualization)
+
+9. [**09 - Permission Handling, Dynamic Claim Policies & RBAC in React 19**](../docs-frontend/09-permission-handling-rbac-and-dynamic-claim-policies.md)
+   - Fine-grained Claim-Based Access Control (CBAC) vs Role-Based Access Control (RBAC)
+   - JWT permission extraction, authentication state hydration & reactive custom hooks (`useAuthorization`, `usePermission`)
+   - Declarative `<PermissionGate />` components, conditional UI action masking, and React Router protected route guards (`<ProtectedRoute />`)
+   - Axios `403 Forbidden` vs `401 Unauthorized` handling, cross-tab session synchronization, and Zero-Trust defense-in-depth
+
+10. [**10 - Extensible Workflow Engine, State Machines & UI Integration**](../docs-frontend/10-workflow-engine-state-machine-and-ui-integration.md)
+    - Data-driven $N$-level approval state machine lifecycle (Draft, Submitted, InApproval, Approved, Completed, Rejected, Obsolescence)
+    - Dynamic Workflow Template Builder: configurable approval tiers and level-specific permission mappings
+    - Visual Multi-tier Stepper (`WorkflowApprovalProgress`) and chronological audit timeline (`WorkflowTimeline`)
+    - TanStack Query v5 mutation flows: tier approval, mandatory rejection reasons, obsolescence flags, and Super Admin signature revocation & draft reset
+    - Seamless alignment with [.NET 10 Dynamic Policy Engine](../docs-backend/21-extensible-workflow-engine-and-authorization.md)
