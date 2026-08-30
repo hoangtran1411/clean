@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CleanArch.Infrastructure.Migrations
-{
-    /// <inheritdoc />
-    public partial class AddWorkflowAuthorization : Migration
+#pragma warning disable CA1861 // Prefer 'static readonly' fields over constant array arguments
+
+namespace CleanArch.Infrastructure.Migrations;
+
+/// <inheritdoc />
+public partial class AddWorkflowAuthorization : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -384,4 +386,3 @@ namespace CleanArch.Infrastructure.Migrations
                 name: "WorkflowRequests");
         }
     }
-}

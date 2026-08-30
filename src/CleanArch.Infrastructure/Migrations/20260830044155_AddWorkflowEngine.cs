@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+#pragma warning disable CA1861 // Prefer 'static readonly' fields over constant array arguments
 
-namespace CleanArch.Infrastructure.Migrations
-{
-    /// <inheritdoc />
-    public partial class AddWorkflowEngine : Migration
+namespace CleanArch.Infrastructure.Migrations;
+
+/// <inheritdoc />
+public partial class AddWorkflowEngine : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -293,4 +294,3 @@ namespace CleanArch.Infrastructure.Migrations
                 onDelete: ReferentialAction.Cascade);
         }
     }
-}

@@ -15,8 +15,8 @@ public class WorkflowRequest : BaseEntity
     public string RequestedByUserName { get; set; } = string.Empty;
     
     public WorkflowStatus Status { get; set; } = WorkflowStatus.Draft;
-    public int CurrentApprovalLevel { get; set; } = 0;
-    public int TotalApprovalLevels { get; set; } = 0;
+    public int CurrentApprovalLevel { get; set; }
+    public int TotalApprovalLevels { get; set; }
     
     public string? RejectionReason { get; set; }
     public string? RejectedByUserId { get; set; }
