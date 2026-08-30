@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, Link } from 'react-router-dom'
+import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
 import { AuthSection } from '@/features/auth/AuthSection'
 import { ProductsSection } from '@/features/products/ProductsSection'
 import { IdempotencySection } from '@/features/payments/IdempotencySection'
@@ -11,7 +12,7 @@ import { CreateWorkflowTemplatePage } from '@/features/workflows/pages/CreateWor
 import { DocsPage } from '@/features/docs/pages/DocsPage'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Package, CreditCard, Sparkles, BookOpen, GitPullRequest } from 'lucide-react'
+import { Shield, Package, CreditCard, Sparkles, BookOpen, GitPullRequest, LayoutDashboard } from 'lucide-react'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
@@ -74,11 +75,13 @@ function MainLayout() {
 
   const getActiveTab = () => {
     const path = location.pathname
+    if (path === '/' || path.startsWith('/dashboard')) return 'dashboard'
     if (path.startsWith('/docs')) return 'docs'
     if (path.startsWith('/workflows') || path.startsWith('/workflow-templates')) return 'workflows'
     if (path.startsWith('/auth')) return 'auth'
     if (path.startsWith('/idempotency')) return 'idempotency'
-    return 'products'
+    if (path.startsWith('/products')) return 'products'
+    return 'dashboard'
   }
 
   const activeTab = getActiveTab()
@@ -121,6 +124,16 @@ function MainLayout() {
       {/* Tab Navigation */}
       <div className="bg-white dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 sticky top-16 2xl:top-20 z-40 shadow-xs backdrop-blur-xs transition-colors">
         <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 3xl:px-16 4xl:px-20 flex space-x-2 py-2 2xl:py-3 overflow-x-auto">
+          <Button
+            variant={activeTab === 'dashboard' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => navigate('/dashboard')}
+            className={`text-xs sm:text-sm 2xl:text-base 2xl:py-2.5 ${
+              activeTab !== 'dashboard' ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800' : ''
+            }`}
+          >
+            <LayoutDashboard className="h-4 w-4 2xl:h-5 2xl:w-5 mr-1.5 text-blue-500" /> ERP Dashboard
+          </Button>
           <Button
             variant={activeTab === 'products' ? 'default' : 'ghost'}
             size="sm"
@@ -179,7 +192,8 @@ function MainLayout() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 3xl:px-16 4xl:px-20 py-6 2xl:py-10">
         <Routes>
-          <Route path="/" element={<Navigate to="/products" replace />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/products" element={<ProductsSection />} />
           <Route
             path="/auth"
@@ -201,7 +215,7 @@ function MainLayout() {
           <Route path="/docs/:category" element={<DocsPage />} />
           <Route path="/docs/:category/:docSlug" element={<DocsPage />} />
 
-          <Route path="*" element={<Navigate to="/products" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 

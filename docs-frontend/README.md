@@ -76,3 +76,10 @@ Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwi
     - Tailwind CSS v4 `@theme` custom breakpoints (`3xl: 1920px`, `4xl: 2560px`) and fluid container widths (`2560px`)
     - Flagship mobile ergonomics for **iPhone 17 Pro Max** (Dynamic Island safe-areas) and **Samsung S26 Ultra** (QHD+ `100dvh`)
     - Multi-tier Interactive Font Scaling (`A` Standard 100%, `A+` 2K 125%, `A++` 4K 150%) with `localStorage` persistence
+
+14. [**14 - Enterprise ERP Dashboard, Dynamic Drag-and-Drop Grid & Real-Time Telemetry**](../docs-frontend/14-enterprise-erp-dashboard-dynamic-dnd-grid-and-telemetry.md)
+    - Executive ERP dashboard architecture with native HTML5 Drag and Drop reordering (zero heavy dependencies)
+    - Responsive column span toggling (`1 Col`, `2 Cols`, `3 Cols`, `Full Row`) and layout persistence in `localStorage`
+    - Real-time auto-refresh polling with live countdown timer (`5s`, `15s`, `30s`, `60s`) and instant on-demand cache invalidation
+    - Interactive financial velocity charts, catalog stock breakdowns, approval pipeline bottleneck tracking, and CLR system health telemetry
+

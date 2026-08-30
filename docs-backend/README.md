@@ -127,3 +127,11 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Real-world case study: Version 1 (3 levels) vs Version 2 (4 levels) with zero code changes
     - React 19 visual $N$-step progress bar, timeline audit log, and interactive template builder
     - Top 5 Senior Engineering Workflow & State Machine Interview Questions & Answers
+
+22. [**22 - Executive Dashboard Metrics & Real-Time Telemetry Aggregation**](../docs-backend/22-executive-dashboard-metrics-and-realtime-telemetry-aggregation.md)
+    - High-performance CQRS query design (`GetDashboardMetricsQuery`) aggregating Catalog, Financials, Workflows, and Telemetry
+    - Zero-allocation EF Core projections (`COUNT(*)`, `SUM(Amount)`, `GROUP BY Category`)
+    - Real-time CLR internals collection (`GC.GetTotalMemory()`, `ThreadPool.GetAvailableThreads()`, EF Core stopwatch latency ping)
+    - Clean Architecture separation between WebApi `DashboardController` and domain aggregate queries
+    - Automated unit testing with in-memory database assertions (`GetDashboardMetricsQueryTests`)
+
