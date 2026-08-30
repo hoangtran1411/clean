@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace CleanArch.WebApi.Controllers;
 
 [Authorize]
+[Route("api/workflow-templates")]
+[Route("api/[controller]")]
 public class WorkflowTemplatesController : ApiControllerBase
 {
     [HttpGet]
