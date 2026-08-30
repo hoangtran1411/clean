@@ -11,34 +11,34 @@ This document details the frontend implementation of our **Data-Driven $N$-Level
 ```mermaid
 flowchart TD
     subgraph DataDrivenTemplate ["Dynamic Workflow Template (Database)"]
-        T["WorkflowTemplate: 'Purchase Order Approval'"]
-        T --> L1["Level 1: Team Leader (Workflows.Approve.TeamLeader)"]
-        T --> L2["Level 2: Department Head (Workflows.Approve.DepartmentHead)"]
-        T --> L3["Level 3: Technical Director (Workflows.Approve.TechnicalDirector)"]
+        T["WorkflowTemplate: Purchase Order Approval"]
+        T --> L1["Level 1: Team Leader"]
+        T --> L2["Level 2: Department Head"]
+        T --> L3["Level 3: Technical Director"]
     end
 
     subgraph RuntimeStateMachine ["Runtime State Machine (React UI & API)"]
-        Draft(["Draft"]) -->|Submit Request| InApp1["InApproval (Level 1/3)"]
-        InApp1 -->|Approve Level 1| InApp2["InApproval (Level 2/3)"]
-        InApp2 -->|Approve Level 2| InApp3["InApproval (Level 3/3)"]
-        InApp3 -->|Approve Level 3 (Final)| Approved(["Approved"])
-        Approved -->|Complete| Completed(["Completed"])
+        Draft["Draft"] -->|Submit Request| InApp1["InApproval - Level 1/3"]
+        InApp1 -->|Approve Level 1| InApp2["InApproval - Level 2/3"]
+        InApp2 -->|Approve Level 2| InApp3["InApproval - Level 3/3"]
+        InApp3 -->|Approve Final Level| Approved["Approved"]
+        Approved -->|Complete| Completed["Completed"]
 
-        InApp1 -.->|Reject + Reason| Rejected(["Rejected"])
-        InApp2 -.->|Reject + Reason| Rejected
-        InApp3 -.->|Reject + Reason| Rejected
+        InApp1 -.->|Reject with Reason| Rejected["Rejected"]
+        InApp2 -.->|Reject with Reason| Rejected
+        InApp3 -.->|Reject with Reason| Rejected
 
-        Draft -.->|Mark Obsolete + Reason| Obsolete(["Obsolescence"])
-        InApp1 -.->|Mark Obsolete + Reason| Obsolete
-        InApp2 -.->|Mark Obsolete + Reason| Obsolete
-        InApp3 -.->|Mark Obsolete + Reason| Obsolete
-        Approved -.->|Mark Obsolete + Reason| Obsolete
+        Draft -.->|Mark Obsolete with Reason| Obsolete["Obsolescence"]
+        InApp1 -.->|Mark Obsolete with Reason| Obsolete
+        InApp2 -.->|Mark Obsolete with Reason| Obsolete
+        InApp3 -.->|Mark Obsolete with Reason| Obsolete
+        Approved -.->|Mark Obsolete with Reason| Obsolete
 
-        InApp1 ==>|Revoke Signatures & Reset to Draft| Draft
-        InApp2 ==>|Revoke Signatures & Reset to Draft| Draft
-        InApp3 ==>|Revoke Signatures & Reset to Draft| Draft
-        Approved ==>|Revoke Signatures & Reset to Draft| Draft
-        Rejected ==>|Revoke Signatures & Reset to Draft| Draft
+        InApp1 ==>|Revoke Signatures and Reset| Draft
+        InApp2 ==>|Revoke Signatures and Reset| Draft
+        InApp3 ==>|Revoke Signatures and Reset| Draft
+        Approved ==>|Revoke Signatures and Reset| Draft
+        Rejected ==>|Revoke Signatures and Reset| Draft
     end
 ```
 
@@ -348,9 +348,9 @@ In [CreateWorkflowTemplatePage.tsx](../client/src/features/workflows/pages/Creat
 
 ```mermaid
 graph LR
-    User["Admin clicks 'Add Approval Level'"] --> LevelState["Append to levels: [{ levelOrder: 3, levelName: '', requiredPermission: '' }]"]
-    LevelState --> InputForm["Render Input fields for Tier Name & Permission String"]
-    InputForm --> Submit["POST /api/workflows/templates -> Invalidate queryClient['workflowTemplates']"]
+    User["Admin clicks Add Approval Level"] --> LevelState["Append new level to state array"]
+    LevelState --> InputForm["Render Input fields for Tier Name and Permission"]
+    InputForm --> Submit["POST /api/workflows/templates -> Invalidate TanStack Query Cache"]
 ```
 
 ```tsx
