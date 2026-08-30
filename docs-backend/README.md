@@ -134,4 +134,3 @@ Welcome to the step-by-step learning guide for ASP.NET Core Identity, JWT authen
     - Real-time CLR internals collection (`GC.GetTotalMemory()`, `ThreadPool.GetAvailableThreads()`, EF Core stopwatch latency ping)
     - Clean Architecture separation between WebApi `DashboardController` and domain aggregate queries
     - Automated unit testing with in-memory database assertions (`GetDashboardMetricsQueryTests`)
-
