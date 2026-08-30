@@ -25,14 +25,14 @@ export function CreateWorkflowPage() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-xs border border-slate-200 p-6 max-w-2xl mx-auto">
-      <h2 className="text-xl font-bold text-slate-900 mb-6">New Workflow Request</h2>
+    <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xs border border-slate-200 dark:border-slate-800 p-6 sm:p-8 max-w-2xl mx-auto transition-colors">
+      <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">New Workflow Request</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Workflow Template</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Workflow Template</label>
           <select 
-            className="w-full rounded-md border border-slate-300 p-2 text-sm"
+            className="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 p-2.5 text-sm shadow-xs focus:ring-2 focus:ring-blue-500 outline-none"
             value={templateId}
             onChange={e => setTemplateId(Number(e.target.value))}
             required
@@ -45,7 +45,7 @@ export function CreateWorkflowPage() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Title</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Title</label>
           <Input 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
@@ -55,7 +55,7 @@ export function CreateWorkflowPage() {
         </div>
         
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">Description</label>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Description</label>
           <Textarea 
             value={description} 
             onChange={e => setDescription(e.target.value)} 
@@ -64,7 +64,7 @@ export function CreateWorkflowPage() {
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4">
+        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           <Button type="button" variant="outline" onClick={() => navigate('/workflows')}>Cancel</Button>
           <Button type="submit" disabled={createMutation.isPending || templateId === 0}>
             {createMutation.isPending ? 'Creating...' : 'Create Draft'}

@@ -136,6 +136,9 @@ Runs both the .NET 10 API (`:8080`) and the Nginx-hosted React 19 SPA (`:3000`) 
 8. [**08 - Top 30 Modern Frontend & React Interview Questions (Easy, Medium, Advanced)**](./docs-frontend/08-top-30-frontend-interview-questions.md)
 9. [**09 - Permission Handling, Dynamic Claim Policies & RBAC in React 19**](./docs-frontend/09-permission-handling-rbac-and-dynamic-claim-policies.md)
 10. [**10 - Extensible Workflow Engine, State Machines & UI Integration**](./docs-frontend/10-workflow-engine-state-machine-and-ui-integration.md)
+11. [**11 - In-App Documentation Hub, Dynamic Markdown Engine & Search Architecture**](./docs-frontend/11-inapp-documentation-hub-and-markdown-engine.md)
+12. [**12 - Interactive Mermaid Vector Diagram Rendering & Fullscreen Lightbox**](./docs-frontend/12-interactive-mermaid-diagram-rendering-and-fullscreen-lightbox.md)
+13. [**13 - Enterprise Dark/Light Theming, HiDPI 2K/4K Scaling & Flagship Mobile Optimization**](./docs-frontend/13-responsive-enterprise-theming-dark-mode-and-hidpi-device-optimization.md)
 
 ### 🏛️ Backend Modules (`docs-backend/`)
 

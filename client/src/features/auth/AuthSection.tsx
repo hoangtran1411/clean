@@ -85,11 +85,11 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
   }
 
   return (
-    <Card className="w-full shadow-md border-slate-200">
+    <Card className="w-full shadow-md">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <ShieldCheck className="h-6 w-6 text-blue-600" />
+            <ShieldCheck className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             <CardTitle>Authentication & JWT Security</CardTitle>
           </div>
           {currentUser && (
@@ -105,11 +105,11 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
 
       <CardContent className="space-y-4">
         {currentUser ? (
-          <div className="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h4 className="font-semibold text-slate-900">{currentUser.fullName}</h4>
-                <p className="text-sm text-slate-500">{currentUser.email}</p>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-base">{currentUser.fullName}</h4>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{currentUser.email}</p>
               </div>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={handleRefreshToken} disabled={loading}>
@@ -122,8 +122,8 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
             </div>
 
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Roles:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Roles:</span>
+              <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {(currentUser.roles ?? []).map((role) => (
                   <Badge key={role} variant="default">
                     {role}
@@ -133,8 +133,8 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
             </div>
 
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Permissions:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Permissions:</span>
+              <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {(currentUser.permissions ?? []).map((perm) => (
                   <Badge key={perm} variant="secondary">
                     {perm}
@@ -164,7 +164,7 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
                 <LogIn className="h-4 w-4 mr-1" /> Sign In
               </Button>
 
-              <span className="text-xs text-slate-400">Quick Test Accounts:</span>
+              <span className="text-xs text-slate-400 dark:text-slate-500">Quick Test Accounts:</span>
               <Button
                 variant="outline"
                 size="sm"
@@ -203,7 +203,7 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
         )}
 
         {statusMsg && (
-          <p className="text-xs text-blue-600 font-medium bg-blue-50 p-2 rounded border border-blue-100">
+          <p className="text-xs text-blue-700 dark:text-blue-300 font-medium bg-blue-50 dark:bg-blue-950/40 p-2.5 rounded-lg border border-blue-100 dark:border-blue-900/60">
             {statusMsg}
           </p>
         )}

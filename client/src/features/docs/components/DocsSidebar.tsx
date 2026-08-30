@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 import { DocCategory, DocItem } from '../data/docsRegistry'
-import { Search, ChevronDown, ChevronRight, BookOpen, FileText, CheckCircle, X } from 'lucide-react'
+import {
+  Search,
+  ChevronDown,
+  ChevronRight,
+  BookOpen,
+  FileText,
+  CheckCircle,
+  X,
+  ChevronsUpDown,
+  ListCollapse,
+} from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 
@@ -37,6 +47,24 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({
     }))
   }
 
+  const handleExpandAll = () => {
+    const allExpanded: Record<string, boolean> = {}
+    categories.forEach((cat) => {
+      allExpanded[cat.id] = true
+    })
+    setExpandedCategories(allExpanded)
+  }
+
+  const handleCollapseAll = () => {
+    const allCollapsed: Record<string, boolean> = {}
+    categories.forEach((cat) => {
+      allCollapsed[cat.id] = false
+    })
+    setExpandedCategories(allCollapsed)
+  }
+
+  const isAllExpanded = Object.values(expandedCategories).every(Boolean)
+
   // Filter categories and docs based on search
   const filteredCategories = categories
     .map((cat) => {
@@ -58,24 +86,27 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({
       className={`bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden transition-colors ${
         isMobileDrawer
           ? 'w-full h-full max-h-[100dvh]'
-          : 'w-full lg:w-80 2xl:w-96 rounded-2xl border h-[calc(100vh-140px)] 2xl:h-[calc(100vh-160px)] sticky top-20 2xl:top-24'
+          : 'w-full rounded-2xl border h-[calc(100dvh-130px)] 2xl:h-[calc(100dvh-154px)] sticky top-[120px] 2xl:top-[144px]'
       }`}
     >
       {/* Search & Drawer Header */}
-      <div className="p-4 2xl:p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/90 space-y-3 shrink-0">
+      <div className="p-4 2xl:p-5 3xl:p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/90 space-y-3 shrink-0">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 text-slate-900 dark:text-slate-100 font-bold text-sm 2xl:text-base">
-            <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+          <div className="flex items-center space-x-2 text-slate-900 dark:text-slate-100 font-bold text-sm 2xl:text-base 3xl:text-lg">
+            <BookOpen className="h-5 w-5 3xl:h-6 3xl:w-6 text-blue-600 dark:text-blue-400 shrink-0" />
             <span className="truncate">Documentation Hub</span>
           </div>
           <div className="flex items-center space-x-2">
-            <Badge variant="outline" className="text-xs 2xl:text-sm bg-white dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 px-2 py-0.5">
+            <Badge
+              variant="outline"
+              className="text-xs 2xl:text-sm 3xl:text-base bg-white dark:bg-slate-800 font-mono text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 px-2 py-0.5"
+            >
               {totalDocsCount} Guides
             </Badge>
             {isMobileDrawer && onCloseDrawer && (
               <button
                 onClick={onCloseDrawer}
-                className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                 title="Close drawer"
               >
                 <X className="h-5 w-5" />
@@ -84,21 +115,53 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({
           </div>
         </div>
 
-        <div className="relative">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-500" />
+        {/* Search Input with Clear Button */}
+        <div className="relative flex items-center">
+          <Search className="absolute left-3 top-3 3xl:top-3.5 h-4 w-4 3xl:h-5 3xl:w-5 text-slate-400 dark:text-slate-500 pointer-events-none" />
           <Input
-            placeholder="Search 100+ guides..."
+            placeholder="Search all 100+ guides..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 text-sm 2xl:text-base h-10 2xl:h-11 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-lg"
+            className="pl-9 pr-8 text-sm 2xl:text-base 3xl:text-lg h-10 2xl:h-11 3xl:h-12 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-lg"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-2.5 p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              title="Clear search"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
+
+        {/* Quick Expand / Collapse All Controls */}
+        <div className="flex items-center justify-between text-xs 2xl:text-sm text-slate-500 dark:text-slate-400 pt-1">
+          <span>Categories ({filteredCategories.length})</span>
+          <button
+            onClick={isAllExpanded ? handleCollapseAll : handleExpandAll}
+            className="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+            title={isAllExpanded ? 'Collapse All Categories' : 'Expand All Categories'}
+          >
+            {isAllExpanded ? (
+              <>
+                <ListCollapse className="h-3.5 w-3.5" />
+                <span>Collapse All</span>
+              </>
+            ) : (
+              <>
+                <ChevronsUpDown className="h-3.5 w-3.5" />
+                <span>Expand All</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
 
       {/* Category & Docs List */}
-      <div className="flex-1 overflow-y-auto p-2.5 2xl:p-4 space-y-3.5 divide-y divide-slate-100 dark:divide-slate-800 overscroll-contain">
+      <div className="flex-1 overflow-y-auto p-2.5 2xl:p-4 3xl:p-5 space-y-3.5 divide-y divide-slate-100 dark:divide-slate-800 overscroll-contain">
         {filteredCategories.length === 0 ? (
-          <div className="p-8 text-center text-slate-400 dark:text-slate-500 text-sm">
+          <div className="p-8 text-center text-slate-400 dark:text-slate-500 text-sm 2xl:text-base">
             No guides found matching "{searchQuery}".
           </div>
         ) : (
@@ -118,17 +181,17 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({
                   }`}
                 >
                   <div className="flex items-center space-x-2.5 min-w-0">
-                    <span className="text-lg">{category.icon}</span>
-                    <span className="text-sm 2xl:text-base font-bold truncate">{category.name}</span>
+                    <span className="text-lg 2xl:text-xl 3xl:text-2xl">{category.icon}</span>
+                    <span className="text-sm 2xl:text-base 3xl:text-lg font-bold truncate">{category.name}</span>
                   </div>
                   <div className="flex items-center space-x-1.5 shrink-0">
-                    <span className="text-xs 2xl:text-sm text-slate-400 dark:text-slate-500 font-mono">
+                    <span className="text-xs 2xl:text-sm 3xl:text-base text-slate-400 dark:text-slate-500 font-mono">
                       {category.docs.length}
                     </span>
                     {isExpanded ? (
-                      <ChevronDown className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+                      <ChevronDown className="h-4 w-4 3xl:h-5 3xl:w-5 text-slate-400 dark:text-slate-500" />
                     ) : (
-                      <ChevronRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+                      <ChevronRight className="h-4 w-4 3xl:h-5 3xl:w-5 text-slate-400 dark:text-slate-500" />
                     )}
                   </div>
                 </button>
@@ -146,16 +209,16 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({
                             onSelectDoc(doc)
                             if (onCloseDrawer) onCloseDrawer()
                           }}
-                          className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-lg text-left text-sm 2xl:text-base transition-all min-h-[40px] ${
+                          className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-lg text-left text-sm 2xl:text-base 3xl:text-lg transition-all min-h-[40px] ${
                             isSelected
-                              ? 'bg-blue-600 text-white font-semibold shadow-xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-slate-100'
+                              ? 'bg-blue-600 text-white font-bold shadow-xs'
+                              : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-950 dark:hover:text-slate-100 font-medium'
                           }`}
                         >
                           {isSelected ? (
-                            <CheckCircle className="h-4 w-4 shrink-0 text-white" />
+                            <CheckCircle className="h-4 w-4 3xl:h-5 3xl:w-5 shrink-0 text-white" />
                           ) : (
-                            <FileText className="h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500" />
+                            <FileText className="h-4 w-4 3xl:h-5 3xl:w-5 shrink-0 text-slate-400 dark:text-slate-500" />
                           )}
                           <span className="truncate">{doc.title}</span>
                         </button>

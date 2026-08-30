@@ -87,7 +87,7 @@ function MainLayout() {
     <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col font-sans transition-colors">
       {/* Header Navigation */}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 shadow-xs transition-colors">
-        <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-16 2xl:h-20 flex items-center justify-between">
+        <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 3xl:px-16 4xl:px-20 h-16 2xl:h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-opacity">
             <div className="h-9 w-9 2xl:h-11 2xl:w-11 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
               <Sparkles className="h-5 w-5 2xl:h-6 2xl:w-6" />
@@ -120,7 +120,7 @@ function MainLayout() {
 
       {/* Tab Navigation */}
       <div className="bg-white dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 sticky top-16 2xl:top-20 z-40 shadow-xs backdrop-blur-xs transition-colors">
-        <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 flex space-x-2 py-2 2xl:py-3 overflow-x-auto">
+        <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 3xl:px-16 4xl:px-20 flex space-x-2 py-2 2xl:py-3 overflow-x-auto">
           <Button
             variant={activeTab === 'products' ? 'default' : 'ghost'}
             size="sm"
@@ -177,7 +177,7 @@ function MainLayout() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 2xl:py-10">
+      <main className="flex-1 max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] w-full mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 3xl:px-16 4xl:px-20 py-6 2xl:py-10">
         <Routes>
           <Route path="/" element={<Navigate to="/products" replace />} />
           <Route path="/products" element={<ProductsSection />} />
@@ -207,7 +207,7 @@ function MainLayout() {
 
       {/* Footer */}
       <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 transition-colors">
-        <div className="flex items-center justify-center gap-1.5">
+        <div className="max-w-7xl 2xl:max-w-[1720px] 3xl:max-w-[2100px] 4xl:max-w-[2560px] mx-auto px-4 flex items-center justify-center gap-1.5">
           <BookOpen className="h-4 w-4 text-slate-400 dark:text-slate-500" />
           <span>
             100+ In-Depth Learning Guides available in{' '}

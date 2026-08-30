@@ -35,6 +35,7 @@ client/src/
 │   └── axiosClient.ts       # Axios instance with request/response interceptors
 │
 ├── components/
+│   ├── theme/               # ThemeProvider & ThemeToggle (Light, Dark, System)
 │   └── ui/                  # Reusable shadcn component primitives
 │       ├── button.tsx       # Button with variants (default, destructive, outline, success)
 │       ├── card.tsx         # Card, CardHeader, CardTitle, CardContent
@@ -45,18 +46,23 @@ client/src/
 │   ├── auth/                # Identity login, role inspection & token refresh UI
 │   ├── products/            # Catalog, TanStack caching, and EPPlus Excel export/import
 │   ├── payments/            # Payments with Idempotency-Key testing
-│   └── workflows/           # N-level approval workflow engine, state machine & audit timeline
-│       ├── api/             # Workflow API endpoints
-│       ├── components/      # Multi-tier stepper & timeline components
-│       ├── hooks/           # TanStack Query hooks & query key factories
-│       ├── pages/           # List, Create, Detail, and Template builder pages
-│       └── types/           # Strict TypeScript contracts & status enums
+│   ├── workflows/           # N-level approval workflow engine, state machine & audit timeline
+│   │   ├── api/             # Workflow API endpoints
+│   │   ├── components/      # Multi-tier stepper & timeline components
+│   │   ├── hooks/           # TanStack Query hooks & query key factories
+│   │   ├── pages/           # List, Create, Detail, and Template builder pages
+│   │   └── types/           # Strict TypeScript contracts & status enums
+│   │
+│   └── docs/                # In-App Documentation Hub & Knowledge Base
+│       ├── components/      # DocMarkdownViewer, MermaidViewer, DocsSidebar, TableOfContents
+│       ├── data/            # Dynamic raw glob loader (import.meta.glob) & registry
+│       └── pages/           # DocsPage layout & navigation
 │
 ├── lib/
 │   └── utils.ts             # cn() utility helper (clsx + tailwind-merge)
 │
 ├── App.tsx                  # Main application with QueryClientProvider & navigation
-├── index.css                # Tailwind CSS v4 root stylesheet
+├── index.css                # Tailwind CSS v4 root stylesheet with @theme breakpoints
 └── main.tsx                 # React 19 entry point
 ```
 

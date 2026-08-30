@@ -1,6 +1,6 @@
 # React 19, Tailwind CSS, shadcn/ui, Axios & TanStack Query - Frontend Path
 
-Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwind CSS v4**, **shadcn/ui**, **Axios with JWT Refresh Token Rotation**, **TanStack Query v5**, **Career Roadmap**, **Interview Preparation**, and full-stack integration with our **.NET 10 Clean Architecture API**.
+Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwind CSS v4**, **shadcn/ui**, **Axios with JWT Refresh Token Rotation**, **TanStack Query v5**, **Interactive Documentation Hub**, **Mermaid Vector Graphics Engine**, **Dark/Light/System Mode Theming**, **HiDPI 2K/4K Scaling**, and full-stack integration with our **.NET 10 Clean Architecture API**.
 
 ---
 
@@ -58,3 +58,21 @@ Welcome to the frontend learning curriculum demonstrating **React 19**, **Tailwi
     - Visual Multi-tier Stepper (`WorkflowApprovalProgress`) and chronological audit timeline (`WorkflowTimeline`)
     - TanStack Query v5 mutation flows: tier approval, mandatory rejection reasons, obsolescence flags, and Super Admin signature revocation & draft reset
     - Seamless alignment with [.NET 10 Dynamic Policy Engine](../docs-backend/21-extensible-workflow-engine-and-authorization.md)
+
+11. [**11 - In-App Documentation Hub, Dynamic Markdown Engine & Search Architecture**](../docs-frontend/11-inapp-documentation-hub-and-markdown-engine.md)
+    - Architectural design of the in-app Documentation Hub (`/docs`, `/docs/:category`, `/docs/:category/:docSlug`)
+    - Dynamic raw markdown glob imports in Vite (`import.meta.glob`) and zero-overhead code splitting
+    - Custom AST rendering: GitHub Alert banners (`[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`) and auto-anchor slug links
+    - Throttled Scroll-Spy Table of Contents with dynamic heading hierarchy tracking (`H2`/`H3`)
+
+12. [**12 - Interactive Mermaid Vector Diagram Rendering & Fullscreen Lightbox**](../docs-frontend/12-interactive-mermaid-diagram-rendering-and-fullscreen-lightbox.md)
+    - Vector SVG rendering engine for C4 diagrams, sequence charts, and state transitions
+    - Solving small SVG rendering limitations through automated SVG attribute normalization
+    - Dynamic Dark Mode and Light Mode color palette synchronization
+    - Fullscreen interactive lightbox modal with mouse wheel zoom (up to 600%) and drag-to-pan exploration
+
+13. [**13 - Enterprise Dark/Light Theming, HiDPI 2K/4K Scaling & Flagship Mobile Optimization**](../docs-frontend/13-responsive-enterprise-theming-dark-mode-and-hidpi-device-optimization.md)
+    - Zero-CLS ThemeProvider: Light, Dark, and System preference synchronization (`prefers-color-scheme`)
+    - Tailwind CSS v4 `@theme` custom breakpoints (`3xl: 1920px`, `4xl: 2560px`) and fluid container widths (`2560px`)
+    - Flagship mobile ergonomics for **iPhone 17 Pro Max** (Dynamic Island safe-areas) and **Samsung S26 Ultra** (QHD+ `100dvh`)
+    - Multi-tier Interactive Font Scaling (`A` Standard 100%, `A+` 2K 125%, `A++` 4K 150%) with `localStorage` persistence

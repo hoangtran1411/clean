@@ -58,10 +58,10 @@ export const IdempotencySection: React.FC = () => {
   }
 
   return (
-    <Card className="w-full shadow-md border-slate-200">
+    <Card className="w-full shadow-md">
       <CardHeader>
         <div className="flex items-center space-x-2">
-          <CreditCard className="h-6 w-6 text-purple-600" />
+          <CreditCard className="h-6 w-6 text-purple-600 dark:text-purple-400" />
           <CardTitle>API Idempotency & Replay Protection</CardTitle>
         </div>
         <CardDescription>
@@ -70,9 +70,9 @@ export const IdempotencySection: React.FC = () => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
           <div>
-            <label className="text-xs font-semibold text-slate-600 block mb-1">
+            <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">
               Idempotency-Key Header
             </label>
             <div className="flex gap-1">
@@ -88,12 +88,12 @@ export const IdempotencySection: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-slate-600 block mb-1">Order Reference</label>
+            <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">Order Reference</label>
             <Input value={orderRef} onChange={(e) => setOrderRef(e.target.value)} />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-slate-600 block mb-1">Amount ($ USD)</label>
+            <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 block mb-1">Amount ($ USD)</label>
             <Input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
           </div>
         </div>
@@ -115,7 +115,7 @@ export const IdempotencySection: React.FC = () => {
         </div>
 
         {responseLog && (
-          <div className="bg-slate-950 text-slate-100 p-4 rounded-lg font-mono text-xs space-y-2 overflow-x-auto">
+          <div className="bg-slate-950 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-2 overflow-x-auto border border-slate-800 shadow-md">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
               <span>
                 HTTP Status:{' '}

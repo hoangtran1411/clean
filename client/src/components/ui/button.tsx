@@ -9,10 +9,10 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-blue-600 text-white shadow hover:bg-blue-700',
         destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700',
-        outline: 'border border-slate-300 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900',
-        secondary: 'bg-slate-100 text-slate-900 shadow-sm hover:bg-slate-200',
-        ghost: 'hover:bg-slate-100 hover:text-slate-900',
-        link: 'text-blue-600 underline-offset-4 hover:underline',
+        outline: 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white',
+        secondary: 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700',
+        ghost: 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white',
+        link: 'text-blue-600 dark:text-blue-400 underline-offset-4 hover:underline',
         success: 'bg-emerald-600 text-white shadow hover:bg-emerald-700',
       },
       size: {

@@ -59,7 +59,6 @@ export const ProductsSection: React.FC = () => {
     onSuccess: () => {
       setStatusMsg(`Product "${name}" created! Caches evicted and UI refreshed.`)
       setName('')
-      // Invalidate TanStack Query cache to trigger automatic background refetch!
       queryClient.invalidateQueries({ queryKey: ['products'] })
     },
     onError: (err: unknown) => {
@@ -125,12 +124,12 @@ export const ProductsSection: React.FC = () => {
   }
 
   return (
-    <Card className="w-full shadow-md border-slate-200">
+    <Card className="w-full shadow-md">
       <CardHeader>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
             <div className="flex items-center space-x-2">
-              <Package className="h-6 w-6 text-emerald-600" />
+              <Package className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
               <CardTitle>Catalog Management (TanStack Query + EPPlus)</CardTitle>
             </div>
             <CardDescription>
@@ -162,9 +161,9 @@ export const ProductsSection: React.FC = () => {
 
       <CardContent className="space-y-6">
         {/* Create Product Form */}
-        <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
-          <h4 className="font-semibold text-sm text-slate-800 flex items-center gap-1.5">
-            <Plus className="h-4 w-4 text-blue-600" /> Add New Product (Triggers Automatic Cache Eviction)
+        <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <h4 className="font-semibold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+            <Plus className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Add New Product (Triggers Automatic Cache Eviction)
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
             <Input
@@ -202,7 +201,7 @@ export const ProductsSection: React.FC = () => {
         </div>
 
         {/* Excel Integration Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-emerald-50/70 dark:bg-emerald-950/30 p-3.5 rounded-xl border border-emerald-100 dark:border-emerald-900/60">
           <div className="flex items-center gap-2">
             <Button variant="success" size="sm" onClick={handleExportExcel}>
               <Download className="h-4 w-4 mr-1" /> Export Styled Excel (.xlsx)
@@ -214,7 +213,7 @@ export const ProductsSection: React.FC = () => {
 
           <label className="inline-flex items-center cursor-pointer">
             <input type="file" accept=".xlsx" className="hidden" onChange={handleFileUpload} />
-            <span className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-slate-50 text-slate-700">
+            <span className="inline-flex items-center justify-center rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
               <Upload className="h-3.5 w-3.5 mr-1" /> Import Excel
             </span>
           </label>
@@ -222,21 +221,21 @@ export const ProductsSection: React.FC = () => {
 
         {/* Cache Info Banner */}
         {data && (
-          <div className="flex items-center justify-between text-xs bg-slate-100 px-3 py-2 rounded text-slate-600">
+          <div className="flex items-center justify-between text-xs bg-slate-100 dark:bg-slate-800/80 px-3.5 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
             <span>
-              <strong>Active Cache:</strong> {data.cacheMechanism}
+              <strong className="text-slate-800 dark:text-slate-200">Active Cache:</strong> {data.cacheMechanism}
             </span>
             <span>
-              <strong>Generated:</strong>{' '}
+              <strong className="text-slate-800 dark:text-slate-200">Generated:</strong>{' '}
               {new Date(data.generatedAtUtc || data.queriedAtUtc || '').toLocaleTimeString()}
             </span>
           </div>
         )}
 
         {/* Products Table */}
-        <div className="overflow-x-auto rounded-lg border border-slate-200">
-          <table className="min-w-full divide-y divide-slate-200 text-sm">
-            <thead className="bg-slate-50 text-slate-700">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+            <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               <tr>
                 <th className="px-4 py-3 text-left font-semibold">ID</th>
                 <th className="px-4 py-3 text-left font-semibold">Product Name</th>
@@ -245,28 +244,28 @@ export const ProductsSection: React.FC = () => {
                 <th className="px-4 py-3 text-right font-semibold">Stock</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 bg-white">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900">
               {isLoading ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                  <td colSpan={5} className="px-4 py-6 text-center text-slate-400 dark:text-slate-500">
                     Loading products...
                   </td>
                 </tr>
               ) : data?.data && data.data.length > 0 ? (
                 data.data.map((product) => (
-                  <tr key={product.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-4 py-3 font-mono text-xs text-slate-500">#{product.id}</td>
-                    <td className="px-4 py-3 font-medium text-slate-900">{product.name}</td>
+                  <tr key={product.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td className="px-4 py-3 font-mono text-xs text-slate-500 dark:text-slate-400">#{product.id}</td>
+                    <td className="px-4 py-3 font-medium text-slate-900 dark:text-slate-100">{product.name}</td>
                     <td className="px-4 py-3">
                       <Badge variant="secondary">{product.category}</Badge>
                     </td>
-                    <td className="px-4 py-3 text-right font-mono text-slate-900">
+                    <td className="px-4 py-3 text-right font-mono text-slate-900 dark:text-slate-100 font-semibold">
                       ${product.price.toFixed(2)}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <span
                         className={`font-semibold ${
-                          product.stockQuantity < 10 ? 'text-red-600' : 'text-slate-700'
+                          product.stockQuantity < 10 ? 'text-red-600 dark:text-red-400' : 'text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         {product.stockQuantity}
@@ -276,7 +275,7 @@ export const ProductsSection: React.FC = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                  <td colSpan={5} className="px-4 py-6 text-center text-slate-400 dark:text-slate-500">
                     No products found. Add one above!
                   </td>
                 </tr>
@@ -286,7 +285,7 @@ export const ProductsSection: React.FC = () => {
         </div>
 
         {statusMsg && (
-          <p className="text-xs text-emerald-700 font-medium bg-emerald-50 p-2.5 rounded border border-emerald-200">
+          <p className="text-xs text-emerald-700 dark:text-emerald-300 font-medium bg-emerald-50 dark:bg-emerald-950/40 p-2.5 rounded-lg border border-emerald-200 dark:border-emerald-800">
             {statusMsg}
           </p>
         )}

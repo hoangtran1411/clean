@@ -73,14 +73,14 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
 
   return (
     <>
-      {/* 1. Desktop & 2K/4K Sticky Sidebar (XL+ screens) */}
-      <div className="w-72 2xl:w-88 hidden xl:block shrink-0 sticky top-20 2xl:top-24 h-[calc(100vh-140px)] 2xl:h-[calc(100vh-160px)] overflow-y-auto pl-5 border-l-2 border-slate-200 dark:border-slate-800">
-        <div className="flex items-center space-x-2 text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">
-          <ListTree className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+      {/* 1. Desktop & 2K/4K Compact Sticky TOC (2/3 scale of previous width) */}
+      <div className="w-48 2xl:w-60 3xl:w-[250px] 4xl:w-[280px] hidden xl:block shrink-0 sticky top-[120px] 2xl:top-[144px] h-[calc(100dvh-130px)] 2xl:h-[calc(100dvh-154px)] overflow-y-auto pl-3.5 border-l border-slate-200 dark:border-slate-800">
+        <div className="flex items-center space-x-1.5 text-[11px] 2xl:text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-3">
+          <ListTree className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           <span>On This Page</span>
         </div>
 
-        <nav className="space-y-1.5 text-xs sm:text-sm 2xl:text-base">
+        <nav className="space-y-1 text-xs leading-snug">
           {headings.map((item, idx) => {
             const isActive = activeId === item.id
 
@@ -88,13 +88,14 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
               <a
                 key={idx}
                 href={`#${item.id}`}
-                className={`block transition-all py-1.5 leading-snug ${
-                  item.level === 3 ? 'pl-4 text-slate-500 dark:text-slate-400' : 'pl-0 font-medium'
+                className={`block transition-all py-1 leading-snug truncate ${
+                  item.level === 3 ? 'pl-3 text-[11px] text-slate-500 dark:text-slate-400' : 'pl-0 font-medium text-slate-700 dark:text-slate-300'
                 } ${
                   isActive
-                    ? 'text-blue-600 dark:text-blue-400 font-bold border-l-2 border-blue-600 dark:border-blue-400 -ml-5 pl-4 bg-blue-50/60 dark:bg-blue-950/40 rounded-r'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-r'
+                    ? 'text-blue-600 dark:text-blue-400 font-bold border-l-2 border-blue-600 dark:border-blue-400 -ml-3.5 pl-3 bg-blue-50/60 dark:bg-blue-950/40 rounded-r'
+                    : 'hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-r'
                 }`}
+                title={item.text}
               >
                 {item.text}
               </a>
@@ -107,7 +108,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
       <div className="xl:hidden fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setMobileTocOpen(true)}
-          className="rounded-full shadow-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2 px-4 py-3 h-12 text-sm font-semibold border-2 border-white dark:border-slate-850"
+          className="rounded-full shadow-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2 px-4 py-3 h-12 text-sm font-semibold border-2 border-white dark:border-slate-800"
           title="On this page table of contents"
         >
           <ListTree className="h-4 w-4" />

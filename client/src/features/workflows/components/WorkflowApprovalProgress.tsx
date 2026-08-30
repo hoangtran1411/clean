@@ -13,7 +13,7 @@ export function WorkflowApprovalProgress({ currentApprovalLevel, totalApprovalLe
   const isApprovedOrCompleted = status === 'Approved' || status === 'Completed'
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3 overflow-x-auto py-2">
       {steps.map(step => {
         let isCompleted = false
         let isCurrent = false
@@ -30,17 +30,17 @@ export function WorkflowApprovalProgress({ currentApprovalLevel, totalApprovalLe
         }
 
         return (
-          <div key={step} className="flex flex-col items-center gap-1">
+          <div key={step} className="flex flex-col items-center gap-1.5">
             {isCompleted ? (
-              <CheckCircle2 className="h-6 w-6 text-green-500" />
+              <CheckCircle2 className="h-6 w-6 text-emerald-500" />
             ) : isCurrent ? (
-              <Clock className="h-6 w-6 text-yellow-500" />
+              <Clock className="h-6 w-6 text-amber-500 animate-pulse" />
             ) : isRejected && step === currentApprovalLevel ? (
-              <Circle className="h-6 w-6 text-red-500 fill-red-100" />
+              <Circle className="h-6 w-6 text-rose-500 fill-rose-100 dark:fill-rose-950/50" />
             ) : (
-              <Circle className="h-6 w-6 text-slate-300" />
+              <Circle className="h-6 w-6 text-slate-300 dark:text-slate-700" />
             )}
-            <span className="text-[10px] font-medium text-slate-500">Level {step}</span>
+            <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">Level {step}</span>
           </div>
         )
       })}
