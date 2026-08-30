@@ -31,6 +31,7 @@ public static class DbInitializer
 
         // 2. Seed Super Admin
         const string adminEmail = "admin@example.com";
+        const string adminPassword = "Admin@123456";
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
         if (adminUser == null)
         {
@@ -43,7 +44,7 @@ public static class DbInitializer
                 CreatedAt = DateTime.UtcNow
             };
 
-            var result = await userManager.CreateAsync(newAdmin, "Admin@123456");
+            var result = await userManager.CreateAsync(newAdmin, adminPassword);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(newAdmin, UserRoles.Admin);
@@ -53,9 +54,29 @@ public static class DbInitializer
                 }
             }
         }
+        else
+        {
+            // Ensure password is synchronized with quick test credentials
+            if (!await userManager.CheckPasswordAsync(adminUser, adminPassword))
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(adminUser);
+                await userManager.ResetPasswordAsync(adminUser, token, adminPassword);
+            }
+
+            // Sync all permissions
+            var existingClaims = await userManager.GetClaimsAsync(adminUser);
+            foreach (var perm in AppPermissions.AllPermissions)
+            {
+                if (!existingClaims.Any(c => c.Type == AppPermissions.ClaimType && c.Value == perm))
+                {
+                    await userManager.AddClaimAsync(adminUser, new Claim(AppPermissions.ClaimType, perm));
+                }
+            }
+        }
 
         // 3. Seed Manager
         const string managerEmail = "manager@example.com";
+        const string managerPassword = "Manager@123456";
         var managerUser = await userManager.FindByEmailAsync(managerEmail);
         if (managerUser == null)
         {
@@ -68,7 +89,7 @@ public static class DbInitializer
                 CreatedAt = DateTime.UtcNow
             };
 
-            var result = await userManager.CreateAsync(newManager, "Manager@123456");
+            var result = await userManager.CreateAsync(newManager, managerPassword);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(newManager, UserRoles.Manager);
@@ -77,9 +98,18 @@ public static class DbInitializer
                 await userManager.AddClaimAsync(newManager, new Claim(AppPermissions.ClaimType, AppPermissions.ReportsExport));
             }
         }
+        else
+        {
+            if (!await userManager.CheckPasswordAsync(managerUser, managerPassword))
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(managerUser);
+                await userManager.ResetPasswordAsync(managerUser, token, managerPassword);
+            }
+        }
 
         // 4. Seed Standard User
         const string standardEmail = "user@example.com";
+        const string standardPassword = "User@123456";
         var standardUser = await userManager.FindByEmailAsync(standardEmail);
         if (standardUser == null)
         {
@@ -92,11 +122,19 @@ public static class DbInitializer
                 CreatedAt = DateTime.UtcNow
             };
 
-            var result = await userManager.CreateAsync(newStandard, "User@123456");
+            var result = await userManager.CreateAsync(newStandard, standardPassword);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(newStandard, UserRoles.User);
                 await userManager.AddClaimAsync(newStandard, new Claim(AppPermissions.ClaimType, AppPermissions.UsersView));
+            }
+        }
+        else
+        {
+            if (!await userManager.CheckPasswordAsync(standardUser, standardPassword))
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(standardUser);
+                await userManager.ResetPasswordAsync(standardUser, token, standardPassword);
             }
         }
 

@@ -47,6 +47,18 @@ builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+// 8. CORS Configuration for Frontend Single-Page App (React 19)
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Correlation ID Middleware (must be first to tag all incoming logs with X-Correlation-ID)
@@ -74,7 +86,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+// CORS Middleware must precede Authentication
+app.UseCors();
 
 // Output Caching Middleware
 app.UseOutputCache();

@@ -47,8 +47,9 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
         setStatusMsg(`Successfully logged in as ${response.data.data.email}!`)
       }
     } catch (err: unknown) {
-      const error = err as { response?: { data?: { message?: string } } }
-      setStatusMsg(`Login failed: ${error.response?.data?.message || 'Invalid credentials'}`)
+      const error = err as { message?: string; response?: { data?: { message?: string; title?: string } } }
+      const backendMsg = error.response?.data?.message || error.response?.data?.title || error.message || 'Invalid credentials'
+      setStatusMsg(`Login failed: ${backendMsg}`)
     } finally {
       setLoading(false)
     }
