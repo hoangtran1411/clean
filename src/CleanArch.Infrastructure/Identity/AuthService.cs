@@ -84,7 +84,8 @@ public class AuthService : IAuthService
             UserId = user.Id,
             Email = user.Email,
             FullName = user.FullName,
-            Roles = roles.ToList()
+            Roles = roles.ToList(),
+            Permissions = customClaims.Where(c => c.Type == AppPermissions.ClaimType).Select(c => c.Value).ToList()
         };
     }
 
@@ -123,7 +124,8 @@ public class AuthService : IAuthService
             UserId = user.Id,
             Email = user.Email,
             FullName = user.FullName,
-            Roles = roles.ToList()
+            Roles = roles.ToList(),
+            Permissions = customClaims.Where(c => c.Type == AppPermissions.ClaimType).Select(c => c.Value).ToList()
         };
     }
 
@@ -171,7 +173,8 @@ public class AuthService : IAuthService
             UserId = user.Id,
             Email = user.Email,
             FullName = user.FullName,
-            Roles = roles.ToList()
+            Roles = roles.ToList(),
+            Permissions = customClaims.Where(c => c.Type == AppPermissions.ClaimType).Select(c => c.Value).ToList()
         };
     }
 

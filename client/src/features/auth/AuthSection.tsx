@@ -124,7 +124,7 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
             <div>
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Roles:</span>
               <div className="flex flex-wrap gap-1 mt-1">
-                {currentUser.roles.map((role) => (
+                {(currentUser.roles ?? []).map((role) => (
                   <Badge key={role} variant="default">
                     {role}
                   </Badge>
@@ -135,7 +135,7 @@ export const AuthSection: React.FC<AuthSectionProps> = ({ currentUser, onAuthCha
             <div>
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Permissions:</span>
               <div className="flex flex-wrap gap-1 mt-1">
-                {currentUser.permissions.map((perm) => (
+                {(currentUser.permissions ?? []).map((perm) => (
                   <Badge key={perm} variant="secondary">
                     {perm}
                   </Badge>
