@@ -314,7 +314,7 @@ const HighlightedCodeBlock: React.FC<{ language: string; code: string; sizeClass
           >
             <code>
               {tokens.map((line, i) => {
-                const lineProps = getLineProps({ line, key: i })
+                const { key: _lineKey, ...lineProps } = getLineProps({ line })
                 return (
                   <div key={i} {...lineProps} className="table-row">
                     {/* Line Numbers Column */}
@@ -323,9 +323,10 @@ const HighlightedCodeBlock: React.FC<{ language: string; code: string; sizeClass
                     </span>
                     {/* Code Line Tokens */}
                     <span className="table-cell pl-4 text-slate-900 dark:text-slate-100">
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token, key })} />
-                      ))}
+                      {line.map((token, key) => {
+                        const { key: _tokenKey, ...tokenProps } = getTokenProps({ token })
+                        return <span key={key} {...tokenProps} />
+                      })}
                     </span>
                   </div>
                 )

@@ -81,6 +81,12 @@ export const CATEGORY_METADATA: Record<string, { name: string; icon: string; des
     description: 'Big-O Analysis, Data Structures, Algorithms, DP & OS Internals',
     order: 10,
   },
+  'docs-cloud': {
+    name: 'Cloud Architecture (Azure & AWS)',
+    icon: '☁️',
+    description: 'Azure & AWS Fundamentals, Compute, Storage, VNet/VPC, IAM & IaC',
+    order: 11,
+  },
 }
 
 export function formatDocTitle(filename: string): string {

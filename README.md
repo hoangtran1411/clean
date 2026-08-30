@@ -73,6 +73,7 @@ clean/
 ├── docs-deploy/                          # 🚀 7 DevOps & Deployment Modules & Helper Map (docs-deploy/README.md)
 ├── docs-network/                         # 🌐 10 Networking & Protocols Modules & Helper Map (docs-network/README.md)
 ├── docs-cs-fundamentals/                 # 💻 11 CS Fundamentals Modules & Helper Map (docs-cs-fundamentals/README.md)
+├── docs-cloud/                           # ☁️ 10 Cloud Architecture Modules (Azure & AWS) & Helper Map (docs-cloud/README.md)
 ├── docker-compose.yml                    # Unified local multi-container orchestration
 ├── IdentityJwtDemo.http                  # Executable REST Client testing file
 ├── Directory.Build.props                 # Centralized MSBuild & C# 13 configuration
@@ -142,7 +143,8 @@ Each documentation domain features a dedicated **Curriculum Helper Map (`README.
 | **🚀 DevOps & Deploy** | [**`docs-deploy/README.md`**](./docs-deploy/README.md) | 7 | Docker Multi-Stage, Nginx Reverse Proxy, Let's Encrypt SSL, GitHub Actions CI/CD, Aspire |
 | **🌐 Networking** | [**`docs-network/README.md`**](./docs-network/README.md) | 10 | OSI & TCP/IP, DNS, TCP vs UDP, TLS 1.3 Handshake, Subnets/CIDR, CDNs, Network Tools |
 | **💻 CS Fundamentals** | [**`docs-cs-fundamentals/README.md`**](./docs-cs-fundamentals/README.md) | 11 | Big-O Complexity, Data Structures, Graph Algorithms, Dynamic Programming, OS & Memory |
-| **Total Curriculum** | **10 Helper Maps** | **108 Modules** | **Full-Stack Enterprise Cloud-Native Engineering** |
+| **☁️ Cloud Architecture** | [**`docs-cloud/README.md`**](./docs-cloud/README.md) | 10 | Azure vs AWS, Compute, Storage (Blob/S3), VNet/VPC, IAM/Entra, Messaging, FinOps, IaC |
+| **Total Curriculum** | **11 Helper Maps** | **118 Modules** | **Full-Stack Enterprise Cloud-Native Engineering** |
 
 ---
 
@@ -293,6 +295,19 @@ Each documentation domain features a dedicated **Curriculum Helper Map (`README.
 9. [**09 - Object-Oriented Programming (OOP) & SOLID Principles**](./docs-cs-fundamentals/09-oop-and-solid-principles.md)
 10. [**10 - Operating Systems (OS) Fundamentals**](./docs-cs-fundamentals/10-operating-systems-fundamentals.md)
 11. [**11 - Top 30 CS Fundamentals Interview Questions (Easy, Medium, Advanced)**](./docs-cs-fundamentals/11-top-30-cs-fundamentals-interview-questions.md)
+
+### ☁️ Cloud Architecture & Engineering Modules (Azure & AWS) ([Helper Map](./docs-cloud/README.md))
+
+1. [**01 - Cloud Fundamentals, Azure vs. AWS & Shared Responsibility**](./docs-cloud/01-cloud-fundamentals-azure-vs-aws-and-shared-responsibility.md)
+2. [**02 - Cloud Compute: VMs, Containers & Serverless**](./docs-cloud/02-cloud-compute-vms-containers-and-serverless.md)
+3. [**03 - Cloud Storage: Blob Storage, S3 & Data Tiering**](./docs-cloud/03-cloud-storage-blob-s3-and-data-tiering.md)
+4. [**04 - Cloud Networking: VNet, VPC & Hybrid Connectivity**](./docs-cloud/04-cloud-networking-vnet-vpc-and-hybrid-connectivity.md)
+5. [**05 - Managed Databases & Distributed Caching**](./docs-cloud/05-managed-databases-and-distributed-caching.md)
+6. [**06 - Cloud Identity, IAM, Entra ID & Zero Trust**](./docs-cloud/06-cloud-identity-iam-entra-id-and-zero-trust.md)
+7. [**07 - Cloud Messaging, Event-Driven Architecture & Queues**](./docs-cloud/07-cloud-messaging-event-driven-architecture-and-queues.md)
+8. [**08 - Cloud Observability, Monitoring & FinOps**](./docs-cloud/08-cloud-observability-monitoring-and-finops.md)
+9. [**09 - Infrastructure as Code (IaC): Bicep, Terraform & CloudFormation**](./docs-cloud/09-infrastructure-as-code-bicep-terraform-and-cloudformation.md)
+10. [**10 - Top 30 Cloud (Azure & AWS) Interview Questions**](./docs-cloud/10-top-30-cloud-azure-and-aws-interview-questions.md)
 
 ---
 
