@@ -3,9 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-#pragma warning disable CA1861 // Prefer 'static readonly' fields over constant array arguments
-
 namespace CleanArch.Infrastructure.Migrations;
 
 /// <inheritdoc />

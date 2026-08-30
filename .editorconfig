@@ -1,113 +1,25 @@
-# Top-most EditorConfig file for this repository
+# Top-most EditorConfig file
 root = true
 
-# ==============================================================================
-# 1. Core Global Formatting Rules (Applies to all files)
-# ==============================================================================
+# All files
 [*]
 indent_style = space
 indent_size = 4
-end_of_line = crlf
+end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# JSON, YAML and Markdown specific indentation
-[*.{json,yml,yaml}]
-indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false
-
-# ==============================================================================
-# 2. C# Formatting & Code Style Rules
-# ==============================================================================
+# C# Source Files
 [*.cs]
-# Indentation & Newlines
-csharp_new_line_before_open_brace = all
-csharp_new_line_before_else = true
-csharp_new_line_before_catch = true
-csharp_new_line_before_finally = true
-csharp_new_line_before_members_in_object_initializers = true
-
-# Var Preferences
+csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
-csharp_style_var_elsewhere = true:suggestion
 
-# Expression-bodied members
-csharp_style_expression_bodied_methods = when_on_single_line:suggestion
-csharp_style_expression_bodied_constructors = false:silent
-csharp_style_expression_bodied_properties = true:suggestion
-csharp_style_expression_bodied_accessors = true:suggestion
-
-# Modern C# Features (Pattern Matching, Null checks)
-csharp_style_pattern_matching_over_is_with_cast_check = true:warning
-csharp_style_pattern_matching_over_as_with_null_check = true:warning
-csharp_style_inlined_variable_declaration = true:suggestion
-csharp_style_throw_expression = true:suggestion
-csharp_style_conditional_delegate_call = true:suggestion
-csharp_style_prefer_null_coalescing_operator = true:warning
-
-# Namespace declaration style (File-scoped namespaces in .NET 10)
-csharp_style_namespace_declarations = file_scoped:warning
-
-# Using directives placement
-csharp_using_directive_placement = outside_namespace:warning
-
-# ==============================================================================
-# 3. .NET Naming Conventions
-# ==============================================================================
-# Constants: PascalCase
-dotnet_naming_rule.constants_should_be_pascal_case.symbols = constant_symbols
-dotnet_naming_rule.constants_should_be_pascal_case.style = pascal_case_style
-dotnet_naming_rule.constants_should_be_pascal_case.severity = suggestion
-
-dotnet_naming_symbols.constant_symbols.applicable_kinds = field
-dotnet_naming_symbols.constant_symbols.applicable_accessibilities = *
-dotnet_naming_symbols.constant_symbols.required_modifiers = const
-
-# Interface naming: Must start with 'I' (e.g. IAuthService, IAppDbContext)
-dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface_symbols
-dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
-dotnet_naming_rule.interface_should_be_begins_with_i.severity = warning
-
-dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
-dotnet_naming_symbols.interface_symbols.applicable_accessibilities = *
-dotnet_naming_style.begins_with_i.required_prefix = I
-dotnet_naming_style.begins_with_i.capitalization = pascal_case
-
-# Private non-const fields naming: Must start with '_' (e.g. _logger, _context)
-dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore.symbols = private_field_symbols
-dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore.style = camel_case_with_underscore
-dotnet_naming_rule.private_fields_should_be_camel_case_with_underscore.severity = suggestion
-
-dotnet_naming_symbols.private_field_symbols.applicable_kinds = field
-dotnet_naming_symbols.private_field_symbols.applicable_accessibilities = private
-dotnet_naming_style.camel_case_with_underscore.required_prefix = _
-dotnet_naming_style.camel_case_with_underscore.capitalization = camel_case
-
-# Types & Methods naming: PascalCase
-dotnet_naming_rule.types_and_methods_should_be_pascal_case.symbols = types_and_methods
-dotnet_naming_rule.types_and_methods_should_be_pascal_case.style = pascal_case_style
-dotnet_naming_rule.types_and_methods_should_be_pascal_case.severity = warning
-
-dotnet_naming_symbols.types_and_methods.applicable_kinds = class, struct, enum, property, method
-dotnet_naming_symbols.types_and_methods.applicable_accessibilities = public, internal, protected
-dotnet_naming_style.pascal_case_style.capitalization = pascal_case
-
-# ==============================================================================
-# 4. Roslyn Code Quality & Performance Analyzers
-# ==============================================================================
-# Unused parameter
-dotnet_diagnostic.IDE0060.severity = suggestion
-
-# Use null check / coalesce
-dotnet_diagnostic.IDE0029.severity = suggestion
-dotnet_diagnostic.IDE0030.severity = suggestion
-
-# Avoid unneeded cast
-dotnet_diagnostic.IDE0004.severity = suggestion
-
-# Mark members as static where possible
-dotnet_diagnostic.CA1822.severity = suggestion
+# EF Core Migrations - treat as auto-generated code and suppress generated array/styling rules
+[**/Migrations/**.cs]
+generated_code = true
+dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.CA1814.severity = none
+dotnet_diagnostic.IDE0161.severity = none
+dotnet_diagnostic.IDE0058.severity = none
